@@ -1,0 +1,15 @@
+{
+	"name": "brute-force",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"server": "cd server && npm start",
+		"client": "cd client && npm run dev",
+		"dev": "cd client && npm run dev && cd server && npm start"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
+}
