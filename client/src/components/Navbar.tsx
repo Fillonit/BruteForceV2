@@ -1,5 +1,5 @@
 import React from "react";
-import ReactIcon from "../assets/react.svg";
+// import ReactIcon from "../assets/react.svg";
 import {
 	FaUser,
 	FaInfoCircle,
@@ -42,12 +42,13 @@ const Navbar = () => {
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="flex items-center justify-between h-16">
 					<div className="flex items-center">
-						<div className="flex-shrink-0">
-							<img
+						<div className="flex-shrink-0 text-2xl font-semibold text-white bg-purple-400 px-2 rounded pb-1 hover:bg-purple-200 cursor-pointer">
+							{/* <img
 								className="h-8 w-8"
 								src={ReactIcon}
 								alt="Icon"
-							/>
+							/> */}
+							BruteForce
 						</div>
 						<div className="ml-10 flex items-baseline space-x-2">
 							{navItems.map((item, index) => (
@@ -65,7 +66,7 @@ const Navbar = () => {
 						<div className="ml-4 flex items-center md:ml-6">
 							<a
 								href="/login"
-								className="text-gray-800 hover:bg-purple-200 hover:text-purple-600 transition-colors duration-300 px-3 py-2 rounded-md text-sm font-medium"
+								className="text-gray-800 bg-purple-200 hover:bg-purple-400 hover:text-purple-600 transition-colors duration-300 px-3 py-2 rounded-md text-sm font-medium"
 							>
 								Login
 							</a>

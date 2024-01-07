@@ -5,20 +5,17 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"server": "cd server && npm start",
-		"client": "cd client && npm run dev",
-		"dev": "cd client && npm run dev && cd server && npm start"
+		"start:server": "cd server && npm start",
+		"start:client": "cd client && npm run dev",
+		"dev": "npm run server && npm run client",
+		"start:both": "concurrently \"npm run start:server\" \"npm run start:client\""
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"@fortawesome/free-brands-svg-icons": "^6.5.1",
-		"@fortawesome/free-solid-svg-icons": "^6.5.1",
-		"@fortawesome/react-fontawesome": "^0.2.0",
-		"react-router-dom": "^6.21.1"
 	},
 	"devDependencies": {
-		"tailwindcss": "^3.4.1"
+		"concurrently": "^8.2.2"
 	}
 }

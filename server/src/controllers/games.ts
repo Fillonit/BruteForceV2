@@ -53,6 +53,7 @@ export const addGame = async (req: express.Request, res: express.Response) => {
 			rating,
 			description,
 			tags,
+			image,
 		} = req.body;
 
 		const game = await createGame({
@@ -66,6 +67,7 @@ export const addGame = async (req: express.Request, res: express.Response) => {
 			rating,
 			description,
 			tags,
+			image,
 		});
 
 		return res.status(200).json({ game }).end();
