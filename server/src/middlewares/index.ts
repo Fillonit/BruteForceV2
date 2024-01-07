@@ -82,9 +82,9 @@ export const isPostOwner = async (
 				.json({ message: "Unauthorized, Not Authenticated!" });
 		}
 
-		const authorId = await getPostAuthorId(id);
+		const author = await getPostAuthorId(id);
 
-		if (identity.toString() !== authorId.authorId.toString()) {
+		if (identity.toString() !== author._id.toString()) {
 			return res
 				.status(401)
 				.json({ message: "Unauthorized, Not Post Author!" });

@@ -3,8 +3,9 @@ import mongoose from "mongoose";
 const GameSchema = new mongoose.Schema({
 	name: { type: String, required: true, unique: true, index: true },
 	description: { type: String, required: true },
-	genre: { type: String, required: true },
-	platform: { type: String, required: true },
+	genre: { type: [String], required: true },
+	platform: { type: [String], required: true },
+	tags: { type: [String], required: true },
 	developer: { type: String, required: true },
 	publisher: { type: String, required: true },
 	releaseDate: { type: Date, required: true },
@@ -27,7 +28,7 @@ export const createGame = (values: Record<string, any>) =>
 	new GameModel(values).save().then((game) => game.toObject());
 
 export const updateGame = (id: string, values: Record<string, any>) => {
-	return GameModel.findByIdAndUpdate(id, values).then((game) =>
+	return GameModel.findByIdAndUpdate(id, values, { new: true }).then((game) =>
 		game.toObject()
 	);
 };
@@ -48,10 +49,10 @@ export const searchGames = (search: string) =>
 	GameModel.find({ name: { $regex: search, $options: "i" } });
 
 export const searchGamesByGenre = (search: string) =>
-	GameModel.find({ genre: { $regex: search, $options: "i" } });
+	GameModel.find({ genre: { $in: [new RegExp(search, "i")] } });
 
 export const searchGamesByPlatform = (search: string) =>
-	GameModel.find({ platform: { $regex: search, $options: "i" } });
+	GameModel.find({ platform: { $in: [new RegExp(search, "i")] } });
 
 export const searchGamesByDeveloper = (search: string) =>
 	GameModel.find({ developer: { $regex: search, $options: "i" } });
@@ -68,5 +69,5 @@ export const searchGamesByPrice = (search: string) =>
 export const searchGamesByRating = (search: string) =>
 	GameModel.find({ rating: { $regex: search, $options: "i" } });
 
-export const searchGamesByPriceRange = (search: string) =>
-	GameModel.find({ price: { $regex: search, $options: "i" } });
+export const searchGamesByPriceRange = (min: number, max: number) =>
+	GameModel.find({ price: { $gte: min, $lte: max } });

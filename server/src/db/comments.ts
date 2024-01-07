@@ -1,9 +1,11 @@
 import mongoose from "mongoose";
 
 const CommentSchema = new mongoose.Schema({
-	game: { type: mongoose.Schema.Types.ObjectId, ref: "Game" },
+	// game: { type: mongoose.Schema.Types.ObjectId, ref: "Game" },
 	user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-	content: String,
+	post: { type: mongoose.Schema.Types.ObjectId, ref: "Post" },
+	content: { type: String, required: true },
+	likes: { type: Number, default: 0 },
 	createdAt: { type: Date, default: Date.now },
 	updatedAt: { type: Date, default: Date.now },
 });
@@ -26,32 +28,26 @@ export const updateComment = (id: string, values: Record<string, any>) => {
 export const deleteCommentById = (id: string) =>
 	CommentModel.findOneAndDelete({ _id: id });
 
-export const getCommentsByGame = (game: string) => CommentModel.find({ game });
+export const deleteCommentsByPostId = (postId: string) =>
+	CommentModel.deleteMany({ post: postId });
 
-export const getCommentsByUser = (user: string) => CommentModel.find({ user });
+export const deleteCommentsByUserId = (userId: string) =>
+	CommentModel.deleteMany({ user: userId });
 
-export const getCommentsByGameAndUser = (game: string, user: string) =>
-	CommentModel.find({ game, user });
+export const getCommentsByPostId = (postId: string) =>
+	CommentModel.find({ post: postId });
 
-export const getCommentsByGameOrUser = (game: string, user: string) => {
-	return CommentModel.find({ $or: [{ game }, { user }] });
-};
+export const getCommentsByUserId = (userId: string) =>
+	CommentModel.find({ user: userId });
 
-export const getCommentsByGameAndUserWithLimit = (
-	game: string,
-	user: string,
-	limit: number
-) => {
-	return CommentModel.find({ $or: [{ game }, { user }] }).limit(limit);
-};
+export const getCommentsByUserAndPostId = (userId: string, postId: string) =>
+	CommentModel.find({ user: userId, post: postId });
 
-export const getCommentsByGameAndUserWithLimitAndSort = (
-	game: string,
-	user: string,
-	limit: number,
-	sort: string
-) => {
-	return CommentModel.find({ $or: [{ game }, { user }] })
-		.limit(limit)
-		.sort(sort);
-};
+export const getCommentsByUserOrPostId = (userId: string, postId: string) =>
+	CommentModel.find({ $or: [{ user: userId }, { post: postId }] });
+
+export const getCommentsByContent = (content: string) =>
+	CommentModel.find({ content });
+
+export const getCommentsByContentRegex = (content: string) =>
+	CommentModel.find({ content: { $regex: content, $options: "i" } });

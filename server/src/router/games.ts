@@ -17,7 +17,7 @@ export default (router: express.Router) => {
 	router.get("/games/:id", getGame);
 	router.post("/games", addGame);
 	router.delete("/games/:id", isAuthenticated, isAdmin, removeGame);
-	router.patch("/games/:id", isAuthenticated, isAdmin, editGame);
+	router.patch("/games/:id", editGame);
 	router.get("/games/search/:search", searchAllGames);
 	router.get("/games/genre/:search", searchGamesByGenre);
 };

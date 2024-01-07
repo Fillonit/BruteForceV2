@@ -51,8 +51,8 @@ export const addGame = async (req: express.Request, res: express.Response) => {
 			releaseDate,
 			price,
 			rating,
-			image,
 			description,
+			tags,
 		} = req.body;
 
 		const game = await createGame({
@@ -64,8 +64,8 @@ export const addGame = async (req: express.Request, res: express.Response) => {
 			releaseDate,
 			price,
 			rating,
-			image,
 			description,
+			tags,
 		});
 
 		return res.status(200).json({ game }).end();
@@ -88,6 +88,9 @@ export const editGame = async (req: express.Request, res: express.Response) => {
 			releaseDate,
 			price,
 			rating,
+			description,
+			tags,
+			image,
 		} = req.body;
 
 		const game = await updateGame(id, {
@@ -99,6 +102,9 @@ export const editGame = async (req: express.Request, res: express.Response) => {
 			releaseDate,
 			price,
 			rating,
+			description,
+			tags,
+			image,
 		});
 
 		return res.status(200).json({ game }).end();

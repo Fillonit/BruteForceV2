@@ -1,0 +1,59 @@
+[
+	{
+		"_id": "6580fea50e2cfb99d15449b3",
+		"name": "Yakuza 0",
+		"description": "Fight like hell through Tokyo and Osaka with protagonist Kazuma Kiryu and series regular Goro Majima.",
+		"genre": ["Action", "Adventure"],
+		"platform": ["PC", "PS4"],
+		"developer": "SEGA",
+		"publisher": "SEGA",
+		"releaseDate": "2015-03-12T00:00:00.000Z",
+		"price": 20,
+		"rating": 4.5,
+		"image": "https://example.com/yakuza0.png",
+		"createdAt": "2023-12-19T02:23:33.815Z",
+		"updatedAt": "2023-12-19T02:23:33.815Z",
+		"__v": 0,
+		"tags": ["Action", "Adventure", "Crime", "Open World", "Singleplayer"]
+	},
+	{
+		"_id": "6580fea50e2cfb99d15449b4",
+		"name": "Risk of Rain 2",
+		"description": "The classic multiplayer roguelike, Risk of Rain, returns with an extra dimension and more challenging action.",
+		"genre": ["Action", "Roguelike"],
+		"platform": ["PC", "PS4", "Xbox One", "Switch"],
+		"developer": "Hopoo Games",
+		"publisher": "Gearbox Publishing",
+		"releaseDate": "2019-03-28T00:00:00.000Z",
+		"price": 25,
+		"rating": 4.5,
+		"image": "https://example.com/riskofrain2.png",
+		"createdAt": "2023-12-19T02:23:33.815Z",
+		"updatedAt": "2023-12-19T02:23:33.815Z",
+		"__v": 0,
+		"tags": [
+			"Action",
+			"Multiplayer",
+			"Roguelike",
+			"Third Person",
+			"Shooter"
+		]
+	},
+	{
+		"_id": "6580fea50e2cfb99d15449b5",
+		"name": "Elden Ring",
+		"description": "ELDEN RING, developed by FromSoftware, Inc. and BANDAI NAMCO Entertainment Inc., is a fantasy action-RPG adventure.",
+		"genre": ["Action", "RPG"],
+		"platform": ["PC", "PS4", "PS5", "Xbox One", "Xbox Series X/S"],
+		"developer": "FromSoftware",
+		"publisher": "BANDAI NAMCO Entertainment",
+		"releaseDate": "2022-02-25T00:00:00.000Z",
+		"price": 60,
+		"rating": 5,
+		"image": "https://example.com/eldenring.png",
+		"createdAt": "2023-12-19T02:23:33.815Z",
+		"updatedAt": "2023-12-19T02:23:33.815Z",
+		"__v": 0,
+		"tags": ["Action", "RPG", "Fantasy", "Open World", "Singleplayer"]
+	}
+]

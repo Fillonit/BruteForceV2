@@ -4,11 +4,16 @@ const PostSchema = new mongoose.Schema({
 	title: { type: String, required: true },
 	imageURL: { type: String, required: false, default: "" },
 	content: { type: String, required: true },
-	authorId: { type: String, required: true },
-	authorUsername: { type: String, required: true },
+	tags: { type: [String], required: true },
+	author: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "User",
+		required: true,
+	},
 	createdAt: { type: Date, default: Date.now },
 	updatedAt: { type: Date, default: Date.now },
 	views: { type: Number, default: 0 },
+	likes: { type: Number, default: 0 },
 });
 
 export const PostModel = mongoose.model("Post", PostSchema);
