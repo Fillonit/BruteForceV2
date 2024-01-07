@@ -21,6 +21,7 @@ interface Game {
 const Home: React.FC = () => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [games, setGames] = useState<Game[]>([]);
+	console.log(games);
 
 	useEffect(() => {
 		const fetchGames = async () => {

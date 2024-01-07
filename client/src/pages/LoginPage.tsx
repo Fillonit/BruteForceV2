@@ -1,15 +1,15 @@
 import React from "react";
 import SignUp from "../components/SignUp";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import SignIn from "../components/SignIn";
+// import SignIn from "../components/SignIn";
 
 const LoginPage: React.FC = () => {
-	const [isSignUp, setIsSignUp] = React.useState(false);
+	// const [isSignUp, setIsSignUp] = React.useState(false);
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const toggleSignUp = () => {
-		setIsSignUp(!isSignUp);
-	};
+	// const toggleSignUp = () => {
+	// 	setIsSignUp(!isSignUp);
+	// };
 
 	return (
 		<div>
