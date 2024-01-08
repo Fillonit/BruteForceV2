@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Avatar, Dropdown } from "flowbite-react";
 import { API_BASE_URL } from "../../config";
 import { ToastContainer, ToastOptions, toast } from "react-toastify";
