@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import GamesList from "../components/Games/GamesList";
+import { API_BASE_URL } from "../config";
 
 interface Game {
 	_id: string;
@@ -25,7 +26,7 @@ const Home: React.FC = () => {
 
 	useEffect(() => {
 		const fetchGames = async () => {
-			const response = await fetch("http://localhost:5000/games");
+			const response = await fetch(`${API_BASE_URL}/games`);
 			const data = await response.json();
 			setGames(data.games);
 		};

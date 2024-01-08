@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import { API_BASE_URL } from "../../config";
 interface Game {
 	_id: string;
 	name: string;
@@ -20,10 +20,11 @@ interface Game {
 
 const GamesList: React.FC = () => {
 	const [games, setGames] = useState<Game[]>([]);
+	console.log(games);
 
 	useEffect(() => {
 		const fetchGames = async () => {
-			const response = await fetch("http://localhost:5000/games");
+			const response = await fetch(`${API_BASE_URL}/games`);
 			const data = await response.json();
 			setGames(data.games);
 		};
@@ -46,9 +47,9 @@ const GamesList: React.FC = () => {
 								src={game.image}
 								alt={game.name}
 							/>
-							<div className="absolute top-0 right-0 bg-gray-200 rounded-full px-2 py-1 text-sm font-semibold text-gray-800 mr-2 mt-2">
+							{/* <div className="absolute top-0 right-0 bg-gray-200 rounded-full px-2 py-1 text-sm font-semibold text-gray-800 mr-2 mt-2">
 								{game.platform.join(", ")}
-							</div>
+							</div> */}
 							<div className="px-6 py-4">
 								<div className="font-bold text-xl mb-2">
 									{game.name}
