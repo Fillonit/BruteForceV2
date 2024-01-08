@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect, useState } from "react";
-import { API_BASE_URL } from "../../config";
+import React from "react";
+// import { API_BASE_URL } from "../../config";
 import GameCard from "./GameCard";
 interface Game {
 	_id: string;
