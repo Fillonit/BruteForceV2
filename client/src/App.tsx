@@ -12,7 +12,7 @@ function App() {
 	return (
 		<Router>
 			<Flowbite>
-				<div className="min-h-screen flex flex-col">
+				<div className="min-h-screen flex flex-col ">
 					{!window.location.pathname.includes("/dashboard") && (
 						<Navbar />
 					)}
@@ -25,7 +25,7 @@ function App() {
 						<Footer />
 					)}
 				</div>
-				<DarkThemeToggle className="fixed bottom-2 right-2" />
+				<DarkThemeToggle className="fixed bottom-2 right-2 text-white dark:text-white" />
 			</Flowbite>
 		</Router>
 	);

@@ -1,29 +1,58 @@
 import React, { useState } from "react";
+import { API_BASE_URL } from "../config";
+import { ToastContainer, UpdateOptions, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import notifyConfig from "./notifyConfig";
 
-const SignUp: React.FC = () => {
+interface SignUpProps {
+	setLogIn: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const SignUp: React.FC<SignUpProps> = ({ setLogIn }) => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [username, setUsername] = useState("");
 
+	console.log(notifyConfig);
+
 	const handleSignUp = async () => {
+		const SignUpToast = toast.loading("Signing Up...", {
+			autoClose: 3000,
+		});
 		try {
-			const response = await fetch(
-				"http://localhost:5000/auth/register",
-				{
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify({
-						email,
-						password,
-						username,
-					}),
-				}
-			);
+			const response = await fetch(`${API_BASE_URL}/auth/register`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					email,
+					password,
+					username,
+				}),
+			});
 			const data = await response.json();
+			if (response.status === 201) {
+				toast.update(SignUpToast, {
+					render: "Signed Up Successfully!",
+					type: "success",
+					...notifyConfig,
+				} as UpdateOptions<unknown>);
+				setLogIn(true);
+			} else {
+				toast.update(SignUpToast, {
+					render: "Sign Up Failed!",
+					type: "error",
+					...notifyConfig,
+				} as UpdateOptions<unknown>);
+			}
 			console.log(data);
 		} catch (error) {
+			toast.update(SignUpToast, {
+				render: "Sign Up Failed!",
+				type: "error",
+				...notifyConfig,
+			} as UpdateOptions<unknown>);
 			console.error(error);
 		}
 	};
@@ -62,7 +91,21 @@ const SignUp: React.FC = () => {
 					>
 						Sign Up
 					</button>
+					<div className="mt-4 text-center">
+						<span className="text-gray-600 dark:text-gray-400">
+							Already have an account?
+						</span>
+						<button
+							onClick={() => {
+								setLogIn(true);
+							}}
+							className="text-purple-500 hover:text-purple-600 dark:text-purple-400 ml-2 font-bold underline"
+						>
+							Sign In
+						</button>
+					</div>
 				</div>
+				<ToastContainer />
 			</div>
 		</div>
 	);

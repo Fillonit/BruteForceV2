@@ -1,6 +1,8 @@
 "use client";
 
 import { Button, Navbar } from "flowbite-react";
+// import { FaUser } from "react-icons/fa";
+import NavAvatar from "./User/NavAvatar";
 
 function NavbarComponent() {
 	const NavItems = [
@@ -25,6 +27,9 @@ function NavbarComponent() {
 			path: "/contact",
 		},
 	];
+
+	const user = localStorage.getItem("user");
+	const username = user ? JSON.parse(user).username : null;
 	return (
 		<div>
 			<Navbar fluid className="font-tektur">
@@ -34,12 +39,24 @@ function NavbarComponent() {
 					</span>
 				</Navbar.Brand>
 				<div className="flex md:order-2">
-					<Button
-						href="/login"
-						className="bg-purple-700 dark:bg-purple-500 text-2xl font-bold"
-					>
-						Login
-					</Button>
+					{username ? (
+						// <a
+						// 	href="/profile"
+						// 	className="bg-purple-500 dark:bg-purple-800 p-2 rounded-md"
+						// >
+						// 	<span className="flex items-center self-center whitespace-nowrap text-xl font-semibold text-white">
+						// 		{username} <FaUser className="ml-2" />
+						// 	</span>
+						// </a>
+						<NavAvatar />
+					) : (
+						<Button
+							href="/login"
+							className="bg-purple-700 dark:bg-purple-500 text-2xl font-bold"
+						>
+							Login
+						</Button>
+					)}
 					<Navbar.Toggle />
 				</div>
 				<Navbar.Collapse>

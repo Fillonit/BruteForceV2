@@ -35,9 +35,9 @@ const GamesList: React.FC<{ gamesList: Game[] }> = ({ gamesList }) => {
 	// }, []);
 
 	return (
-		<div className="bg-gray-200 min-h-screen dark:bg-slate-700">
+		<div className="bg-gray-200 min-h-screen dark:bg-slate-700 bg-gradient-to-br from-purple-400 to-indigo-600 dark:from-purple-800 dark:to-indigo-900">
 			<main className="container mx-auto py-8 px-4 sm:px-6 lg:px-8">
-				<h2 className="text-2xl font-bold mb-4 text-black dark:text-white">
+				<h2 className="text-2xl font-bold mb-4 text-white dark:text-white">
 					Latest Games
 				</h2>
 				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
