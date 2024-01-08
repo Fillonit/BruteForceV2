@@ -6,8 +6,8 @@ interface Game {
 	_id: string;
 	name: string;
 	description: string;
-	genre: string;
-	platform: string;
+	genre: string[];
+	platform: string[]; // Fix: Change the type of 'platform' to 'string[]'
 	developer: string;
 	publisher: string;
 	releaseDate: string;
@@ -17,12 +17,12 @@ interface Game {
 	createdAt: string;
 	updatedAt: string;
 	__v: number;
+	tags: string[];
 }
 
 const Home: React.FC = () => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [games, setGames] = useState<Game[]>([]);
-	console.log(games);
 
 	useEffect(() => {
 		const fetchGames = async () => {
@@ -36,7 +36,7 @@ const Home: React.FC = () => {
 
 	return (
 		<div>
-			<GamesList />
+			<GamesList gamesList={games.slice(0, 4)} />
 		</div>
 	);
 };

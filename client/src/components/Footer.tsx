@@ -1,56 +1,34 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-	faGithub,
-	faTwitter,
-	faLinkedin,
-} from "@fortawesome/free-brands-svg-icons";
+"use client";
 
-const Footer: React.FC = () => {
+import { Footer } from "flowbite-react";
+
+function FooterComponent() {
 	return (
-		<footer className="bg-gray-800 text-white py-4">
-			<div className="container mx-auto flex flex-col justify-center items-center">
-				<div className="flex justify-center items-center mb-4">
-					<a
-						href="https://github.com"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="mr-4"
-					>
-						<FontAwesomeIcon
-							icon={faGithub}
-							className="text-white text-xl hover:text-purple-400 transition-colors duration-300"
-						/>
-					</a>
-					<a
-						href="https://twitter.com"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="mr-4"
-					>
-						<FontAwesomeIcon
-							icon={faTwitter}
-							className="text-white text-xl hover:text-purple-400 transition-colors duration-300"
-						/>
-					</a>
-					<a
-						href="https://linkedin.com"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<FontAwesomeIcon
-							icon={faLinkedin}
-							className="text-white text-xl hover:text-purple-400 transition-colors duration-300"
-						/>
-					</a>
-				</div>
-				<p className="text-slate-400">
-					© {new Date().getFullYear()} BruteForce. All rights
-					reserved.
-				</p>
-			</div>
-		</footer>
-	);
-};
+		<Footer container className="rounded-none">
+			<div className="w-full text-center">
+				<div className="w-full justify-between sm:flex sm:items-center sm:justify-between">
+					<div>
+						<span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+							BruteForce
+						</span>
+					</div>
 
-export default Footer;
+					<Footer.LinkGroup>
+						<Footer.Link href="#">About</Footer.Link>
+						<Footer.Link href="#">Privacy Policy</Footer.Link>
+						<Footer.Link href="#">Licensing</Footer.Link>
+						<Footer.Link href="#">Contact</Footer.Link>
+					</Footer.LinkGroup>
+				</div>
+				<Footer.Divider />
+				<Footer.Copyright
+					href="/"
+					by="BruteForce"
+					year={new Date().getFullYear()}
+				/>
+			</div>
+		</Footer>
+	);
+}
+
+export default FooterComponent;

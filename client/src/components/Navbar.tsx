@@ -1,81 +1,65 @@
-// import React from "react";
-// import ReactIcon from "../assets/react.svg";
-import {
-	FaUser,
-	FaInfoCircle,
-	FaEnvelope,
-	FaBook,
-	FaGamepad,
-} from "react-icons/fa";
+"use client";
 
-const Navbar = () => {
-	const navItems = [
+import { Button, Navbar } from "flowbite-react";
+
+function NavbarComponent() {
+	const NavItems = [
 		{
-			label: "Blog",
-			icon: <FaBook className="inline-block mr-1 ml-4 text-lg" />,
-			link: "/blog",
+			name: "Home",
+			path: "/",
 		},
 		{
-			label: "About",
-			icon: <FaInfoCircle className="inline-block mr-1 ml-4 text-lg" />,
-			link: "/about",
+			name: "About",
+			path: "/about",
 		},
 		{
-			label: "Contact",
-			icon: <FaEnvelope className="inline-block mr-1 ml-4 text-lg" />,
-			link: "/contact",
+			name: "Blog",
+			path: "/blog",
 		},
 		{
-			label: "Games",
-			icon: <FaGamepad className="inline-block mr-1 ml-4 text-lg" />,
-			link: "/games",
+			name: "Games",
+			path: "/games",
 		},
 		{
-			label: "Profile",
-			icon: <FaUser className="inline-block mr-1 ml-4 text-lg" />,
-			link: `/users/me`,
+			name: "Contact",
+			path: "/contact",
 		},
 	];
-
 	return (
-		<nav className="bg-white text-gray-800 shadow-lg">
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-				<div className="flex items-center justify-between h-16">
-					<div className="flex items-center">
-						<div className="flex-shrink-0 text-2xl font-semibold text-white bg-purple-400 px-2 rounded pb-1 hover:bg-purple-200 cursor-pointer">
-							{/* <img
-								className="h-8 w-8"
-								src={ReactIcon}
-								alt="Icon"
-							/> */}
-							BruteForce
-						</div>
-						<div className="ml-10 flex items-baseline space-x-2">
-							{navItems.map((item, index) => (
-								<a
-									key={index}
-									href={`${item.link}`}
-									className="text-gray-800 hover:text-purple-600 hover:bg-purple-200 transition-colors duration-300 px-2 pr-6 py-2 rounded-md text-sm font-medium"
-								>
-									{item.icon} {item.label}
-								</a>
-							))}
-						</div>
-					</div>
-					<div className="hidden md:block">
-						<div className="ml-4 flex items-center md:ml-6">
-							<a
-								href="/login"
-								className="text-gray-800 bg-purple-200 hover:bg-purple-400 hover:text-purple-600 transition-colors duration-300 px-3 py-2 rounded-md text-sm font-medium"
-							>
-								Login
-							</a>
-						</div>
-					</div>
+		<div>
+			<Navbar fluid className="font-tektur">
+				<Navbar.Brand href="/">
+					<span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+						BruteForce
+					</span>
+				</Navbar.Brand>
+				<div className="flex md:order-2">
+					<Button
+						href="/login"
+						className="bg-purple-700 dark:bg-purple-500 text-2xl font-bold"
+					>
+						Login
+					</Button>
+					<Navbar.Toggle />
 				</div>
-			</div>
-		</nav>
+				<Navbar.Collapse>
+					{NavItems.map((item) => (
+						<Navbar.Link
+							href={item.path}
+							active={window.location.pathname === item.path}
+							className={
+								window.location.pathname === item.path
+									? "text-purple-500 hover:text-purple-500 active:text-purple-500 bg-purple-700 dark:text-white md:bg-transparent md:text-purple-700 font-bold"
+									: "border-b border-gray-100  text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:hover:bg-transparent md:hover:text-purple-700 md:dark:hover:bg-transparent md:dark:hover:text-white font-bold"
+							}
+						>
+							{item.name}
+						</Navbar.Link>
+					))}
+				</Navbar.Collapse>
+			</Navbar>
+		</div>
 	);
-};
+}
 
-export default Navbar;
+export default NavbarComponent;

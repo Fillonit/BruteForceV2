@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const NotFound = () => {
 	const navigate = useNavigate();
 	return (
-		<div className="flex flex-col items-center justify-center h-screen bg-gradient-to-br from-purple-400 to-indigo-600">
+		<div className="flex flex-col items-center justify-center h-screen bg-gradient-to-br from-purple-400 to-indigo-600 dark:from-purple-800 dark:to-indigo-900">
 			<div className="text-6xl text-white">
 				<FontAwesomeIcon icon={faGamepad} />
 			</div>
