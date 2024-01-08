@@ -42,6 +42,9 @@ const SignIn: React.FC<SignInProps> = ({ setLogIn }) => {
 					...notifyConfig,
 				} as UpdateOptions<unknown>);
 				setLogIn(true);
+				setTimeout(() => {
+					window.location.href = "/";
+				}, 1000);
 			} else {
 				toast.update(SignInToast, {
 					render: `${data.message}!`,
