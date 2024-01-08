@@ -47,9 +47,9 @@ const GamesList: React.FC = () => {
 								src={game.image}
 								alt={game.name}
 							/>
-							{/* <div className="absolute top-0 right-0 bg-gray-200 rounded-full px-2 py-1 text-sm font-semibold text-gray-800 mr-2 mt-2">
+							<div className="absolute top-0 right-0 bg-gray-200 rounded-full px-2 py-1 text-sm font-semibold text-gray-800 mr-2 mt-2">
 								{game.platform.join(", ")}
-							</div> */}
+							</div>
 							<div className="px-6 py-4">
 								<div className="font-bold text-xl mb-2">
 									{game.name}
