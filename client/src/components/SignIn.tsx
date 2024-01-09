@@ -13,48 +13,54 @@ const SignIn: React.FC<SignInProps> = ({ setLogIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSignIn = async () => {
-    const SignInToast = toast("Signing In...", {
-      autoClose: 3000,
-    });
-    try {
-      const response = await fetch(`${API_BASE_URL}/auth/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
-      const data = await response.json();
-      console.log(data);
-      if (response.status === 200) {
-        localStorage.setItem("token", data.user.authentication.sessionToken);
-        localStorage.setItem("user", JSON.stringify(data.user));
-        toast.update(SignInToast, {
-          render: "Signed In Successfully!",
-          type: "success",
-          ...notifyConfig,
-        } as UpdateOptions<unknown>);
-        setLogIn(true);
-      } else {
-        toast.update(SignInToast, {
-          render: `${data.message}!`,
-          type: "error",
-          ...notifyConfig,
-        } as UpdateOptions<unknown>);
-      }
-    } catch (error) {
-      toast.update(SignInToast, {
-        render: "Sign In Failed!",
-        type: "error",
-        ...notifyConfig,
-      } as UpdateOptions<unknown>);
-      console.error(error);
-    }
-  };
+	const handleSignIn = async () => {
+		const SignInToast = toast("Signing In...", {
+			autoClose: 3000,
+		});
+		try {
+			const response = await fetch(`${API_BASE_URL}/auth/login`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					email,
+					password,
+				}),
+			});
+			const data = await response.json();
+			console.log(data);
+			if (response.status === 200) {
+				localStorage.setItem(
+					"token",
+					data.user.authentication.sessionToken
+				);
+				localStorage.setItem("user", JSON.stringify(data.user));
+				toast.update(SignInToast, {
+					render: "Signed In Successfully!",
+					type: "success",
+					...notifyConfig,
+				} as UpdateOptions<unknown>);
+				setLogIn(true);
+				setTimeout(() => {
+					window.location.href = "/";
+				}, 1000);
+			} else {
+				toast.update(SignInToast, {
+					render: `${data.message}!`,
+					type: "error",
+					...notifyConfig,
+				} as UpdateOptions<unknown>);
+			}
+		} catch (error) {
+			toast.update(SignInToast, {
+				render: "Sign In Failed!",
+				type: "error",
+				...notifyConfig,
+			} as UpdateOptions<unknown>);
+			console.error(error);
+		}
+	};
 
   return (
     <div className="bg-[url('https://i.pinimg.com/originals/43/fc/01/43fc016f861af30e156c4d7844922917.jpg')]">

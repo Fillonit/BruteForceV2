@@ -147,7 +147,7 @@ export const getUserByToken = async (
 	res: express.Response
 ) => {
 	try {
-		const { sessionToken } = req.body;
+		const sessionToken = req.headers.authorization as string;
 
 		const user = await getUserBySessionToken(sessionToken);
 

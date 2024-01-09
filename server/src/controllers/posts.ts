@@ -28,19 +28,21 @@ export const createNewPost = async (
 	res: express.Response
 ) => {
 	try {
-		const sessionToken = req.cookies.sessionToken;
+		const sessionToken = req.headers.authorization as string;
+		console.log(sessionToken);
 
 		if (!sessionToken) {
 			return res.status(401).json({ message: "Unauthorized" });
 		}
 
 		const user = await getUserBySessionToken(sessionToken);
+		console.log(user);
 
 		if (!user) {
 			return res.status(401).json({ message: "Unauthorized" });
 		}
 
-		const { title, content, imageURL } = req.body;
+		const { title, content, imageURL, tags } = req.body;
 
 		if (!title || !content) {
 			return res
@@ -51,9 +53,9 @@ export const createNewPost = async (
 		const post = await createPost({
 			title,
 			content,
-			authorId: user._id,
-			authorUsername: user.username,
+			author: user,
 			imageURL: imageURL ?? "",
+			tags,
 		});
 
 		return res
