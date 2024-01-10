@@ -58,7 +58,7 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className="bg-gray-200 min-h-screen dark:bg-slate-700 bg-gradient-to-br from-purple-400 to-indigo-600 dark:from-purple-800 dark:to-indigo-900">
+    <div className="bg-gray-200 min-h-screen dark:bg-slate-700 bg-gradient-to-br from-purple-400 to-indigo-600 dark:from-purple-800 dark:to-indigo-900 bg-[url('https://i.pinimg.com/originals/43/fc/01/43fc016f861af30e156c4d7844922917.jpg')]">
       <main className="container mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <UserInfo user={userData} />
       </main>
