@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React from "react";
 import PostCard from "./PostCard";
 import PostContent from "./PostContent";
 import PostComments from "./PostComents";
