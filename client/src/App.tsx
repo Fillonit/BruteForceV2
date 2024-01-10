@@ -10,6 +10,7 @@ import { DarkThemeToggle, Flowbite } from "flowbite-react";
 import Game from "./pages/Games";
 import Posts from "./pages/Posts";
 import Post from "./pages/Post";
+import Profile from "./pages/Profile";
 function App() {
   // const [userId, setUserId] = useState(localStorage.getItem("userId"));
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/posts" element={<Posts />} />
             <Route path="/post/:id" element={<Post />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           {!window.location.pathname.includes("/dashboard") && <Footer />}

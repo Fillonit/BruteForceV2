@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { API_BASE_URL } from "../../config";
+import React from "react";
 interface Post {
   _id: string;
   title: string;
@@ -13,21 +12,11 @@ interface Post {
   views: number;
 }
 
-const PostComments = () => {
-  const [post, setPost] = useState<Post | null>(null);
+interface PostCardProps {
+  post: Post | null;
+}
 
-  useEffect(() => {
-    const fetchPost = async () => {
-      const response = await fetch(
-        `${API_BASE_URL}/posts/659c3f3ceb0af242dcbdc784`
-      );
-      const data = await response.json();
-      setPost(data.post);
-    };
-
-    fetchPost();
-  }, []);
-
+const PostComments: React.FC<PostCardProps> = ({ post }) => {
   if (!post) {
     return null;
   }

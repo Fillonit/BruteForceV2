@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { API_BASE_URL } from "../../config";
+import React from "react";
 import { FaEye } from "react-icons/fa";
 import { BiSolidLike } from "react-icons/bi";
 interface Post {
@@ -15,9 +14,11 @@ interface Post {
   views: number;
 }
 
-const PostCard = () => {
-  const [post, setPost] = useState<Post | null>(null);
+interface PostCardProps {
+  post: Post | null;
+}
 
+const PostCard: React.FC<PostCardProps> = ({ post }) => {
   function getTimeDifference(updatedAt: string): string {
     const now = new Date();
     const updatedTime = new Date(updatedAt);
@@ -38,18 +39,6 @@ const PostCard = () => {
       return `${seconds} second${seconds > 1 ? "s" : ""} ago`;
     }
   }
-
-  useEffect(() => {
-    const fetchPost = async () => {
-      const response = await fetch(
-        `${API_BASE_URL}/posts/659c3f3ceb0af242dcbdc784`
-      );
-      const data = await response.json();
-      setPost(data.post);
-    };
-
-    fetchPost();
-  }, []);
 
   if (!post) {
     return null;
