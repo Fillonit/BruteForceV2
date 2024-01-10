@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Footer from "./components/Footer";
 import LoginPage from "./pages/LoginPage";
+import Dashboard from "./pages/Dashboard";
 import { DarkThemeToggle, Flowbite } from "flowbite-react";
 function App() {
 	// const [userId, setUserId] = useState(localStorage.getItem("userId"));
@@ -19,6 +20,7 @@ function App() {
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="/login" element={<LoginPage />} />
+						<Route path="/dashboard" element={<Dashboard />} />
 						<Route path="*" element={<NotFound />} />
 					</Routes>
 					{!window.location.pathname.includes("/dashboard") && (

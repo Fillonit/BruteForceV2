@@ -46,7 +46,7 @@ const GameCard: React.FC<Game> = (game) => {
 	return (
 		<div
 			key={game._id}
-			className="bg-white rounded-lg overflow-hidden shadow-lg relative dark:bg-slate-900 font-tektur"
+			className="bg-white rounded-lg overflow-hidden shadow-lg relative dark:bg-slate-900 font-tektur hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
 		>
 			<img
 				className="w-full h-64 object-cover"
@@ -68,7 +68,7 @@ const GameCard: React.FC<Game> = (game) => {
 			</div>
 			<div className="px-6 pt-4 pb-2">
 				{game.tags.slice(0, 4).map((tag) => (
-					<span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 mr-2 mb-2 dark:bg-gray-800 dark:text-gray-200">
+					<span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 mr-2 mb-2 dark:bg-gray-800 dark:text-gray-200 cursor-pointer hover:scale-110 hover:bg-purple-400 hover:text-white">
 						#{tag}
 					</span>
 				))}
