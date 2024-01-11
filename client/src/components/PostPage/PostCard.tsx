@@ -50,7 +50,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
       className="bg-white rounded-lg overflow-hidden shadow-lg relative dark:bg-slate-900 font-tektur"
     >
       <img
-        className="w-full h-128 object-cover"
+        className="w-full h-124 object-cover"
         src={post.imageURL}
         alt={post.title}
       />

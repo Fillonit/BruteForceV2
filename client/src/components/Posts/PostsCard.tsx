@@ -19,16 +19,6 @@ const PostCard: React.FC<Post> = (post) => {
   const [posts, setPosts] = useState<Post[]>([]);
   console.log(posts);
 
-  function formatNumber(num: number) {
-    if (num >= 1000000) {
-      return (num / 1000000).toFixed(1) + "M";
-    } else if (num >= 1000) {
-      return (num / 1000).toFixed(1) + "K";
-    } else {
-      return num;
-    }
-  }
-
   useEffect(() => {
     const fetchPosts = async () => {
       const response = await fetch(`${API_BASE_URL}/posts`);
@@ -51,7 +41,7 @@ const PostCard: React.FC<Post> = (post) => {
           alt={post.title}
         />
         <div className="absolute top-0 right-0 bg-gray-200 rounded-full px-2 py-1 text-sm font-semibold mr-2 mt-2 text-white flex items-center text-md bg-gradient-to-r from-purple-500 to-purple-800">
-          {formatNumber(Math.floor(Math.random() * 9999999) + 1)}
+          {post.views}
           <FaEye className="ml-1 text-purple-50" />
         </div>
         <div className="px-6 py-4">
