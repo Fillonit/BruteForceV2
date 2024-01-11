@@ -222,3 +222,14 @@ export const logger = (
 
 	next();
 };
+
+
+export const addVisit = (
+	req: express.Request,
+	res: express.Response,
+	next: express.NextFunction
+) => {
+	console.log(`Added a visit to ${req.path}.`);
+
+	//add to db table 
+}
