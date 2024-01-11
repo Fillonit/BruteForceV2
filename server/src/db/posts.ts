@@ -1,3 +1,4 @@
+// Remove the import statement for getPostsAuthorId
 import mongoose from "mongoose";
 
 const PostSchema = new mongoose.Schema({
@@ -5,6 +6,14 @@ const PostSchema = new mongoose.Schema({
 	imageURL: { type: String, required: false, default: "" },
 	content: { type: String, required: true },
 	tags: { type: [String], required: true },
+	comments: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Comment",
+			required: false,
+			default: [],
+		},
+	],
 	author: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "User",
@@ -18,10 +27,10 @@ const PostSchema = new mongoose.Schema({
 
 export const PostModel = mongoose.model("Post", PostSchema);
 
-export const getPosts = () => PostModel.find().populate("author");
+export const getPosts = () => PostModel.find().populate("author comments");
 
 export const getPostById = (id: string) =>
-	PostModel.findById(id).populate("author");
+	PostModel.findById(id).populate("author comments");
 
 export const createPost = (values: Record<string, any>) =>
 	new PostModel(values).save().then((post) => post.toObject());
@@ -75,5 +84,7 @@ export const getMostViewedPostsByAuthorId = (authorId: string, limit: number) =>
 export const getTrendingPosts = (limit: number) =>
 	PostModel.find().sort({ views: -1, createdAt: -1 }).limit(limit);
 
-export const getPostAuthorId = (id: string) =>
-	PostModel.findById(id).select("authorId");
+export const getPostsAuthorId = async (postId: string) => {
+	const post = await PostModel.findById(postId);
+	return post.author;
+};

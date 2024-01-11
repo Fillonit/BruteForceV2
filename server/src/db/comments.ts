@@ -12,16 +12,19 @@ const CommentSchema = new mongoose.Schema({
 
 export const CommentModel = mongoose.model("Comment", CommentSchema);
 
-export const getComments = () => CommentModel.find();
+export const getComments = () => CommentModel.find().populate("user post");
 
-export const getCommentById = (id: string) => CommentModel.findById(id);
+export const getCommentById = (id: string) =>
+	CommentModel.findById(id).populate("user post");
 
 export const createComment = (values: Record<string, any>) =>
-	new CommentModel(values).save().then((comment) => comment.toObject());
+	new CommentModel(values)
+		.save()
+		.then((comment) => comment.populate("user post"));
 
 export const updateComment = (id: string, values: Record<string, any>) => {
-	return CommentModel.findByIdAndUpdate(id, values).then((comment) =>
-		comment.toObject()
+	return CommentModel.findByIdAndUpdate(id, values, { new: true }).populate(
+		"user post"
 	);
 };
 
