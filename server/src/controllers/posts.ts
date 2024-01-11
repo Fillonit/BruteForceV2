@@ -93,7 +93,7 @@ export const updatePostById = async (
 ) => {
 	try {
 		const { id } = req.params;
-		const { title, content, imageURL } = req.body;
+		const { title, content, imageURL, tags } = req.body;
 		// console.log(req.body);
 
 		if (!title || !content) {
@@ -106,6 +106,7 @@ export const updatePostById = async (
 			title,
 			content,
 			imageURL: imageURL ?? "",
+			tags,
 			updatedAt: new Date(),
 		});
 

@@ -3,7 +3,7 @@ import { get, merge } from "lodash";
 
 import { getUserBySessionToken } from "../db/users";
 
-import { getPostAuthorId } from "../db/posts";
+import { getPostsAuthorId } from "../db/posts";
 
 export const isAuthenticated = async (
 	req: express.Request,
@@ -82,7 +82,7 @@ export const isPostOwner = async (
 				.json({ message: "Unauthorized, Not Authenticated!" });
 		}
 
-		const author = await getPostAuthorId(id);
+		const author = await getPostsAuthorId(id);
 
 		if (identity.toString() !== author._id.toString()) {
 			return res
@@ -222,3 +222,14 @@ export const logger = (
 
 	next();
 };
+
+
+export const addVisit = (
+	req: express.Request,
+	res: express.Response,
+	next: express.NextFunction
+) => {
+	console.log(`Added a visit to ${req.path}.`);
+
+	//add to db table 
+}
