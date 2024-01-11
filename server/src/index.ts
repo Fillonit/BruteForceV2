@@ -13,7 +13,7 @@ import router from "./router";
 dotenv.config();
 
 const { PORT, MONGO_URL, NODE_ENV } = process.env;
-import { notFound, errorHandler, logger } from "./middlewares";
+import { notFound, errorHandler, logger, addVisit } from "./middlewares";
 
 const app = express();
 
@@ -41,6 +41,7 @@ mongoose
 	.then(() => console.log("MongoDB connected"))
 	.catch((err) => console.log(err));
 
+app.use(addVisit);
 app.use(logger);
 app.use("/", router());
 
