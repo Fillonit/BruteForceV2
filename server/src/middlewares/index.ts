@@ -223,13 +223,19 @@ export const logger = (
 	next();
 };
 
-
-export const addVisit = (
+import { increaseVisits } from "../db/visits";
+import { getVisitsByPathHandler } from "./../controllers/visits";
+export const addVisit = async (
 	req: express.Request,
 	res: express.Response,
 	next: express.NextFunction
 ) => {
-	console.log(`Added a visit to ${req.path}.`);
-
-	//add to db table 
-}
+	await increaseVisits(req.path);
+	const visits = await getVisitsByPathHandler(req.path);
+	if ("visits" in visits) {
+		console.log(
+			`Added a visit to ${req.path}. Now at ${visits.visits} visits.`
+		);
+	}
+	next();
+};
