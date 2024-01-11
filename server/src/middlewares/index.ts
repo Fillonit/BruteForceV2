@@ -232,10 +232,10 @@ export const addVisit = async (
 ) => {
 	await increaseVisits(req.path);
 	const visits = await getVisitsByPathHandler(req.path);
-	if ("visits" in visits) {
-		console.log(
-			`Added a visit to ${req.path}. Now at ${visits.visits} visits.`
-		);
-	}
+	// if ("visits" in visits) {
+	// 	console.log(
+	// 		`Added a visit to ${req.path}. Now at ${visits.visits} visits.`
+	// 	);
+	// }
 	next();
 };

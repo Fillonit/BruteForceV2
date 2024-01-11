@@ -43,9 +43,9 @@ export const addComment = async (
 	res: express.Response
 ) => {
 	try {
-		const { game, user, content } = req.body;
+		const { post, user, content } = req.body;
 
-		const comment = await createComment({ game, user, content });
+		const comment = await createComment({ post, user, content });
 
 		return res.status(200).json({ comment }).end();
 	} catch (error) {
