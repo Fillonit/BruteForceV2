@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PostCard from "./PostCard";
 import PostContent from "./PostContent";
 // import PostComments from "./PostComents";
