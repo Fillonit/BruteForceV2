@@ -33,10 +33,16 @@ const PostContent: React.FC<PostCardProps> = ({ post }) => {
 	}
 
 	return (
-		<div key={post._id} className="relative font-tektur">
-			<p className="text-black text-base dark:text-white">
-				{post.content}
-			</p>
+		<div
+			key={post._id}
+			className="relative font-tektur bg-slate-50 p-8 rounded-md"
+		>
+			<p
+				className="text-black text-base dark:text-white"
+				dangerouslySetInnerHTML={{
+					__html: post.content,
+				}}
+			></p>
 		</div>
 	);
 };

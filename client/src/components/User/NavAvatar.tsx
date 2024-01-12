@@ -76,7 +76,9 @@ function NavAvatar() {
 				inline
 			>
 				<Dropdown.Header>
-					<span className="block text-sm">{userData.username}</span>
+					<span className="block text-sm font-bold">
+						{userData.username}
+					</span>
 					<span className="block truncate text-sm font-medium">
 						{userData.email}
 					</span>
@@ -84,8 +86,12 @@ function NavAvatar() {
 				<Link to={`/profile`}>
 					<Dropdown.Item>Profile</Dropdown.Item>
 				</Link>
-				<Dropdown.Item>Dashboard</Dropdown.Item>
-				<Dropdown.Item>Settings</Dropdown.Item>
+				<Link to={`/dashboard`}>
+					<Dropdown.Item>Dashboard</Dropdown.Item>
+				</Link>
+				<Link to={`/settings`}>
+					<Dropdown.Item>Settings</Dropdown.Item>
+				</Link>
 				{/* <Dropdown.Item>Posts</Dropdown.Item> */}
 				<Dropdown.Divider />
 				<Dropdown.Item onClick={handleSignOut}>Sign out</Dropdown.Item>

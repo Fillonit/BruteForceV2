@@ -61,25 +61,29 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 	return (
 		<div
 			key={post._id}
-			className="bg-white rounded-lg overflow-hidden shadow-lg relative dark:bg-slate-900 font-tektur hover:shadow-2xl transition duration-300 ease-in-out transform"
+			className="flex flex-col bg-white rounded-lg overflow-hidden shadow-lg relative dark:bg-slate-900 font-tektur hover:shadow-2xl transition duration-300 ease-in-out transform"
 		>
 			<img
 				className="w-full h-64 object-cover"
 				src={post.imageURL}
 				alt={post.title}
 			/>
-			<div className="absolute top-0 right-0 bg-gray-200 rounded-full px-2 py-1 text-sm font-semibold mr-2 mt-2 text-white flex items-center text-md bg-gradient-to-r from-purple-500 to-purple-800">
-				{formatNumber(post.views)}
-				<FaEye className="ml-1 text-purple-50" />
-			</div>
-			<div className="absolute top-8 right-0 bg-gray-200 rounded-full px-2 py-1 text-sm font-semibold mr-2 mt-2 text-white flex items-center text-md bg-gradient-to-r from-purple-500 to-purple-800">
-				{formatNumber(post.likes)}
-				<FaThumbsUp className="ml-1 text-purple-50" />
-			</div>
-			<div className="px-6 py-4">
-				<div className="font-bold text-xl mb-2 dark:text-white">
-					{post.title}
+			<div className="p-6 flex-grow">
+				<div className="flex justify-between items-start">
+					<div className="font-bold text-xl mb-2 dark:text-white">
+						{post.title}
+					</div>
 					<AuthorTag author={post.author} />
+					<div className="flex space-x-4">
+						<div className="bg-gray-200 rounded-full px-2 py-1 text-sm font-semibold text-white flex items-center text-md bg-gradient-to-r from-purple-500 to-purple-800">
+							{formatNumber(post.views)}
+							<FaEye className="ml-1 text-purple-50" />
+						</div>
+						<div className="bg-gray-200 rounded-full px-2 py-1 text-sm font-semibold text-white flex items-center text-md bg-gradient-to-r from-purple-500 to-purple-800">
+							{formatNumber(post.likes)}
+							<FaThumbsUp className="ml-1 text-purple-50" />
+						</div>
+					</div>
 				</div>
 				<p className="text-gray-700 text-base line-clamp-2 dark:text-gray-400">
 					Published at:{" "}
@@ -88,13 +92,13 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 				<p className="text-gray-700 text-base line-clamp-2 dark:text-gray-400">
 					Last Edited at: {getTimeDifference(post.updatedAt)}
 				</p>
-			</div>
-			<div className="px-6 pt-4 pb-2">
-				{post.tags.map((tag) => (
-					<span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 mr-2 mb-2 dark:bg-gray-800 dark:text-gray-200 cursor-pointer hover:scale-110 hover:bg-purple-400 hover:text-white">
-						#{tag}
-					</span>
-				))}
+				<div className="mt-4 flex flex-wrap">
+					{post.tags.map((tag) => (
+						<span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 mr-2 mb-2 dark:bg-gray-800 dark:text-gray-200 cursor-pointer hover:scale-110 hover:bg-purple-400 hover:text-white">
+							#{tag}
+						</span>
+					))}
+				</div>
 			</div>
 		</div>
 	);
