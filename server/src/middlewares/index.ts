@@ -104,12 +104,15 @@ export const isAdmin = async (
 ) => {
 	try {
 		const identity = get(req, "identity") as any;
+		const user = await getUserBySessionToken(
+			req.headers.authorization as string
+		);
 
-		if (!identity) {
+		if (!user) {
 			return res.status(401).json({ message: "Unauthorized" });
 		}
 
-		if (identity.role !== "admin") {
+		if (user.role !== "admin") {
 			return res.status(401).json({ message: "Unauthorized" });
 		}
 
