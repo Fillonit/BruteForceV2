@@ -29,6 +29,16 @@ export const deleteUser = async (
 	try {
 		const { id } = req.params;
 
+		const user = await getUserById(id);
+
+		if (!user || user === null || user === undefined) {
+			return res.status(400).json({ message: "User not found" });
+		}
+
+		if (user.role === "admin") {
+			return res.status(400).json({ message: "Cannot delete admin" });
+		}
+
 		const deletedUser = await deleteUserById(id);
 
 		return res
