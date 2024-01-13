@@ -64,7 +64,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 			className="flex flex-col bg-white rounded-lg overflow-hidden shadow-lg relative dark:bg-slate-900 font-tektur hover:shadow-2xl transition duration-300 ease-in-out transform"
 		>
 			<img
-				className="w-full h-64 object-cover"
+				className="w-full h-full object-cover"
 				src={post.imageURL}
 				alt={post.title}
 			/>

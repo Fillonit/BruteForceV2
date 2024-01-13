@@ -31,14 +31,12 @@ export const createNewPost = async (
 ) => {
 	try {
 		const sessionToken = req.headers.authorization as string;
-		console.log(sessionToken);
 
 		if (!sessionToken) {
 			return res.status(401).json({ message: "Unauthorized" });
 		}
 
 		const user = await getUserBySessionToken(sessionToken);
-		console.log(user);
 
 		if (!user) {
 			return res.status(401).json({ message: "Unauthorized" });

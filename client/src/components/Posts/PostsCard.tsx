@@ -67,7 +67,7 @@ const PostCard: React.FC<Post> = (post) => {
 					<FaEye className="ml-1 text-purple-50" />
 				</div>
 				<div className="px-6 py-4">
-					<div className="font-bold text-xl mb-2 dark:text-white">
+					<div className="font-bold text-xl mb-2 dark:text-white truncate line-clamp-1">
 						{post.title}
 					</div>
 					<p className="text-gray-700 text-base line-clamp-2 dark:text-gray-400">
@@ -76,7 +76,7 @@ const PostCard: React.FC<Post> = (post) => {
 				</div>
 				<div className="px-6 pt-4 pb-2">
 					{post.tags.slice(0, 4).map((tag) => (
-						<span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 mr-2 mb-2 dark:bg-gray-800 dark:text-gray-200">
+						<span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 mr-2 mb-2 dark:bg-gray-800 dark:text-gray-200 cursor-pointer hover:scale-110 hover:bg-purple-400 hover:text-white dark:hover:bg-purple-800">
 							#{tag}
 						</span>
 					))}
