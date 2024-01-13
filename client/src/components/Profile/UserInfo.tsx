@@ -1,6 +1,7 @@
 import { Avatar } from "flowbite-react";
 import { useState, useEffect } from "react";
-import PostList from "../Posts/PostsList";
+// import PostList from "../Posts/PostsList";
+import PostCard from "../Posts/PostsCard";
 import { API_BASE_URL } from "../../config";
 
 interface UserData {
@@ -76,46 +77,63 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
 		return null;
 	}
 	return (
-		<div className="bg-white shadow overflow-hidden sm:rounded-lg">
-			<div className="px-4 py-5 sm:px-6 flex items-center">
-				<Avatar img={user.profile.avatar} size="lg" className="mr-4" />
-				<div>
-					<h3 className="text-lg leading-6 font-medium text-gray-900">
-						User Information
-					</h3>
-					<p className="mt-1 max-w-2xl text-sm text-gray-500">
-						Personal details and application.
-					</p>
+		<div>
+			<div className="bg-white shadow overflow-hidden sm:rounded-lg dark:bg-slate-900">
+				<div className="px-4 py-5 sm:px-6 flex items-center">
+					<Avatar
+						img={user.profile.avatar}
+						size="lg"
+						className="mr-4"
+					/>
+					<div>
+						<h3 className="text-lg leading-6 font-medium text-slate-900 dark:text-white">
+							User Information
+						</h3>
+						<p className="mt-1 max-w-2xl text-sm text-gray-500">
+							Personal details and posts.
+						</p>
+					</div>
+				</div>
+				<div className="border-t border-gray-200 dark:border-slate-900 dark:text-white">
+					<dl className="dark:bg-slate-800">
+						<div className="bg-purple-100 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 dark:bg-slate-800 dark:text-white">
+							<dt className="text-sm font-medium text-gray-500 dark:text-slate-300">
+								Full name
+							</dt>
+							<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 dark:bg-slate-800 dark:text-white">
+								{user.profile.firstName} {user.profile.lastName}
+							</dd>
+						</div>
+						<div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 dark:bg-slate-800 dark:text-white">
+							<dt className="text-sm font-medium text-gray-500 dark:text-slate-300">
+								Email address
+							</dt>
+							<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 dark:bg-slate-800 dark:text-white">
+								<a
+									href={`mailto:${user.email}`}
+									className="text-purple-500 hover:text-purple-700"
+								>
+									{user.email}
+								</a>
+							</dd>
+						</div>
+						<div className="bg-purple-100 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 dark:bg-slate-800 dark:text-white">
+							<dt className="text-sm font-medium text-gray-500 dark:text-slate-300">
+								Bio
+							</dt>
+							<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 dark:text-white">
+								{user.profile.bio}
+							</dd>
+						</div>
+						{/* <PostList postsList={posts} /> */}
+					</dl>
 				</div>
 			</div>
-			<div className="border-t border-gray-200">
-				<dl>
-					<div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-						<dt className="text-sm font-medium text-gray-500">
-							Full name
-						</dt>
-						<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-							{user.profile.firstName} {user.profile.lastName}
-						</dd>
-					</div>
-					<div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-						<dt className="text-sm font-medium text-gray-500">
-							Email address
-						</dt>
-						<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-							{user.email}
-						</dd>
-					</div>
-					<div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-						<dt className="text-sm font-medium text-gray-500">
-							Bio
-						</dt>
-						<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-							{user.profile.bio}
-						</dd>
-					</div>
-					<PostList postsList={posts} />
-				</dl>
+			<h1 className="my-8 text-2xl text-white">Posts</h1>
+			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+				{posts.map((post: Post) => (
+					<PostCard {...post} />
+				))}
 			</div>
 		</div>
 	);
