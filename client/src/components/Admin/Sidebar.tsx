@@ -17,7 +17,10 @@ import { twMerge } from "tailwind-merge";
 
 function SidebarComponent() {
 	return (
-		<Sidebar aria-label="Sidebar with multi-level dropdown example">
+		<Sidebar
+			aria-label="Sidebar with multi-level dropdown example"
+			className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+		>
 			<Sidebar.Items>
 				<Sidebar.ItemGroup>
 					<Sidebar.Item href="#" icon={HiChartPie}>

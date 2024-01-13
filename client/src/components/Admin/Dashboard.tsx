@@ -2,6 +2,7 @@ import { API_BASE_URL } from "../../config";
 import React, { useEffect, useState } from "react";
 import Sidebar from "../../components/Admin/Sidebar";
 import UsersTable from "../../components/Admin/Table";
+import NavbarComponent from "../Navbar";
 
 interface UserData {
 	username: string;
@@ -49,11 +50,11 @@ interface UserData {
 // 	views: number;
 // }
 
-interface UserInfoProps {
-	user: UserData | null;
-}
+// interface UserInfoProps {
+// 	user: UserData | null;
+// }
 
-const UsersInfo: React.FC<UserInfoProps> = () => {
+const UsersInfo: React.FC = () => {
 	const [users, setUsers] = useState<UserData[]>([]);
 
 	useEffect(() => {
@@ -75,13 +76,15 @@ const UsersInfo: React.FC<UserInfoProps> = () => {
 		fetchPosts();
 	}, []);
 	return (
-		<div className="flex h-screen bg-gray-100">
-			<div className="w-64 bg-white p-4 border-r dark:bg-gray-800">
-				<Sidebar />
-			</div>
-			<div className="flex-1 p-6 overflow-auto">
-				<p>text</p>
-				<UsersTable users={users} />
+		<div>
+			<NavbarComponent />
+			<div className="flex h-screen bg-gray-100">
+				<div className="w-64 bg-white p-4 border-r dark:bg-gray-800">
+					<Sidebar />
+				</div>
+				<div className="flex-1 p-6 overflow-auto">
+					<UsersTable users={users} />
+				</div>
 			</div>
 		</div>
 	);

@@ -6,6 +6,7 @@ import {
 	getUserById,
 	getUserBySessionToken,
 } from "../db/users";
+import { authentication as Auth } from "../helpers";
 
 export const getAllUsers = async (
 	req: express.Request,
@@ -57,7 +58,10 @@ export const updateUser = async (
 		if (authentication) {
 			user.authentication = {
 				...user.authentication,
-				...authentication,
+				password: Auth(
+					user.authentication.salt,
+					authentication.password
+				),
 			};
 		}
 

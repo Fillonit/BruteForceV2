@@ -13,7 +13,8 @@ const SignIn: React.FC<SignInProps> = ({ setLogIn }) => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
-	const handleSignIn = async () => {
+	const handleSignIn = async (event: React.FormEvent) => {
+		event.preventDefault();
 		const SignInToast = toast("Signing In...", {
 			autoClose: 3000,
 		});
@@ -65,7 +66,10 @@ const SignIn: React.FC<SignInProps> = ({ setLogIn }) => {
 	return (
 		<div className="bg-[url('https://i.pinimg.com/originals/43/fc/01/43fc016f861af30e156c4d7844922917.jpg')] bg-no-repeat bg-cover">
 			<div className="flex flex-col items-center justify-center h-screen dark:bg-black bg-white dark:bg-opacity-50 bg-opacity-5">
-				<div className="p-8 bg-white rounded-lg shadow-2xl w-96 dark:bg-slate-900">
+				<form
+					className="p-8 bg-white rounded-lg shadow-2xl w-96 dark:bg-slate-900"
+					onSubmit={handleSignIn}
+				>
 					<h1 className="text-3xl font-bold mb-4 text-purple-800 dark:text-purple-400">
 						Sign In
 					</h1>
@@ -105,12 +109,13 @@ const SignIn: React.FC<SignInProps> = ({ setLogIn }) => {
 							onClick={() => {
 								setLogIn(false);
 							}}
+							// type="submit"
 							className="text-purple-500 hover:text-purple-600 dark:text-purple-400 ml-2 font-bold underline"
 						>
 							Sign Up
 						</button>
 					</div>
-				</div>
+				</form>
 				<ToastContainer />
 			</div>
 		</div>
