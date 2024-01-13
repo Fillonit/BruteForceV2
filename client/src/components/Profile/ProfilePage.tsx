@@ -7,9 +7,9 @@ interface UserData {
 	email: string;
 	profile: {
 		avatar: string;
-		firstName: string; // Add firstName property
-		lastName: string; // Add lastName property
-		bio: string; // Add bio property
+		firstName: string;
+		lastName: string;
+		bio: string;
 	};
 	authentication: {
 		password: string;

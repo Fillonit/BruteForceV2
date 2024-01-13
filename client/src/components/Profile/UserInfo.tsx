@@ -87,7 +87,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
 					/>
 					<div>
 						<h3 className="text-lg leading-6 font-medium text-slate-900 dark:text-white">
-							User Information
+							{user.username}
 						</h3>
 						<p className="mt-1 max-w-2xl text-sm text-gray-500">
 							Personal details and posts.
