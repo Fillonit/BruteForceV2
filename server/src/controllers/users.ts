@@ -46,7 +46,7 @@ export const updateUser = async (
 ) => {
 	try {
 		const { id } = req.params;
-		const { username, email, password } = req.body;
+		const { username, email, authentication, profile } = req.body;
 
 		if (!username) {
 			return res.status(400).json({ message: "Username is required" });
@@ -54,7 +54,22 @@ export const updateUser = async (
 
 		const user = await getUserById(id);
 
+		if (authentication) {
+			user.authentication = {
+				...user.authentication,
+				...authentication,
+			};
+		}
+
+		if (profile) {
+			user.profile = {
+				...user.profile,
+				...profile,
+			};
+		}
+
 		user.username = username;
+		user.email = email;
 
 		await user.save();
 

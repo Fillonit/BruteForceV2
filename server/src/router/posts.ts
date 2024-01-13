@@ -6,6 +6,7 @@ import {
 	updatePostById,
 	deletePostById,
 	getPost,
+	getPostsByAuthor,
 } from "../controllers/posts";
 
 import { isAuthenticated, isAdmin, isPostOwner } from "../middlewares";
@@ -26,4 +27,5 @@ export default (router: express.Router) => {
 		isPostOwner || isAdmin,
 		updatePostById
 	);
+	router.get("/posts/author/:id", getPostsByAuthor);
 };
