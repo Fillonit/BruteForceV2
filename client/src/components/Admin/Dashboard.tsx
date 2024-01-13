@@ -50,11 +50,11 @@ interface UserData {
 // 	views: number;
 // }
 
-interface UserInfoProps {
-	user: UserData | null;
-}
+// interface UserInfoProps {
+// 	user: UserData | null;
+// }
 
-const UsersInfo: React.FC<UserInfoProps> = () => {
+const UsersInfo: React.FC = () => {
 	const [users, setUsers] = useState<UserData[]>([]);
 
 	useEffect(() => {
