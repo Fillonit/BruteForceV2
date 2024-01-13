@@ -17,11 +17,6 @@ export default (router: express.Router) => {
 	router.get("/users/:id", getUser);
 	router.delete("/users/:id/admin", isAuthenticated, isAdmin, removeAdmin);
 	router.post("/users/:id/admin", isAuthenticated, isAdmin, addAdmin);
-	router.delete(
-		"/users/:id",
-		isAuthenticated,
-		isOwner || isAdmin,
-		deleteUser
-	);
+	router.delete("/users/:id", isAuthenticated,  isOwner || isAdmin, deleteUser);
 	router.patch("/users/:id", isAuthenticated, isOwner, updateUser);
 };

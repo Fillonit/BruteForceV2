@@ -12,7 +12,7 @@ export const isAuthenticated = async (
 ) => {
 	try {
 		const sessionToken = req.headers.authorization as string;
-
+		console.log(sessionToken);
 		if (!sessionToken) {
 			return res
 				.status(401)
