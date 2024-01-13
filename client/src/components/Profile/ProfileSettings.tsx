@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Button, TextInput } from "flowbite-react";
+import { Button, TextInput, FileInput, Label } from "flowbite-react";
+// import { API_BASE_URL } from "../../config";
 
 const inputTheme = {
 	field: {
 		input: {
 			colors: {
-				purple: "border-purple-500 bg-purple-50 text-purple-900 placeholder-purple-700 focus:border-purple-500 focus:ring-purple-500 dark:border-purple-400 dark:bg-purple-100 dark:focus:border-purple-500 dark:focus:ring-purple-500",
+				purple: "border-purple-500 bg-purple-50 text-purple-900 placeholder-purple-700 focus:border-purple-500 focus:ring-purple-500 dark:border-purple-400 dark:bg-purple-100 dark:focus:border-purple-500 dark:focus:ring-purple-500 ",
 			},
 		},
 	},
@@ -157,13 +158,25 @@ const SettingsPage: React.FC = () => {
 						/>
 					</div>
 					<div className="mb-4">
-						<label
-							className="block text-gray-700 text-sm font-bold mb-2"
-							htmlFor="password"
-						>
-							Profile Picture
-						</label>
-						<div className="flex items-center justify-center w-full">
+						<div id="fileUpload" className="max-w-md">
+							<div className="mb-2 block">
+								<Label
+									htmlFor="file"
+									value="Profile Picture"
+									className="block text-gray-700 text-sm font-bold mb-2"
+								/>
+							</div>
+							<FileInput
+								id="file"
+								theme={inputTheme}
+								color={"purple"}
+								accept="image/*"
+								onChange={handleFileChange}
+								// helperText="A profile picture is useful to confirm your are logged into your account"
+							/>
+						</div>
+
+						{/* <div className="flex items-center justify-center w-full">
 							<label
 								htmlFor="dropzone-file"
 								className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
@@ -201,7 +214,7 @@ const SettingsPage: React.FC = () => {
 									onChange={handleFileChange}
 								/>
 							</label>
-						</div>
+						</div> */}
 					</div>
 					<div className="mb-4">
 						<label
@@ -224,6 +237,7 @@ const SettingsPage: React.FC = () => {
 					<div className="flex items-center justify-between">
 						<Button
 							type="submit"
+							color="purple"
 							className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
 						>
 							Save Changes
