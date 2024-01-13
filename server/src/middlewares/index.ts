@@ -42,19 +42,18 @@ export const isOwner = async (
 	next: express.NextFunction
 ) => {
 	try {
-		const identity = get(req, "identity._id") as string;
 		const { id } = req.params;
+		const user = await getUserBySessionToken(
+			req.headers.authorization as string
+		);
 
-		if (!identity) {
+		if (!user) {
 			return res
 				.status(401)
 				.json({ message: "Unauthorized, Not Authenticated!" });
 		}
 
-		if (
-			identity.toString() !== id &&
-			identity.toString() !== process.env.APP_OWNER_ID
-		) {
+		if (user._id.toString() !== id) {
 			return res
 				.status(401)
 				.json({ message: "Unauthorized, Not Authorized!" });
