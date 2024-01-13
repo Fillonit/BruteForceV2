@@ -40,22 +40,6 @@ export const updatePost = (id: string, values: Record<string, any>) =>
 
 export const deletePost = (id: string) => PostModel.findByIdAndDelete(id);
 
-export const getPostsByAuthorId = (authorId: string) =>
-	PostModel.find({ authorId });
-
-export const getPostsByAuthorUsername = (authorUsername: string) =>
-	PostModel.find({ authorUsername });
-
-export const getPostsByAuthorIdAndUsername = (
-	authorId: string,
-	authorUsername: string
-) => PostModel.find({ authorId, authorUsername });
-
-export const getPostsByAuthorIdOrUsername = (
-	authorId: string,
-	authorUsername: string
-) => PostModel.find({ $or: [{ authorId }, { authorUsername }] });
-
 export const getPostsByTitle = (title: string) => PostModel.find({ title });
 
 export const getPostsByTitleRegex = (title: string) =>
@@ -88,3 +72,6 @@ export const getPostsAuthorId = async (postId: string) => {
 	const post = await PostModel.findById(postId);
 	return post.author;
 };
+
+export const getPostsByAuthorId = (authorId: string) =>
+	PostModel.find({ author: authorId }).populate("comments");

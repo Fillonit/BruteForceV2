@@ -6,8 +6,10 @@ import {
 	deletePost,
 	updatePost,
 	getPostById,
+	getPostsByAuthorId,
 } from "../db/posts";
 import { getUserBySessionToken } from "../db/users";
+import { get, merge } from "lodash";
 
 export const getAllPosts = async (
 	req: express.Request,
@@ -29,14 +31,12 @@ export const createNewPost = async (
 ) => {
 	try {
 		const sessionToken = req.headers.authorization as string;
-		console.log(sessionToken);
 
 		if (!sessionToken) {
 			return res.status(401).json({ message: "Unauthorized" });
 		}
 
 		const user = await getUserBySessionToken(sessionToken);
-		console.log(user);
 
 		if (!user) {
 			return res.status(401).json({ message: "Unauthorized" });
@@ -130,6 +130,21 @@ export const getPost = async (req: express.Request, res: express.Response) => {
 		await post.save();
 
 		return res.status(200).json({ post }).end();
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({ message: "Internal server error" });
+	}
+};
+
+export const getPostsByAuthor = async (
+	req: express.Request,
+	res: express.Response
+) => {
+	try {
+		const { id } = req.params;
+		const posts = await getPostsByAuthorId(id);
+
+		return res.status(200).json({ posts }).end();
 	} catch (error) {
 		console.log(error);
 		return res.status(500).json({ message: "Internal server error" });

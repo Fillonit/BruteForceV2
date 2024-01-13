@@ -68,7 +68,7 @@ const GameCard: React.FC<Game> = (game) => {
 			</div>
 			<div className="px-6 pt-4 pb-2">
 				{game.tags.slice(0, 4).map((tag) => (
-					<span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 mr-2 mb-2 dark:bg-gray-800 dark:text-gray-200 cursor-pointer hover:scale-110 hover:bg-purple-400 hover:text-white">
+					<span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 mr-2 mb-2 dark:bg-gray-800 dark:text-gray-200 cursor-pointer hover:scale-110 hover:bg-purple-400 hover:text-white dark:hover:bg-purple-800">
 						#{tag}
 					</span>
 				))}

@@ -6,3 +6,15 @@
 body {
 	font-family: "Tektur", sans-serif;
 }
+
+video {
+	border-radius: 7.5px;
+}
+
+input[type="file"]::file-selector-button {
+	@apply bg-purple-500 dark:bg-purple-700;
+}
+
+input[type="file"]::file-selector-button:hover {
+	@apply bg-purple-700 dark:bg-purple-400;
+}
