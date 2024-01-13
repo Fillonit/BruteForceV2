@@ -35,7 +35,7 @@ const PostContent: React.FC<PostCardProps> = ({ post }) => {
 	return (
 		<div
 			key={post._id}
-			className="relative font-tektur bg-slate-50 p-8 rounded-md"
+			className="relative font-tektur bg-slate-50 p-8 rounded-md dark:bg-slate-900"
 		>
 			<p
 				className="text-black text-base dark:text-white"

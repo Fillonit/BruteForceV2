@@ -2,14 +2,26 @@ import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../config";
 import { FaEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
+interface Author {
+	_id: string;
+	username: string;
+	email: string;
+	profile: {
+		firstName: string;
+		lastName: string;
+		bio: string;
+		avatar: string;
+	};
+}
+
 interface Post {
 	_id: string;
 	title: string;
 	imageURL: string;
 	content: string[];
 	tags: string[];
-	author: string;
-	createdAt: string;
+	author: Author;
+	createdAt: Date;
 	updatedAt: string;
 	likes: number;
 	views: number;
