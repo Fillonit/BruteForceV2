@@ -6,7 +6,7 @@ import {
 	getUserById,
 	getUserBySessionToken,
 } from "../db/users";
-import { authentication } from "helpers";
+import { authentication as Auth } from "../helpers";
 
 export const getAllUsers = async (
 	req: express.Request,
@@ -47,7 +47,7 @@ export const updateUser = async (
 ) => {
 	try {
 		const { id } = req.params;
-		const { username, email, password, profile } = req.body;
+		const { username, email, authentication, profile } = req.body;
 
 		if (!username) {
 			return res.status(400).json({ message: "Username is required" });
@@ -55,11 +55,14 @@ export const updateUser = async (
 
 		const user = await getUserById(id);
 
-		if (password) {
-			user.authentication.password = authentication(
-				user.authentication.salt,
-				password
-			);
+		if (authentication) {
+			user.authentication = {
+				...user.authentication,
+				password: Auth(
+					user.authentication.salt,
+					authentication.password
+				),
+			};
 		}
 
 		if (profile) {
