@@ -42,7 +42,7 @@ const Posts: React.FC = () => {
 
 	return (
 		<div>
-			<PostsList postsList={posts.slice(0, 4)} />
+			<PostsList postsList={posts} />
 		</div>
 	);
 };
