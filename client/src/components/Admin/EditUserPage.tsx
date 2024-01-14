@@ -127,30 +127,9 @@ const EditUser = () => {
           Authorization: `${localStorage.getItem("token")}`,
         },
         body: JSON.stringify({
-          // ...user,
-          authentication: {
-            password:
-              "96f7c77ff360ef015586c637536a9644d4d0e1de3b017df3b6204b02cac4b25f",
-            salt: "j8GT9WVsZTM=",
-            sessionToken:
-              "fa9bc1cdc8e925e368ec81a39f9e276d7cf7bf123fa691d8aed6b49e8459ac03",
-          },
-          createdAt: "2024-01-10T09:09:57.046Z",
-          email: "erbliny22@gmail.com",
-          profile: {
-            firstName: "erbb",
-            lastName: "Doee",
-            avatar: "https://i.imgur.com/6VBx3io.png",
-            bio: "Hello, World!",
-          },
-          role: "admin",
-          updatedAt: "2024-01-10T09:09:57.046Z",
-          username: "Erblin",
-          __v: 0,
-          _id: "659e5ee5830a638c721a5776",
+          ...user,
         }),
       });
-      const data = await response.json();
       if (response.status === 200) {
         toast.dismiss(UpdateToast);
         toast.success("Profile Updated Successfully!", {
