@@ -7,6 +7,8 @@ import {
 	updatePost,
 	getPostById,
 	getPostsByAuthorId,
+	getMostPopularTags,
+	searchTags,
 } from "../db/posts";
 import { getUserBySessionToken } from "../db/users";
 import { get, merge } from "lodash";
@@ -145,6 +147,76 @@ export const getPostsByAuthor = async (
 		const posts = await getPostsByAuthorId(id);
 
 		return res.status(200).json({ posts }).end();
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({ message: "Internal server error" });
+	}
+};
+
+export const getTrendingPosts = async (
+	req: express.Request,
+	res: express.Response
+) => {
+	try {
+		const posts = await getPosts();
+
+		const trendingPosts = posts
+			.sort((a, b) => {
+				return b.views - a.views;
+			})
+			.slice(0, 5);
+
+		return res.status(200).json({ posts: trendingPosts }).end();
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({ message: "Internal server error" });
+	}
+};
+
+export const getRecentPosts = async (
+	req: express.Request,
+	res: express.Response
+) => {
+	try {
+		const posts = await getPosts();
+
+		const recentPosts = posts
+			.sort((a, b) => {
+				return b.createdAt.getTime() - a.createdAt.getTime();
+			})
+			.slice(0, 5);
+
+		return res.status(200).json({ posts: recentPosts }).end();
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({ message: "Internal server error" });
+	}
+};
+
+export const getMostPopularTagsController = async (
+	req: express.Request,
+	res: express.Response
+) => {
+	try {
+		const tags = await getMostPopularTags(5);
+
+		return res.status(200).json({ tags }).end();
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({ message: "Internal server error" });
+	}
+};
+
+export const searchTagsController = async (
+	req: express.Request,
+	res: express.Response
+) => {
+	try {
+		const { tag } = req.params;
+
+		const tags = await searchTags(tag as string);
+
+		return res.status(200).json({ tags }).end();
 	} catch (error) {
 		console.log(error);
 		return res.status(500).json({ message: "Internal server error" });

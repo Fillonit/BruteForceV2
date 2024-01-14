@@ -3,6 +3,7 @@ import { API_BASE_URL } from "../config";
 import { ToastContainer, UpdateOptions, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import notifyConfig from "./notifyConfig";
+import { Kbd } from "flowbite-react";
 
 interface SignUpProps {
 	setLogIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -106,6 +107,13 @@ const SignUp: React.FC<SignUpProps> = ({ setLogIn }) => {
 					</div>
 				</div>
 				<ToastContainer />
+				<div className="text-slate-200 my-2">
+					You can press{" "}
+					<Kbd className="bg-purple-500 text-white dark:bg-purple-500">
+						enter
+					</Kbd>{" "}
+					to attempt sign up.
+				</div>
 			</div>
 		</div>
 	);

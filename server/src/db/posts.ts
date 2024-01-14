@@ -75,3 +75,24 @@ export const getPostsAuthorId = async (postId: string) => {
 
 export const getPostsByAuthorId = (authorId: string) =>
 	PostModel.find({ author: authorId }).populate("comments");
+
+export const getMostPopularTags = (limit: number) =>
+	PostModel.aggregate([
+		{ $unwind: "$tags" },
+		{ $group: { _id: "$tags", count: { $sum: 1 } } },
+		{ $sort: { count: -1 } },
+		{ $limit: limit },
+	]);
+
+export const searchTags = (search: string) => {
+	if (typeof search !== "string") {
+		throw new Error("Search parameter must be a string");
+	}
+
+	return PostModel.aggregate([
+		{ $unwind: "$tags" },
+		{ $match: { tags: { $regex: search, $options: "i" } } },
+		{ $group: { _id: "$tags", count: { $sum: 1 } } },
+		{ $sort: { count: -1 } },
+	]);
+};

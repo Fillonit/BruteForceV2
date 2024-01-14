@@ -120,7 +120,7 @@ const SignIn: React.FC<SignInProps> = ({ setLogIn }) => {
 				<ToastContainer />
 				<div className="text-slate-200 my-2">
 					You can press{" "}
-					<Kbd className="bg-purple-400 text-white dark:bg-purple-700">
+					<Kbd className="bg-purple-500 text-white dark:bg-purple-500">
 						enter
 					</Kbd>{" "}
 					to attempt sign in.
