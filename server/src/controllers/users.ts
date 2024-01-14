@@ -65,13 +65,13 @@ export const updateUser = async (
 
 		const user = await getUserById(id);
 
-		if (authentication) {
+		if (authentication && authentication.password) {
 			user.authentication = {
-				...user.authentication,
 				password: Auth(
 					user.authentication.salt,
 					authentication.password
 				),
+				...user.authentication,
 			};
 		}
 

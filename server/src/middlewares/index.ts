@@ -145,6 +145,35 @@ export const isAppOwner = async (
 	}
 };
 
+export const isOwnerOrAdmin = async (
+	req: express.Request,
+	res: express.Response,
+	next: express.NextFunction
+) => {
+	try {
+		const user = await getUserBySessionToken(
+			req.headers.authorization as string
+		);
+
+		if (!user) {
+			return res.status(401).json({ message: "Unauthorized" });
+		}
+
+		if (user._id.toString() === req.params.id) {
+			return next();
+		}
+
+		if (user.role === "admin") {
+			return next();
+		} else {
+			return res.status(401).json({ message: "Unauthorized" });
+		}
+	} catch (error) {
+		console.log(error);
+		return res.status(500).send({ error: error.message });
+	}
+};
+
 // Error handling
 export const notFound = (
 	req: express.Request,

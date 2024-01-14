@@ -22,8 +22,9 @@ interface UserProfile {
 }
 
 interface UserAuthentication {
+	[x: string]: string;
 	password: string;
-	sessionToken: string;
+	// sessionToken: string;
 }
 
 interface User {
@@ -41,7 +42,8 @@ const SettingsPage: React.FC = () => {
 		username: "",
 		email: "",
 		profile: { firstName: "", lastName: "", avatar: "", bio: "" },
-		authentication: { password: "", sessionToken: "" },
+		authentication: { password: "" },
+		role: "user",
 	});
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,20 +74,38 @@ const SettingsPage: React.FC = () => {
 	};
 
 	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		if (event.target.files && event.target.files[0]) {
-			const reader = new FileReader();
+		try {
+			if (event.target.files && event.target.files[0]) {
+				const img = document.createElement("img");
+				img.src = URL.createObjectURL(event.target.files[0]);
+				img.onload = () => {
+					const canvas = document.createElement("canvas");
+					const ctx = canvas.getContext("2d");
 
-			reader.onload = (e) => {
-				setUser((prevUser) => ({
-					...prevUser,
-					profile: {
-						...prevUser.profile,
-						avatar: e.target?.result as string,
-					},
-				}));
-			};
+					// Set the canvas dimensions to the desired dimensions
+					canvas.width = 200;
+					canvas.height = 200;
 
-			reader.readAsDataURL(event.target.files[0]);
+					// Draw the image onto the canvas
+					ctx?.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+					// Get the data URL of the resized image
+					const resizedImageUrl = canvas.toDataURL();
+
+					setUser((prevUser) => ({
+						...prevUser,
+						profile: {
+							...prevUser.profile,
+							avatar: resizedImageUrl,
+						},
+					}));
+				};
+			}
+		} catch (error) {
+			console.warn(error);
+			toast.error("Profile Picture Upload Failed!", {
+				...notifyConfig,
+			} as ToastOptions);
 		}
 	};
 
@@ -93,7 +113,7 @@ const SettingsPage: React.FC = () => {
 		event.preventDefault();
 
 		const UpdateToast = toast.loading("Updating Profile...", {
-			autoClose: 3000,
+			autoClose: 1000,
 		});
 		if (
 			user.username === "".trim() ||

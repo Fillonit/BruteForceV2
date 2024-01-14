@@ -9,7 +9,12 @@ import {
 	removeAdmin,
 	getUserByToken,
 } from "../controllers/users";
-import { isAuthenticated, isOwner, isAdmin } from "../middlewares";
+import {
+	isAuthenticated,
+	isOwner,
+	isAdmin,
+	isOwnerOrAdmin,
+} from "../middlewares";
 
 export default (router: express.Router) => {
 	router.get("/users", isAuthenticated, getAllUsers);
@@ -17,11 +22,6 @@ export default (router: express.Router) => {
 	router.get("/users/:id", getUser);
 	router.delete("/users/:id/admin", isAuthenticated, isAdmin, removeAdmin);
 	router.post("/users/:id/admin", isAuthenticated, isAdmin, addAdmin);
-	router.delete(
-		"/users/:id",
-		isAuthenticated,
-		isAdmin || isOwner,
-		deleteUser
-	);
-	router.patch("/users/:id", isAuthenticated, isAdmin || isOwner, updateUser);
+	router.delete("/users/:id", isAuthenticated, isOwnerOrAdmin, deleteUser);
+	router.patch("/users/:id", isAuthenticated, isOwnerOrAdmin, updateUser);
 };
