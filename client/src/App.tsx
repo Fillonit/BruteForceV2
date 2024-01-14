@@ -14,6 +14,8 @@ import Posts from "./pages/Posts";
 import Post from "./pages/Post";
 import Profile from "./pages/Profile";
 import Contact from "./pages/Contact";
+import EditUser from "./components/Admin/EditUserPage";
+import ViewUser from "./components/Admin/ViewUserPage";
 function App() {
 	// const [userId, setUserId] = useState(localStorage.getItem("userId"));
 	return (
@@ -32,6 +34,8 @@ function App() {
 						<Route path="/profile" element={<Profile />} />
 						<Route path="/settings" element={<ProfileSettings />} />
 						<Route path="/contact" element={<Contact />} />
+						<Route path="/edituser/:id" element={<EditUser />} />
+						<Route path="/viewuser/:id" element={<ViewUser />} />
 						<Route path="*" element={<NotFound />} />
 					</Routes>
 					{!window.location.pathname.includes("/dashboard") && (

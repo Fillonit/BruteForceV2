@@ -75,12 +75,10 @@ const UsersInfo: React.FC = () => {
     fetchUsers();
   }, []);
 
-  
-
   return (
     <div>
       <NavbarComponent />
-      <div className="flex h-screen bg-gray-100">
+      <div className="flex h-screen bg-gray-100 bg-gradient-to-br from-purple-400 to-indigo-600 dark:from-purple-800 dark:to-indigo-900 py-10 ">
         <div className="w-64 bg-white p-4 border-r dark:bg-gray-800">
           <Sidebar />
         </div>
