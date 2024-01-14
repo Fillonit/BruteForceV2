@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Modal, Table } from "flowbite-react";
+import { Avatar, Button, Modal, Table } from "flowbite-react";
 import { API_BASE_URL } from "../../config";
 import { useState } from "react";
 
@@ -52,13 +52,12 @@ function TableComponent({ users }: { users: UserData[] }) {
     <div className="overflow-x-auto">
       <Table hoverable>
         <Table.Head>
+          <Table.HeadCell>Avatar</Table.HeadCell>
           <Table.HeadCell>Username</Table.HeadCell>
           <Table.HeadCell>Full Name</Table.HeadCell>
           <Table.HeadCell>Email</Table.HeadCell>
           <Table.HeadCell>Role</Table.HeadCell>
-          <Table.HeadCell>
-            <span className="sr-only">Edit</span>
-          </Table.HeadCell>
+          <Table.HeadCell>Action</Table.HeadCell>
         </Table.Head>
         <Table.Body className="divide-y">
           {users.map((user) => (
@@ -66,6 +65,15 @@ function TableComponent({ users }: { users: UserData[] }) {
               key={user._id}
               className="bg-white dark:border-gray-700 dark:bg-gray-800"
             >
+              <Table.Cell>
+                <Avatar
+                  alt="User settings"
+                  img={user.profile.avatar}
+                  rounded
+                  size="md"
+                  className="block"
+                />
+              </Table.Cell>
               <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                 {user.username}
               </Table.Cell>
