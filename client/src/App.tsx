@@ -20,9 +20,9 @@ function App() {
 		<Router>
 			<Flowbite>
 				<div className="min-h-screen flex flex-col ">
-					{!window.location.pathname.includes("/dashboard") && (
-						<Navbar />
-					)}
+					{/* {!window.location.pathname.includes("/dashboard") && ( */}
+					<Navbar />
+					{/* )} */}
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="/login" element={<LoginPage />} />

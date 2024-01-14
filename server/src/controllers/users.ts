@@ -57,7 +57,7 @@ export const updateUser = async (
 ) => {
 	try {
 		const { id } = req.params;
-		const { username, email, authentication, profile } = req.body;
+		const { username, email, authentication, profile, role } = req.body;
 
 		if (!username) {
 			return res.status(400).json({ message: "Username is required" });
@@ -84,6 +84,7 @@ export const updateUser = async (
 
 		user.username = username;
 		user.email = email;
+		user.role = role;
 
 		await user.save();
 
