@@ -10,6 +10,8 @@ import {
 	getMostPopularTags,
 	searchTags,
 	searchPostsByTag,
+	getPostsByMonth,
+	getPostsByYear,
 } from "../db/posts";
 import { getUserBySessionToken } from "../db/users";
 import { get, merge } from "lodash";
@@ -232,6 +234,46 @@ export const searchPostsByTagController = async (
 		const { tag } = req.params;
 
 		const posts = await searchPostsByTag(tag as string);
+
+		return res.status(200).json({ posts }).end();
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({ message: "Internal server error" });
+	}
+};
+
+export const getAllPostsByMonth = async (
+	req: express.Request,
+	res: express.Response
+) => {
+	try {
+		const month = Number(req.params.month);
+
+		if (isNaN(month)) {
+			return res.status(400).json({ message: "Month must be a number" });
+		}
+
+		const posts = await getPostsByMonth(month);
+
+		return res.status(200).json({ posts }).end();
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({ message: "Internal server error" });
+	}
+};
+
+export const getAllPostsByYear = async (
+	req: express.Request,
+	res: express.Response
+) => {
+	try {
+		const year = Number(req.params.year);
+
+		if (isNaN(year)) {
+			return res.status(400).json({ message: "Year must be a number" });
+		}
+
+		const posts = await getPostsByYear(year);
 
 		return res.status(200).json({ posts }).end();
 	} catch (error) {

@@ -99,3 +99,17 @@ export const searchTags = (search: string) => {
 
 export const searchPostsByTag = (tag: string) =>
 	PostModel.find({ tags: tag }).populate("author comments");
+
+export const getPostsByMonth = (month: number) =>
+	PostModel.find({
+		$expr: {
+			$eq: [{ $month: "$createdAt" }, month],
+		},
+	});
+
+export const getPostsByYear = (year: number) =>
+	PostModel.find({
+		$expr: {
+			$eq: [{ $year: "$createdAt" }, year],
+		},
+	});

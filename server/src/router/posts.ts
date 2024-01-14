@@ -12,6 +12,8 @@ import {
 	getTrendingPosts,
 	searchTagsController,
 	searchPostsByTagController,
+	getAllPostsByMonth,
+	getAllPostsByYear,
 } from "../controllers/posts";
 
 import { isAuthenticated, isAdmin, isPostOwner } from "../middlewares";
@@ -38,4 +40,6 @@ export default (router: express.Router) => {
 		updatePostById
 	);
 	router.get("/posts/author/:id", getPostsByAuthor);
+	router.get("/posts/month/:month", getAllPostsByMonth);
+	router.get("/posts/year/:year", getAllPostsByYear);
 };
