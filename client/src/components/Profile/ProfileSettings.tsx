@@ -24,7 +24,6 @@ interface UserProfile {
 interface UserAuthentication {
 	[x: string]: string;
 	password: string;
-	// sessionToken: string;
 }
 
 interface User {
@@ -73,24 +72,46 @@ const SettingsPage: React.FC = () => {
 		console.log(user);
 	};
 
+	const fileInputRef = React.useRef<HTMLInputElement>(null);
 	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		try {
 			if (event.target.files && event.target.files[0]) {
 				const img = document.createElement("img");
 				img.src = URL.createObjectURL(event.target.files[0]);
+				if (event.target.files[0].size > 2 * 1024 * 1024) {
+					toast.error(
+						"Image is too large. Please select a smaller image.",
+						{
+							...notifyConfig,
+						} as ToastOptions
+					);
+
+					if (fileInputRef.current) {
+						fileInputRef.current.value = "";
+					}
+
+					return;
+				}
 				img.onload = () => {
 					const canvas = document.createElement("canvas");
 					const ctx = canvas.getContext("2d");
 
-					// Set the canvas dimensions to the desired dimensions
 					canvas.width = 200;
 					canvas.height = 200;
 
-					// Draw the image onto the canvas
 					ctx?.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-					// Get the data URL of the resized image
 					const resizedImageUrl = canvas.toDataURL();
+
+					const base64Limit = 3 * 1024 * 1024;
+					if (resizedImageUrl.length > base64Limit) {
+						toast.error(
+							"Image is too large. Please select a smaller image.",
+							{
+								...notifyConfig,
+							} as ToastOptions
+						);
+					}
 
 					setUser((prevUser) => ({
 						...prevUser,
@@ -103,9 +124,12 @@ const SettingsPage: React.FC = () => {
 			}
 		} catch (error) {
 			console.warn(error);
-			toast.error("Profile Picture Upload Failed!", {
-				...notifyConfig,
-			} as ToastOptions);
+			toast.error(
+				(error as Error).message || "Profile Picture Upload Failed!",
+				{
+					...notifyConfig,
+				} as ToastOptions
+			);
 		}
 	};
 
@@ -152,6 +176,7 @@ const SettingsPage: React.FC = () => {
 			}
 			console.log(data);
 		} catch (error) {
+			toast.dismiss(UpdateToast);
 			toast.error("Profile Update Failed!", {
 				...notifyConfig,
 			} as ToastOptions);
@@ -302,6 +327,7 @@ const SettingsPage: React.FC = () => {
 								theme={inputTheme}
 								color={"purple"}
 								accept="image/*"
+								ref={fileInputRef}
 								onChange={handleFileChange}
 								// helperText="A profile picture is useful to confirm your are logged into your account"
 							/>

@@ -2,27 +2,26 @@ import { API_BASE_URL } from "../../config";
 import React, { useEffect, useState } from "react";
 import Sidebar from "../../components/Admin/Sidebar";
 import UsersTable from "../../components/Admin/Table";
-import NavbarComponent from "../Navbar";
 
 interface UsersData {
-  username: string;
-  email: string;
-  profile: {
-    firstName: string;
-    lastName: string;
-    avatar: string;
-    bio: string;
-  };
-  authentication: {
-    password: string;
-    salt: string;
-    sessionToken: string;
-  };
-  _id: string;
-  role: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
+	username: string;
+	email: string;
+	profile: {
+		firstName: string;
+		lastName: string;
+		avatar: string;
+		bio: string;
+	};
+	authentication: {
+		password: string;
+		salt: string;
+		sessionToken: string;
+	};
+	_id: string;
+	role: string;
+	createdAt: string;
+	updatedAt: string;
+	__v: number;
 }
 
 // interface Author {
@@ -55,38 +54,38 @@ interface UsersData {
 // }
 
 const UsersInfo: React.FC = () => {
-  const [users, setUsers] = useState<UsersData[]>([]);
+	const [users, setUsers] = useState<UsersData[]>([]);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch(`${API_BASE_URL}/users`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `${localStorage.getItem("token")}`,
-          },
-        });
-        const data = await response.json();
-        setUsers(data.users);
-      } catch (error) {
-        console.error("Failed to fetch users:", error);
-      }
-    };
-    fetchUsers();
-  }, []);
+	useEffect(() => {
+		const fetchUsers = async () => {
+			try {
+				const response = await fetch(`${API_BASE_URL}/users`, {
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `${localStorage.getItem("token")}`,
+					},
+				});
+				const data = await response.json();
+				setUsers(data.users);
+			} catch (error) {
+				console.error("Failed to fetch users:", error);
+			}
+		};
+		fetchUsers();
+	}, []);
 
-  return (
-    <div>
-      <div className="flex h-screen bg-gray-100 bg-gradient-to-br from-purple-400 to-indigo-600 dark:from-purple-800 dark:to-indigo-900 py-10 ">
-        <div className="w-64 bg-white p-4 border-r dark:bg-gray-800">
-          <Sidebar />
-        </div>
-        <div className="flex-1 p-6 overflow-auto">
-          <UsersTable users={users} />
-        </div>
-      </div>
-    </div>
-  );
+	return (
+		<div>
+			<div className="flex h-screen bg-gray-100 bg-gradient-to-br from-purple-400 to-indigo-600 dark:from-purple-800 dark:to-indigo-900 py-10 ">
+				<div className="w-64 bg-white p-4 border-r dark:bg-gray-800">
+					<Sidebar />
+				</div>
+				<div className="flex-1 p-6 overflow-auto">
+					<UsersTable users={users} />
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default UsersInfo;
