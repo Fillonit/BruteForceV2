@@ -9,6 +9,7 @@ import {
 	getPostsByAuthorId,
 	getMostPopularTags,
 	searchTags,
+	searchPostsByTag,
 } from "../db/posts";
 import { getUserBySessionToken } from "../db/users";
 import { get, merge } from "lodash";
@@ -217,6 +218,22 @@ export const searchTagsController = async (
 		const tags = await searchTags(tag as string);
 
 		return res.status(200).json({ tags }).end();
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({ message: "Internal server error" });
+	}
+};
+
+export const searchPostsByTagController = async (
+	req: express.Request,
+	res: express.Response
+) => {
+	try {
+		const { tag } = req.params;
+
+		const posts = await searchPostsByTag(tag as string);
+
+		return res.status(200).json({ posts }).end();
 	} catch (error) {
 		console.log(error);
 		return res.status(500).json({ message: "Internal server error" });

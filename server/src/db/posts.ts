@@ -96,3 +96,6 @@ export const searchTags = (search: string) => {
 		{ $sort: { count: -1 } },
 	]);
 };
+
+export const searchPostsByTag = (tag: string) =>
+	PostModel.find({ tags: tag }).populate("author comments");
