@@ -1,7 +1,8 @@
 "use client";
 
-import { Table } from "flowbite-react";
+import { Button, Modal, Table } from "flowbite-react";
 import { API_BASE_URL } from "../../config";
+import { useState } from "react";
 
 interface UserData {
   username: string;
@@ -24,6 +25,14 @@ interface UserData {
   __v: number;
 }
 function TableComponent({ users }: { users: UserData[] }) {
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [deleteUser, setDeleteUser] = useState({ id: "", username: "" });
+
+  const handleOpenDeleteModal = (id: string, username: string) => {
+    setOpenDeleteModal(true);
+    setDeleteUser({ id, username });
+  };
+
   const handleDelete = async (id: string) => {
     try {
       await fetch(`${API_BASE_URL}/users/${id}`, {
@@ -33,6 +42,7 @@ function TableComponent({ users }: { users: UserData[] }) {
           Authorization: `${localStorage.getItem("token")}`,
         },
       });
+      window.location.reload();
     } catch (error) {
       console.error("Couldn't delete user:", error);
     }
@@ -65,21 +75,23 @@ function TableComponent({ users }: { users: UserData[] }) {
               <Table.Cell>
                 <div className="space-x-4">
                   <a
-                    href="#"
+                    href={`/edituser/${user._id}`}
                     className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
                   >
                     Edit
                   </a>
                   <a
-                    href="#"
-                    className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
+                    href={`/viewuser/${user._id}`}
+                    className="font-medium text-green-600 hover:underline dark:text-green-500"
                   >
                     View
                   </a>
                   <a
                     href="#"
-                    className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
-                    onClick={() => handleDelete(user._id)}
+                    className="font-medium text-red-600 hover:underline dark:text-red-500"
+                    onClick={() =>
+                      handleOpenDeleteModal(user._id, user.username)
+                    }
                   >
                     Delete
                   </a>
@@ -89,6 +101,22 @@ function TableComponent({ users }: { users: UserData[] }) {
           ))}
         </Table.Body>
       </Table>
+      <Modal show={openDeleteModal} onClose={() => setOpenDeleteModal(false)}>
+        <Modal.Header>Delete User</Modal.Header>
+        <Modal.Body>
+          <div className="space-y-6">
+            <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+              Are you sure that you want to delete user {deleteUser.username} ?
+            </p>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={() => handleDelete(deleteUser.id)}>Yes</Button>
+          <Button color="red" onClick={() => setOpenDeleteModal(false)}>
+            No
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
