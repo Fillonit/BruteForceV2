@@ -1,30 +1,89 @@
 import React, { useEffect, useRef, useState } from "react";
+import { API_BASE_URL } from "../config";
+import { Link } from "react-router-dom";
+
+interface Post {
+  author: string;
+  _id: string;
+  title: string;
+  imageURL: string;
+  content: string;
+  tags: string[];
+  createdAt: Date;
+}
+
+interface Tag {
+  _id: string;
+  count: number;
+}
 
 const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const sidebarRef = useRef<HTMLDivElement>(null);
-  const [month, setMonth] = useState(1);
-  const [posts, setPosts] = useState([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [month, setMonth] = useState<number>(new Date().getMonth() + 1);
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [popularTags, setPopularTags] = useState<Tag[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [selectedYear, setSelectedYear] = useState<number>(
+    new Date().getFullYear()
+  );
+  const [selectedOption, setSelectedOption] = useState<string>("");
 
   useEffect(() => {
-    const fetchPostsByMonth = async () => {
-      setMonth(1);
+    const fetchPosts = async () => {
       try {
-        const response = await fetch(`/api/posts/month/${month}`);
-        if (response.ok) {
-          const data = await response.json();
-          setPosts(data.posts);
-          console.log(posts);
+        let response;
+        if (selectedOption === "year") {
+          response = await fetch(`${API_BASE_URL}/posts/year/${selectedYear}`);
+        } else if (selectedOption === "month") {
+          response = await fetch(`${API_BASE_URL}/posts/month/${month}`);
+        }
+
+        if (response) {
+          console.log("Response status:", response.status);
+          if (response.ok) {
+            const data = await response.json();
+            setPosts(data.posts);
+          } else {
+            console.error("Error fetching posts:", response.statusText);
+          }
         } else {
-          console.error("Error fetching posts:", response.statusText);
+          console.error("Undefined Response");
         }
       } catch (error) {
         console.error("Error fetching posts:", error);
       }
     };
+    console.log(selectedYear);
 
-    fetchPostsByMonth();
-  }, [month]);
+    fetchPosts();
+  }, [selectedOption, selectedYear, month]);
+
+  useEffect(() => {
+    const fetchPopularTags = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/posts/tags/popular`);
+        if (response.ok) {
+          const data = await response.json();
+
+          const sortedTags = data.tags.sort(
+            (a: Tag, b: Tag) => b.count - a.count
+          );
+
+          const top3Tags = sortedTags.slice(0, 3);
+
+          setPopularTags(top3Tags);
+        } else {
+          console.error("Error fetching popular tags:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error fetching popular tags:", error);
+      }
+    };
+
+    fetchPopularTags();
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -43,18 +102,13 @@ const Sidebar = () => {
     };
   }, [isSidebarOpen]);
 
-  const postsByMonth = [
-    { month: "January 2023", posts: ["Post 1", "Post 2"] },
-    { month: "February 2023", posts: ["Post 3", "Post 4"] },
-  ];
-
-  const popularTags = ["React", "Node.js", "TypeScript", "Tailwind CSS"];
-
   return (
     <div ref={sidebarRef}>
       <button
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-        className="p-[0.625rem] rounded-lg fixed bottom-2 left-2 text-white dark:text-white bg-purple-400 hover:bg-purple-600 dark:hover:bg-purple-600 ring-0 focus:ring-0 dark:focus:ring-0 dark:ring-0"
+        className={`p-[0.625rem] rounded-lg fixed bottom-2 left-2 text-white dark:text-white ${
+          isSidebarOpen ? "bg-purple-400" : "bg-purple-600"
+        }  hover:bg-purple-600 dark:hover:bg-purple-600 ring-0 focus:ring-0 dark:focus:ring-0 dark:ring-0`}
       >
         <svg
           className="w-5 h-5text-white"
@@ -73,35 +127,84 @@ const Sidebar = () => {
         </svg>
       </button>
       <div
-        className={`w-[300px] p-4 bg-white rounded-lg fixed left-0 top-1/4 z-50 transition delay-150 duration-300 ease-in-out  ${
+        className={`w-[300px] p-4 bg-white rounded-lg fixed left-0 top-5 z-50 transition delay-150 duration-300 ease-in-out  ${
           isSidebarOpen ? "translate-x-[-100%]" : "translate-x-[0%]"
         }`}
       >
-        <div className="mb-4">
-          <h2 className="text-xl font-bold mb-2">Posts by Month</h2>
-          <ul>
-            {postsByMonth.map(({ month, posts }) => (
-              <li key={month} className="mb-1">
-                <h6>{month}</h6>
-                <ul className="ml-4">
-                  {posts.map((post) => (
-                    <li key={post}>{post}</li>
-                  ))}
-                </ul>
-              </li>
+        <div>
+          <div className="flex justify-between">
+            <h2 className="text-xl text-gray-800 font-bold mb-2">
+              Posts by {selectedOption}
+            </h2>
+            <div className="relative inline-block">
+              <select
+                className="appearance-none bg-white border border-gray-300 rounded-md ml-4 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-gray-500"
+                id="selectMonthYear"
+                value={selectedOption}
+                onChange={(e) => setSelectedOption(e.target.value)}
+                defaultValue="month"
+              >
+                <option value="" disabled>
+                  Sort By
+                </option>
+                <option value="month">Month</option>
+                <option value="year">Year</option>
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg
+                  className="fill-current h-4 w-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                ></svg>
+              </div>
+            </div>
+          </div>
+          <ul className="flex flex-col">
+            {posts.slice(0, 2).map((post) => (
+              <Link
+                to={`/post/${post._id}`}
+                key={post._id}
+                className="block mb-4"
+              >
+                <div className="max-w-[250px] max-h-[190px] bg-purple-700  rounded-lg shadow-md">
+                  <img
+                    src={post.imageURL}
+                    alt={post.title}
+                    className="w-full h-24 object-cover mb-2 rounded-t-lg"
+                  />
+                  <h6 className="text-sm text-white font-semibold px-2">
+                    {post.title}
+                  </h6>
+                  <p className="text-xs text-slate-200 pb-2 pt-1 px-2">
+                    Created :{" "}
+                    {new Date(post.createdAt).toLocaleDateString(undefined, {
+                      month: "long",
+                    })}
+                  </p>
+                </div>
+              </Link>
             ))}
           </ul>
         </div>
 
         <div>
           <h2 className="text-xl font-bold mb-2">Popular Tags</h2>
-          <ul>
-            {popularTags.map((tag) => (
-              <li key={tag} className="mb-3">
-                <span className="bg-purple-500 p-1 rounded">{tag}</span>
-              </li>
-            ))}
-          </ul>
+          {popularTags.length > 0 ? (
+            <ul>
+              {popularTags.map((tag) => (
+                <li
+                  key={tag._id}
+                  className="mb-3 mx-2 transition-transform duration-300 hover:scale-105 inline-block cursor-pointer"
+                >
+                  <span className="bg-purple-700 text-white p-1 rounded">
+                    {tag._id}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No tags available.</p>
+          )}
         </div>
       </div>
     </div>
