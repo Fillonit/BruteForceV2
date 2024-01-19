@@ -9,6 +9,7 @@ import Arcane from "../../assets/Arcane.jpg";
 import EldenRing from "../../assets/EldenRing.jpg";
 import ArcaneCard from "../../assets/ArcaneCard.jpg";
 import Minecraft from "../../assets/Minecraft.jpg";
+import Sidebar from "../Sidebar";
 
 const HomePage = () => {
   return (
@@ -18,7 +19,7 @@ const HomePage = () => {
           autoPlay
           muted
           loop
-          className="w-full h-full object-cover rounded-none"
+          className="w-full h-full object-cover rounded-none bg-cover"
         >
           <source src={LeagueVideo} type="video/mp4" />
           Your browser does not support the video tag.
@@ -100,6 +101,7 @@ const HomePage = () => {
           </Button>
         </Card>
       </div>
+      <Sidebar />
 
       <div className="font-[sans-serif] text-white py-12 px-4">
         <div className="max-w-7xl mx-auto">
