@@ -20,6 +20,7 @@ import ViewUser from "./components/Admin/ViewUserPage";
 import About from "./pages/About";
 import CreatePost from "./pages/CreatePost";
 import Games from "./pages/Games";
+import GetStarted from "./pages/GetStarted";
 function App() {
 	// const [userId, setUserId] = useState(localStorage.getItem("userId"));
 	return (
@@ -47,6 +48,7 @@ function App() {
 						<Route path="/contact" element={<Contact />} />
 						<Route path="/edituser/:id" element={<EditUser />} />
 						<Route path="/viewuser/:id" element={<ViewUser />} />
+						<Route path="/getStarted" element={<GetStarted />} />
 						<Route path="*" element={<NotFound />} />
 					</Routes>
 					{!window.location.pathname.includes("/dashboard") && (

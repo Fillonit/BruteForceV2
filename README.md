@@ -40,7 +40,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Clone
 Clone this repository to your local machine using 
 ```shell
-$ git clone
+$ git clone https://github.com/Fillonit/BruteForceV2
 ```
 ## Setup
 > Install npm packages
