@@ -86,7 +86,7 @@ function NavAvatar() {
 				<Link to={`/profile`}>
 					<Dropdown.Item>Profile</Dropdown.Item>
 				</Link>
-				<Link to={`/dashboard`}>
+				<Link to={`/dashboard/users`}>
 					<Dropdown.Item>Dashboard</Dropdown.Item>
 				</Link>
 				<Link to={`/settings`}>

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Button, TextInput, FileInput, Label, Dropdown } from "flowbite-react";
-import { API_BASE_URL } from "../../config";
+import { API_BASE_URL } from "../../../config";
 import { ToastContainer, ToastOptions, toast } from "react-toastify";
-import notifyConfig from "../notifyConfig";
+import notifyConfig from "../../notifyConfig";
 import { useParams } from "react-router-dom";
 
 const inputTheme = {

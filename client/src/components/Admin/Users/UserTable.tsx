@@ -1,11 +1,11 @@
 "use client";
 
-import { Button, Modal, Table } from "flowbite-react";
-import { API_BASE_URL } from "../../config";
+import { Avatar, Button, Modal, Table } from "flowbite-react";
+import { API_BASE_URL } from "../../../config";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-interface UsersData {
+interface UserData {
   username: string;
   email: string;
   profile: {
@@ -25,62 +25,46 @@ interface UsersData {
   updatedAt: string;
   __v: number;
 }
-
-interface PostsData {
-  author: UsersData;
-  comments: string[];
-  content: string;
-  createdAt: string;
-  imageURL: string;
-  likes: number;
-  tags: string[];
-  title: string;
-  updatedAt: string;
-  views: number;
-  _v: number;
-  _id: string;
-}
-
-function TableComponent({ posts }: { posts: PostsData[] }) {
+function TableComponent({ users }: { users: UserData[] }) {
   const itemsPerPage = 3; // Number of items to display per page
   const [currentPage, setCurrentPage] = useState(1);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentPosts = posts.slice(indexOfFirstItem, indexOfLastItem);
+  const currentUsers = users.slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
-  const [deletePost, setDeletePost] = useState({ id: "", name: "" });
+  const [deleteUser, setDeleteUser] = useState({ id: "", username: "" });
 
-  const handleOpenDeleteModal = (id: string, name: string) => {
+  const handleOpenDeleteModal = (id: string, username: string) => {
     setOpenDeleteModal(true);
-    setDeletePost({ id, name });
+    setDeleteUser({ id, username });
   };
 
-  const test = async () => {
+  const handleCloseDeleteModal = async () => {
     setOpenDeleteModal(false);
-    toast.info("Post Deletion Canceled!");
+    toast.info("User Deletion Canceled!");
   };
 
   const handleDelete = async (id: string) => {
     try {
-      await fetch(`${API_BASE_URL}/posts/${id}`, {
+      await fetch(`${API_BASE_URL}/users/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           Authorization: `${localStorage.getItem("token")}`,
         },
       });
-      toast.success("Post Deleted Successfully!");
+      toast.success("User Deleted Successfully!");
       setTimeout(() => {
         window.location.reload();
       }, 1000);
     } catch (error) {
-      toast.error("Post Deletion Failed!");
-      console.error("Couldn't delete post:", error);
+      toast.error("User Deletion Failed!");
+      console.error("Couldn't delete user:", error);
     }
   };
 
@@ -89,56 +73,51 @@ function TableComponent({ posts }: { posts: PostsData[] }) {
       <div className="overflow-x-auto w-full">
         <Table hoverable>
           <Table.Head>
-            <Table.HeadCell>Cover</Table.HeadCell>
-            <Table.HeadCell>Author</Table.HeadCell>
-            <Table.HeadCell>Title</Table.HeadCell>
-            <Table.HeadCell>Tags</Table.HeadCell>
-            <Table.HeadCell>Likes</Table.HeadCell>
-            <Table.HeadCell>Views</Table.HeadCell>
-            <Table.HeadCell>Date of Post</Table.HeadCell>
+            <Table.HeadCell>Avatar</Table.HeadCell>
+            <Table.HeadCell>Username</Table.HeadCell>
+            <Table.HeadCell>Full Name</Table.HeadCell>
+            <Table.HeadCell>Email</Table.HeadCell>
+            <Table.HeadCell>Role</Table.HeadCell>
             <Table.HeadCell>Action</Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
-            {currentPosts.map((post) => (
+            {currentUsers.map((user) => (
               <Table.Row
-                key={post._id}
+                key={user._id}
                 className="bg-white dark:border-gray-700 dark:bg-gray-800"
-                style={{ height: "100px" }} // Adjust the height as needed
               >
-                <Table.Cell style={{ width: "120px" }}>
-                  <img
-                    style={{
-                      minHeight: "150px",
-                      minWidth: "120px",
-                    }}
-                    src={post.imageURL}
-                    alt="..."
-                    className="rounded-sm object-cover"
+                <Table.Cell>
+                  <Avatar
+                    alt="User settings"
+                    img={user.profile.avatar}
+                    rounded
+                    size="md"
+                    className="block"
                   />
                 </Table.Cell>
                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                  {post.author.username}
+                  {user.username}
                 </Table.Cell>
-                <Table.Cell>{post.title}</Table.Cell>
-                <Table.Cell style={{ width: 300 }}>
-                  {post.tags.slice(0, 10).join(", ")}
-                  {post.tags.length > 10 && `, +${post.tags.length - 10} more`}
-                </Table.Cell>
-                <Table.Cell>{post.likes}</Table.Cell>
-                <Table.Cell>{post.views}</Table.Cell>
+                <Table.Cell>{`${user.profile.firstName} ${user.profile.lastName}`}</Table.Cell>
                 <Table.Cell>
-                  {new Date(post.createdAt).toLocaleDateString("en-GB")}
+                  <a
+                    href={"mailto:" + user.email}
+                    className="text-purple-600 dark:text-purple-500 hover:text-purple-400 dark:hover:text-purple-400"
+                  >
+                    {user.email}
+                  </a>
                 </Table.Cell>
-                <Table.Cell style={{ width: "180px" }}>
+                <Table.Cell>{user.role}</Table.Cell>
+                <Table.Cell>
                   <div className="space-x-4">
                     <a
-                      href={`/edituser/${post._id}`}
+                      href={`/edituser/${user._id}`}
                       className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
                     >
                       Edit
                     </a>
                     <a
-                      href={`/viewuser/${post._id}`}
+                      href={`/viewuser/${user._id}`}
                       className="font-medium text-green-600 hover:underline dark:text-green-500"
                     >
                       View
@@ -147,7 +126,7 @@ function TableComponent({ posts }: { posts: PostsData[] }) {
                       href="#"
                       className="font-medium text-red-600 hover:underline dark:text-red-500"
                       onClick={() =>
-                        handleOpenDeleteModal(post._id, post.author.username)
+                        handleOpenDeleteModal(user._id, user.username)
                       }
                     >
                       Delete
@@ -163,26 +142,26 @@ function TableComponent({ posts }: { posts: PostsData[] }) {
           <Modal.Body>
             <div className="space-y-6">
               <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                Are you sure that you want to delete post made by{" "}
+                Are you sure that you want to delete user{" "}
                 <span className="bg-purple-500 p-2 text-white rounded-md font-bold">
-                  {deletePost.name}
+                  {deleteUser.username}
                 </span>{" "}
                 ?
               </p>
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={() => handleDelete(deletePost.id)} color="success">
+            <Button onClick={() => handleDelete(deleteUser.id)} color="success">
               Yes
             </Button>
-            <Button color="failure" onClick={() => test()}>
+            <Button color="failure" onClick={() => handleCloseDeleteModal()}>
               No
             </Button>
           </Modal.Footer>
         </Modal>
       </div>
       <div className="flex mt-4 absolute bottom-0 mb-10">
-        {Array.from({ length: Math.ceil(posts.length / itemsPerPage) }).map(
+        {Array.from({ length: Math.ceil(users.length / itemsPerPage) }).map(
           (_, index) => (
             <button
               key={index}

@@ -1,9 +1,9 @@
 import { API_BASE_URL } from "../../config";
 import React, { useEffect, useState } from "react";
-// import Sidebar from "../../components/Admin/Sidebar";
-import UsersTable from "./UserTable";
-import GameTable from "./GameTable";
+import UsersTable from "./Users/UserTable";
+import GameTable from "./Games/GameTable";
 import PostTable from "./PostTable";
+import ContactTable from "./ContactsTable";
 import SidebarComponent from "./Sidebar";
 import { useParams } from "react-router-dom";
 
@@ -61,6 +61,16 @@ interface PostsData {
   _id: string;
 }
 
+interface ContanctsData {
+  name: string;
+  email: string;
+  message: string;
+  createdAt: string;
+  updatedAt: string;
+  _v: number;
+  _id: string;
+}
+
 // interface Author {
 // 	_id: string;
 // 	username: string;
@@ -94,43 +104,38 @@ const UsersInfo: React.FC = () => {
   const [users, setUsers] = useState<UsersData[]>([]);
   const [games, setGames] = useState<GamesData[]>([]);
   const [posts, setPosts] = useState<PostsData[]>([]);
+  const [contacts, setContacts] = useState<ContanctsData[]>([]);
 
   const { table } = useParams();
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseUsers = await fetch(`${API_BASE_URL}/users`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `${localStorage.getItem("token")}`,
-          },
-        });
-        const responseGames = await fetch(`${API_BASE_URL}/games`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `${localStorage.getItem("token")}`,
-          },
-        });
-        const responsePosts = await fetch(`${API_BASE_URL}/posts`, {
+        const response = await fetch(`${API_BASE_URL}/${table}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `${localStorage.getItem("token")}`,
           },
         });
 
-        const dataUsers = await responseUsers.json();
-        const dataGames = await responseGames.json();
-        const dataPosts = await responsePosts.json();
-        setPosts(dataPosts.posts);
-        setGames(dataGames.games);
-        setUsers(dataUsers.users);
+        const data = await response.json();
+        {
+          console.log(data);
+          table === "users" || table === undefined
+            ? setUsers(data.users)
+            : table === "games"
+            ? setGames(data.games)
+            : table === "posts"
+            ? setPosts(data.posts)
+            : table === "contacts"
+            ? setContacts(data.contacts)
+            : "";
+        }
       } catch (error) {
         console.error("Failed to fetch data:", error);
       }
     };
     fetchData();
   }, []);
-  console.log(posts);
   return (
     <div>
       <div className="flex h-screen bg-gray-100 bg-gradient-to-br from-purple-400 to-indigo-600 dark:from-purple-800 dark:to-indigo-900 py-10 ">
@@ -144,6 +149,8 @@ const UsersInfo: React.FC = () => {
             <GameTable games={games} />
           ) : table === "posts" ? (
             <PostTable posts={posts} />
+          ) : table === "contacts" ? (
+            <ContactTable contacts={contacts} />
           ) : (
             ""
           )}
