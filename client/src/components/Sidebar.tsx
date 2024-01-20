@@ -128,7 +128,7 @@ const Sidebar = () => {
       </button>
       <div
         className={`w-[300px] p-4 bg-white rounded-lg fixed left-0 top-5 z-50 transition delay-150 duration-300 ease-in-out  ${
-          isSidebarOpen ? "translate-x-[-100%]" : "translate-x-[0%]"
+          isSidebarOpen ? "translate-x-[-100%]" : "translate-x-[2%]"
         }`}
       >
         <div>
@@ -194,7 +194,7 @@ const Sidebar = () => {
               {popularTags.map((tag) => (
                 <li
                   key={tag._id}
-                  className="mb-3 mx-2 transition-transform duration-300 hover:scale-105 inline-block cursor-pointer"
+                  className="mb-3 mr-2 transition-transform duration-300 hover:scale-105 inline-block cursor-pointer"
                 >
                   <span className="bg-purple-700 text-white p-1 rounded">
                     {tag._id}
