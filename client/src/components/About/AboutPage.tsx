@@ -158,13 +158,13 @@ const AboutPage = () => {
 				</div>
 			</section>
 			<div className="py-8 lg:py-8 mx-auto max-w-screen-xl px-4">
-				<h2 className="mb-8 lg:mb-16 text-3xl font-extrabold tracking-tight leading-tight text-center text-gray-900  md:text-4xl">
+				<h2 className="mb-8 lg:mb-16 text-3xl font-extrabold tracking-tight leading-tight text-center text-purple-200  md:text-4xl">
 					You’ll be in good company
 				</h2>
-				<div className="grid grid-cols-2 gap-8 text-gray-500 sm:gap-12 md:grid-cols-3 lg:grid-cols-6 dark:text-gray-400">
+				<div className="grid grid-cols-2 gap-8 text-purple-200 sm:gap-12 md:grid-cols-3 lg:grid-cols-6 dark:text-purple-300">
 					<a className="flex justify-center items-center">
 						<svg
-							className="h-9 hover:text-gray-900 dark:hover:text-white"
+							className="h-9 hover:text-purple-100 dark:hover:text-white"
 							viewBox="0 0 125 35"
 							fill="currentColor"
 							xmlns="http://www.w3.org/2000/svg"
@@ -179,7 +179,7 @@ const AboutPage = () => {
 					</a>
 					<a className="flex justify-center items-center">
 						<svg
-							className="h-9 hover:text-gray-900 dark:hover:text-white"
+							className="h-9 hover:text-purple-100 dark:hover:text-white"
 							viewBox="0 0 86 29"
 							fill="currentColor"
 							xmlns="http://www.w3.org/2000/svg"
@@ -194,7 +194,7 @@ const AboutPage = () => {
 					</a>
 					<a className="flex justify-center items-center">
 						<svg
-							className="h-8 hover:text-gray-900 dark:hover:text-white"
+							className="h-8 hover:text-purple-100 dark:hover:text-white"
 							viewBox="0 0 151 34"
 							fill="currentColor"
 							xmlns="http://www.w3.org/2000/svg"
@@ -220,7 +220,7 @@ const AboutPage = () => {
 
 					<a className="flex justify-center items-center">
 						<svg
-							className="h-9 hover:text-gray-900 dark:hover:text-white"
+							className="h-9 hover:text-purple-100 dark:hover:text-white"
 							viewBox="0 0 124 38"
 							fill="currentColor"
 							xmlns="http://www.w3.org/2000/svg"
@@ -233,7 +233,7 @@ const AboutPage = () => {
 					</a>
 					<a className="flex justify-center items-center">
 						<svg
-							className="h-9 hover:text-gray-900 dark:hover:text-white"
+							className="h-9 hover:text-purple-100 dark:hover:text-white"
 							viewBox="0 0 137 37"
 							fill="currentColor"
 							xmlns="http://www.w3.org/2000/svg"
@@ -314,7 +314,7 @@ const AboutPage = () => {
 					</a>
 					<a className="flex justify-center items-center">
 						<svg
-							className="h-6 hover:text-gray-900 dark:hover:text-white"
+							className="h-6 hover:text-purple-100 dark:hover:text-white"
 							viewBox="0 0 124 21"
 							fill="currentColor"
 							xmlns="http://www.w3.org/2000/svg"
