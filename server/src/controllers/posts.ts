@@ -12,6 +12,7 @@ import {
 	searchPostsByTag,
 	getPostsByMonth,
 	getPostsByYear,
+	increaseLikes,
 } from "../db/posts";
 import { getUserBySessionToken } from "../db/users";
 import { get, merge } from "lodash";
@@ -58,9 +59,14 @@ export const createNewPost = async (
 		const post = await createPost({
 			title,
 			content,
-			author: user,
+			author: user._id,
 			imageURL: imageURL ?? "",
 			tags,
+		}).catch((error) => {
+			console.log(error);
+			return res
+				.status(500)
+				.json({ message: "Internal server error", error });
 		});
 
 		return res
@@ -69,7 +75,9 @@ export const createNewPost = async (
 			.end();
 	} catch (error) {
 		console.log(error);
-		return res.status(500).json({ message: "Internal server error" });
+		return res
+			.status(500)
+			.json({ message: "Internal server error", error });
 	}
 };
 
@@ -279,5 +287,23 @@ export const getAllPostsByYear = async (
 	} catch (error) {
 		console.log(error);
 		return res.status(500).json({ message: "Internal server error" });
+	}
+};
+
+export const increaseLikesController = async (
+	req: express.Request,
+	res: express.Response
+) => {
+	try {
+		const { postId, userId } = req.params;
+
+		const post = await increaseLikes(postId, userId);
+
+		return res.status(200).json({ post }).end();
+	} catch (error) {
+		console.log(error);
+		return res
+			.status(500)
+			.json({ message: "Internal server error", error });
 	}
 };

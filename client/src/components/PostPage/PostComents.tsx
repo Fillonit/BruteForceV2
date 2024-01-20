@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { API_BASE_URL } from "../../config";
 
 interface Author {
-  _id: string;
-  username: string;
-  email: string;
-  profile: {
-    firstName: string;
-    lastName: string;
-    bio: string;
-    avatar: string;
-  };
+	_id: string;
+	username: string;
+	email: string;
+	profile: {
+		firstName: string;
+		lastName: string;
+		bio: string;
+		avatar: string;
+	};
 }
 
 interface Comment {
@@ -34,7 +34,7 @@ interface Post {
   comments: Comment[];
 }
 interface PostCardProps {
-  post: Post | null;
+	post: Post | null;
 }
 
 const PostComments: React.FC<PostCardProps> = ({ post }) => {

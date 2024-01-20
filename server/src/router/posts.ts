@@ -14,6 +14,7 @@ import {
 	searchPostsByTagController,
 	getAllPostsByMonth,
 	getAllPostsByYear,
+	increaseLikesController,
 } from "../controllers/posts";
 
 import { isAuthenticated, isAdmin, isPostOwner } from "../middlewares";
@@ -42,4 +43,5 @@ export default (router: express.Router) => {
 	router.get("/posts/author/:id", getPostsByAuthor);
 	router.get("/posts/month/:month", getAllPostsByMonth);
 	router.get("/posts/year/:year", getAllPostsByYear);
+	router.patch("/posts/likes/:postId/:userId", increaseLikesController);
 };
