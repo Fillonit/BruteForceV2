@@ -18,6 +18,13 @@ interface Author {
   };
 }
 
+interface Comment {
+  _id: string;
+  content: string;
+  user: Author;
+  createdAt: Date;
+}
+
 interface Post {
   _id: string;
   title: string;
@@ -29,6 +36,7 @@ interface Post {
   updatedAt: string;
   likes: number;
   views: number;
+  comments: Comment[];
 }
 
 const PostList = () => {
