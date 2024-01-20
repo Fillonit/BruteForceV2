@@ -15,8 +15,9 @@ import Posts from "./pages/Posts";
 import Post from "./pages/Post";
 import Profile from "./pages/Profile";
 import Contact from "./pages/Contact";
-import EditUser from "./components/Admin/EditUserPage";
-import ViewUser from "./components/Admin/ViewUserPage";
+import EditUser from "./components/Admin/Users/EditUserPage";
+import ViewUser from "./components/Admin/Users/ViewUserPage";
+import EditGame from "./components/Admin/Games/EditGamePage";
 import About from "./pages/About";
 import CreatePost from "./pages/CreatePost";
 import Games from "./pages/Games";
@@ -47,6 +48,7 @@ function App() {
 						<Route path="/settings" element={<ProfileSettings />} />
 						<Route path="/contact" element={<Contact />} />
 						<Route path="/edituser/:id" element={<EditUser />} />
+						<Route path="/editgame/:id" element={<EditGame />} />
 						<Route path="/viewuser/:id" element={<ViewUser />} />
 						<Route path="/getStarted" element={<GetStarted />} />
 						<Route path="*" element={<NotFound />} />

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Avatar } from "flowbite-react"; //Button, FileInput, Label, Dropdown,
-import { API_BASE_URL } from "../../config";
+import { API_BASE_URL } from "../../../config";
 // import { ToastContainer, ToastOptions, toast } from "react-toastify";
 // import notifyConfig from "../notifyConfig";
 import { useParams } from "react-router-dom";
