@@ -43,5 +43,5 @@ export default (router: express.Router) => {
 	router.get("/posts/author/:id", getPostsByAuthor);
 	router.get("/posts/month/:month", getAllPostsByMonth);
 	router.get("/posts/year/:year", getAllPostsByYear);
-	router.patch("/posts/likes/:id", increaseLikesController);
+	router.patch("/posts/likes/:postId/:userId", increaseLikesController);
 };

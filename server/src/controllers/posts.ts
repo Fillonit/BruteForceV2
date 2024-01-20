@@ -295,9 +295,9 @@ export const increaseLikesController = async (
 	res: express.Response
 ) => {
 	try {
-		const { id } = req.params;
+		const { postId, userId } = req.params;
 
-		const post = await increaseLikes(id);
+		const post = await increaseLikes(postId, userId);
 
 		return res.status(200).json({ post }).end();
 	} catch (error) {

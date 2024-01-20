@@ -23,6 +23,11 @@ const PostSchema = new mongoose.Schema({
 	updatedAt: { type: Date, default: Date.now },
 	views: { type: Number, default: 0 },
 	likes: { type: Number, default: 0 },
+	likedBy: {
+		type: [mongoose.Schema.Types.ObjectId],
+		ref: "User",
+		default: [],
+	},
 });
 
 export const PostModel = mongoose.model("Post", PostSchema);
@@ -114,6 +119,14 @@ export const getPostsByYear = (year: number) =>
 		},
 	});
 
-export const increaseLikes = (postId: string) => {
-	return PostModel.findByIdAndUpdate(postId, { $inc: { likes: 1 } });
+export const increaseLikes = (postId: string, userId: string) => {
+	return PostModel.findById(postId).then((post) => {
+		if (post.likedBy.includes(new mongoose.Types.ObjectId(userId))) {
+			throw new Error("User has already liked this post");
+		} else {
+			post.likes += 1;
+			post.likedBy.push(new mongoose.Types.ObjectId(userId));
+			return post.save();
+		}
+	});
 };
