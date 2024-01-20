@@ -78,47 +78,84 @@ const PostComments: React.FC<PostCardProps> = ({ post }) => {
 		return null;
 	}
 
+	const timeSince = (date: Date) => {
+		const seconds = Math.floor(
+			(new Date().getTime() - date.getTime()) / 1000
+		);
+		let interval = Math.floor(seconds / 31536000);
+
+		if (interval > 1) {
+			return interval + " years ago";
+		}
+		interval = Math.floor(seconds / 2592000);
+		if (interval > 1) {
+			return interval + " months ago";
+		}
+		interval = Math.floor(seconds / 86400);
+		if (interval > 1) {
+			return interval + " days ago";
+		}
+		interval = Math.floor(seconds / 3600);
+		if (interval > 1) {
+			return interval + " hours ago";
+		}
+		interval = Math.floor(seconds / 60);
+		if (interval > 1) {
+			return interval + " minutes ago";
+		}
+		return Math.floor(seconds) + " seconds ago";
+	};
+
 	return (
 		<div key={post._id} className="relative font-tektur">
 			<h4 className="text-white dark:text-white mb-4 text-lg">
 				Comments:
 			</h4>
 
-			<form onSubmit={handleFormSubmit} className="mt-4">
+			<form onSubmit={handleFormSubmit} className="my-4">
 				<input
 					type="text"
 					value={comment}
 					onChange={(e) => setComment(e.target.value)}
 					placeholder="Type your comment..."
-					className="p-2 border border-gray-400 rounded-lg"
+					className="p-2 border border-gray-400 rounded-lg w-full"
 				/>
 				<button
 					type="submit"
-					className="bg-white mt-2 p-2 rounded-lg dark:bg-gray-900 dark:text-white text-black text-md"
+					className="bg-white mt-2 p-2 rounded-lg dark:bg-gray-900 dark:text-white text-black text-md w-full"
 				>
 					Add Comment
 				</button>
 			</form>
-			<div className="grid gap-3 grid-cols-2 mt-2">
+			{/* <div className="grid gap-3 grid-cols-2 my-2">
 				<button className="bg-white p-2 rounded-lg dark:bg-gray-900 dark:text-white text-black text-md">
 					Like
 				</button>
-			</div>
+			</div> */}
 			<div className="border border-gray-400 bg-gray-900 p-4 rounded-lg shadow-lg">
 				{post.comments.map((comment) => (
-					<div key={comment._id}>
-						<p className="text-white text-base dark:text-zinc-400">
-							{comment.content}
-						</p>
-						<p className="text-gray-500 text-xs">
-							{comment.user.username} -{" "}
-							{new Date(comment.createdAt).toLocaleString()}
-						</p>
+					<div
+						key={comment._id}
+						className="flex items-center space-x-4 my-2"
+					>
+						<img
+							src={comment.user.profile.avatar}
+							alt="User avatar"
+							className="w-12 h-12 rounded-full"
+						/>
+						<div>
+							<p className="text-white text-base dark:text-zinc-400">
+								{comment.content}
+							</p>
+							<p className="text-gray-400 text-xs">
+								<span className="text-purple-200 text-sm">
+									{comment.user.username}
+								</span>{" "}
+								- {timeSince(new Date(comment.createdAt))}
+							</p>
+						</div>
 					</div>
-				)
-        ,console.log(post.comments)
-        )
-        }
+				))}
 			</div>
 		</div>
 	);
