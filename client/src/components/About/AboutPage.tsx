@@ -6,7 +6,7 @@ import Erblini from "../../assets/Erblini.jpg";
 const AboutPage = () => {
 	return (
 		<div className="bg-gray-200 min-h-screen dark:bg-slate-700 bg-gradient-to-br from-purple-400 to-indigo-600 dark:from-purple-800 dark:to-indigo-900 pb-10 overflow-x-hidden">
-			<span className="block mb-4 text-6xl font-semibold text-primary text-center pt-12">
+			<span className="block mb-4 text-6xl font-semibold text-primary text-center pt-12 text-white dark:text-purple-100">
 				Welcome to BruteForce Gaming!
 			</span>
 			<section className="overflow-hidden pt-10 pb-8 lg:pt-[80px] lg:pb-[60px] w-3/4 mx-auto">
@@ -45,10 +45,10 @@ const AboutPage = () => {
 
 						<div className="w-full px-4 lg:w-1/2 xl:w-5/12">
 							<div className="mt-10 lg:mt-0">
-								<h2 className="mb-5 text-3xl font-bold text-dark dark:text-white sm:text-[40px]/[48px]">
+								<h2 className="mb-5 text-3xl font-bold text-purple-100 dark:text-white sm:text-[40px]/[48px]">
 									Unleash Your Gaming Passion with BruteForce
 								</h2>
-								<p className="mb-5 text-base text-body-color dark:text-dark-6">
+								<p className="mb-5 text-base text-black dark:text-purple-300">
 									BruteForce is not just a gaming blog; it's a
 									sanctuary for gamers seeking the latest
 									updates, in-depth reviews, and an immersive
@@ -58,7 +58,7 @@ const AboutPage = () => {
 									hidden gems, and stay ahead of the gaming
 									curve.
 								</p>
-								<p className="mb-8 text-base text-body-color dark:text-dark-6">
+								<p className="mb-8 text-base text-black dark:text-purple-300">
 									Our dedicated team of gaming enthusiasts
 									brings you insightful analyses, exclusive
 									interviews with industry experts, and a
@@ -76,7 +76,7 @@ const AboutPage = () => {
 					<div className="-mx-4 flex flex-wrap">
 						<div className="w-full px-4">
 							<div className="mx-auto mb-[60px] max-w-[510px] text-center">
-								<h2 className="text-dark  mb-3 text-3xl leading-[1.2] font-bold sm:text-4xl md:text-[40px]">
+								<h2 className="text-purple-100 dark:text-white mb-3 text-3xl leading-[1.2] font-bold sm:text-4xl md:text-[40px]">
 									Our Awesome Team
 								</h2>
 								<p className="text-body-color text-base text-white">
