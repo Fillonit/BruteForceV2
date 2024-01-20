@@ -58,9 +58,14 @@ export const createNewPost = async (
 		const post = await createPost({
 			title,
 			content,
-			author: user,
+			author: user._id,
 			imageURL: imageURL ?? "",
 			tags,
+		}).catch((error) => {
+			console.log(error);
+			return res
+				.status(500)
+				.json({ message: "Internal server error", error });
 		});
 
 		return res
@@ -69,7 +74,9 @@ export const createNewPost = async (
 			.end();
 	} catch (error) {
 		console.log(error);
-		return res.status(500).json({ message: "Internal server error" });
+		return res
+			.status(500)
+			.json({ message: "Internal server error", error });
 	}
 };
 
