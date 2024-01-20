@@ -113,3 +113,7 @@ export const getPostsByYear = (year: number) =>
 			$eq: [{ $year: "$createdAt" }, year],
 		},
 	});
+
+export const increaseLikes = (postId: string) => {
+	return PostModel.findByIdAndUpdate(postId, { $inc: { likes: 1 } });
+};

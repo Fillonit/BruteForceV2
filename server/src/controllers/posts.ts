@@ -12,6 +12,7 @@ import {
 	searchPostsByTag,
 	getPostsByMonth,
 	getPostsByYear,
+	increaseLikes,
 } from "../db/posts";
 import { getUserBySessionToken } from "../db/users";
 import { get, merge } from "lodash";
@@ -286,5 +287,23 @@ export const getAllPostsByYear = async (
 	} catch (error) {
 		console.log(error);
 		return res.status(500).json({ message: "Internal server error" });
+	}
+};
+
+export const increaseLikesController = async (
+	req: express.Request,
+	res: express.Response
+) => {
+	try {
+		const { id } = req.params;
+
+		const post = await increaseLikes(id);
+
+		return res.status(200).json({ post }).end();
+	} catch (error) {
+		console.log(error);
+		return res
+			.status(500)
+			.json({ message: "Internal server error", error });
 	}
 };
