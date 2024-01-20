@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaEye, FaThumbsUp } from "react-icons/fa";
 // import { BiSolidLike } from "react-icons/bi";
 import AuthorTag from "./AuthorTag";
 import { formatNumber } from "../../utils/formatNumber";
+import { API_BASE_URL } from "../../config";
 
 interface Author {
 	_id: string;
@@ -33,6 +34,10 @@ interface PostCardProps {
 }
 
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
+	const [likes, setLikes] = useState(post?.likes ?? 0);
+	const [hasLiked, setHasLiked] = useState(false);
+	const user = localStorage.getItem("user");
+	const userId = user ? JSON.parse(user)._id : null;
 	function getTimeDifference(updatedAt: string): string {
 		const now = new Date();
 		const updatedTime = new Date(updatedAt);
@@ -58,6 +63,20 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 		return null;
 	}
 
+	const handleLike = async () => {
+		const response = await fetch(
+			`${API_BASE_URL}/posts/likes/${post._id}/${userId}`,
+			{
+				method: "PATCH",
+			}
+		);
+
+		if (response.ok) {
+			setHasLiked(true);
+			setLikes(likes + 1);
+		}
+	};
+
 	return (
 		<div
 			key={post._id}
@@ -79,9 +98,14 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 							{formatNumber(post.views)}
 							<FaEye className="ml-1 text-purple-50" />
 						</div>
-						<div className="bg-gray-200 rounded-full px-2 py-1 text-sm font-semibold text-white flex items-center text-md bg-gradient-to-r from-purple-500 to-purple-800">
-							{formatNumber(post.likes)}
-							<FaThumbsUp className="ml-1 text-purple-50" />
+						<div
+							className={`bg-gray-200 rounded-full px-2 py-1 text-sm font-semibold text-white flex items-center text-md bg-gradient-to-r from-purple-500 to-purple-800 cursor-pointer ${
+								hasLiked ? "text-purple-500" : "text-purple-50"
+							}`}
+							onClick={handleLike}
+						>
+							{formatNumber(likes)}
+							<FaThumbsUp className="ml-1" />
 						</div>
 					</div>
 				</div>
