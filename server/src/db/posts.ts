@@ -34,8 +34,17 @@ export const PostModel = mongoose.model("Post", PostSchema);
 
 export const getPosts = () => PostModel.find().populate("author comments");
 
-export const getPostById = (id: string) =>
-	PostModel.findById(id).populate("author comments");
+export const getPostById = (id: string) => {
+	return PostModel.findById(id)
+		.populate("author")
+		.populate({
+			path: "comments",
+			populate: {
+				path: "user",
+				model: "User",
+			},
+		});
+};
 
 export const createPost = (values: Record<string, any>) =>
 	new PostModel(values).save().then((post) => post.toObject());

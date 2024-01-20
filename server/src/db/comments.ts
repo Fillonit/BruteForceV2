@@ -12,10 +12,11 @@ const CommentSchema = new mongoose.Schema({
 
 export const CommentModel = mongoose.model("Comment", CommentSchema);
 
-export const getComments = () => CommentModel.find().populate("user post");
+export const getComments = () =>
+	CommentModel.find().populate("user post comments.user");
 
 export const getCommentById = (id: string) =>
-	CommentModel.findById(id).populate("user post");
+	CommentModel.findById(id).populate("user post comments.user");
 
 import { PostModel } from "./posts";
 
@@ -23,10 +24,14 @@ export const createComment = (values: Record<string, any>) =>
 	new CommentModel(values).save().then((comment) => {
 		return PostModel.findById(values.post)
 			.then((post) => {
+				post.populate("comments comments.user");
+				CommentModel.findById(comment._id).populate("user post").exec();
 				post.comments.push(comment._id);
 				return post.save();
 			})
-			.then(() => comment.populate("user post"));
+			.then(() =>
+				CommentModel.findById(comment._id).populate("user post").exec()
+			);
 	});
 
 export const updateComment = (id: string, values: Record<string, any>) => {
@@ -45,7 +50,7 @@ export const deleteCommentsByUserId = (userId: string) =>
 	CommentModel.deleteMany({ user: userId });
 
 export const getCommentsByPostId = (postId: string) =>
-	CommentModel.find({ post: postId });
+	CommentModel.find({ post: postId }).populate("user");
 
 export const getCommentsByUserId = (userId: string) =>
 	CommentModel.find({ user: userId });
