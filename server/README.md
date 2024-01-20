@@ -1,11 +1,11 @@
-# express typescript starter with mongodb
+# Brute Force API
 This is the API starter. It is a REST API built with Node.js, Express.js, and MongoDB.
 
 ## Getting Started
 To get started, clone this repository and run `npm install` to install the dependencies. Then, run `npm start` to start the server. The server will be running on port **8080**.
 
 ## API Documentation
-The API documentation can be found [here](https://documenter.getpostman.com/view/18001727/2s9XxwxZyi).
+The API documentation can be found [here](https://documenter.getpostman.com/view/18001727/2s9YsT6onc).
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -16,6 +16,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Authors
 - [**Fillonit Ibishi**](https://github.com/Fillonit)
+- [**Butrint Reçica**](https://github.com/butrinntt)
+- [**Erblin Ymeri**](https://github.com/YumaSisyphus)
 
 # Installation
 ## Clone
@@ -36,7 +38,6 @@ MONGO_PASSWORD=
 MONGO_URL=
 SECRET=
 APP_OWNER_ID=
-RIOT_API_KEY=
 PORT=
 ```
 
