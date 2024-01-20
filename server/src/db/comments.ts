@@ -17,10 +17,17 @@ export const getComments = () => CommentModel.find().populate("user post");
 export const getCommentById = (id: string) =>
 	CommentModel.findById(id).populate("user post");
 
+import { PostModel } from "./posts";
+
 export const createComment = (values: Record<string, any>) =>
-	new CommentModel(values)
-		.save()
-		.then((comment) => comment.populate("user post"));
+	new CommentModel(values).save().then((comment) => {
+		return PostModel.findById(values.post)
+			.then((post) => {
+				post.comments.push(comment._id);
+				return post.save();
+			})
+			.then(() => comment.populate("user post"));
+	});
 
 export const updateComment = (id: string, values: Record<string, any>) => {
 	return CommentModel.findByIdAndUpdate(id, values, { new: true }).populate(
