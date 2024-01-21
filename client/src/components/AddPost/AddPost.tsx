@@ -67,7 +67,7 @@ const AddPost = () => {
   };
 
   return (
-    <div className="flex h-screen bg-[url('https://i.pinimg.com/originals/d9/1a/d7/d91ad79a3f6b1075fc48d63fd5f71afb.gif')] bg-no-repeat bg-cover justify-center items-center">
+    <div className="flex h-screen bg-[url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/3cf06a29-04a0-4466-9f83-ab6b9658149f/dgf1nfg-95de740f-6ce8-46d7-9e97-bee39a9bfb24.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzNjZjA2YTI5LTA0YTAtNDQ2Ni05ZjgzLWFiNmI5NjU4MTQ5ZlwvZGdmMW5mZy05NWRlNzQwZi02Y2U4LTQ2ZDctOWU5Ny1iZWUzOWE5YmZiMjQuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.7PmwbFeu9TswCWjhaJEcqjk5t-cXqBRohNIXocAG7Cw')] bg-no-repeat bg-cover justify-center items-center">
       <form
         onSubmit={handleFormSubmit}
         className="bg-white dark:bg-gray-800 p-8 rounded shadow-md w-1/2"
