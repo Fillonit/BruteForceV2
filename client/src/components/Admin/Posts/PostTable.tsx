@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, Modal, Table } from "flowbite-react";
-import { API_BASE_URL } from "../../config";
+import { API_BASE_URL } from "../../../config";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -132,7 +132,7 @@ function TableComponent({ posts }: { posts: PostsData[] }) {
                 <Table.Cell style={{ width: "180px" }}>
                   <div className="space-x-4">
                     <a
-                      href={`/edituser/${post._id}`}
+                      href={`/editpost/${post._id}`}
                       className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
                     >
                       Edit

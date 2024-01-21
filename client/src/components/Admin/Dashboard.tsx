@@ -2,7 +2,7 @@ import { API_BASE_URL } from "../../config";
 import React, { useEffect, useState } from "react";
 import UsersTable from "./Users/UserTable";
 import GameTable from "./Games/GameTable";
-import PostTable from "./PostTable";
+import PostTable from "./Posts/PostTable";
 import ContactTable from "./ContactsTable";
 import SidebarComponent from "./Sidebar";
 import { useParams } from "react-router-dom";
