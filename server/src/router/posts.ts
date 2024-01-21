@@ -17,7 +17,12 @@ import {
 	increaseLikesController,
 } from "../controllers/posts";
 
-import { isAuthenticated, isAdmin, isPostOwner } from "../middlewares";
+import {
+	isAuthenticated,
+	isAdmin,
+	isPostOwner,
+	isOwnerOrAdmin,
+} from "../middlewares";
 
 export default (router: express.Router) => {
 	router.get("/posts/tags/popular", getMostPopularTagsController);
@@ -31,15 +36,10 @@ export default (router: express.Router) => {
 	router.delete(
 		"/posts/:id",
 		isAuthenticated,
-		isPostOwner || isAdmin,
+		isOwnerOrAdmin,
 		deletePostById
 	);
-	router.patch(
-		"/posts/:id",
-		isAuthenticated,
-		isPostOwner || isAdmin,
-		updatePostById
-	);
+	router.patch("/posts/:id", isAuthenticated, isOwnerOrAdmin, updatePostById);
 	router.get("/posts/author/:id", getPostsByAuthor);
 	router.get("/posts/month/:month", getAllPostsByMonth);
 	router.get("/posts/year/:year", getAllPostsByYear);

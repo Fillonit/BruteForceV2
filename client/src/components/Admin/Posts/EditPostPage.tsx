@@ -114,7 +114,7 @@ const EditPost = () => {
       reader.onload = (e) => {
         setPost((prevPost) => ({
           ...prevPost,
-          image: e.target?.result as string,
+          imageURL: e.target?.result as string,
         }));
       };
 
@@ -140,6 +140,7 @@ const EditPost = () => {
       autoClose: 3000,
     });
 
+    console.log(localStorage.getItem("token"));
     try {
       const response = await fetch(`${API_BASE_URL}/posts/${id}`, {
         method: "PATCH",
@@ -157,7 +158,7 @@ const EditPost = () => {
         toast.success("Game Updated Successfully!", {
           ...notifyConfig,
         } as ToastOptions);
-        navigate("/dashboard/games");
+        navigate("/dashboard/posts");
       } else {
         toast.dismiss(UpdateToast);
         toast.error("Game Update Failed!", {
@@ -307,7 +308,6 @@ const EditPost = () => {
               />
             </div>
           </div>
-
           <div>
             <PostComments post={post} />
           </div>

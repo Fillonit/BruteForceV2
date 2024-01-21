@@ -2,7 +2,7 @@
 
 import { Button, Modal, Table } from "flowbite-react";
 import { API_BASE_URL } from "../../../config";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 interface UsersData {
@@ -42,9 +42,8 @@ interface PostsData {
 }
 
 function TableComponent({ posts }: { posts: PostsData[] }) {
-  const itemsPerPage = 3; // Number of items to display per page
+  const [itemsPerPage, setItemsPerPage] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
-
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentPosts = posts.slice(indexOfFirstItem, indexOfLastItem);
@@ -84,6 +83,14 @@ function TableComponent({ posts }: { posts: PostsData[] }) {
     }
   };
 
+  useEffect(() => {
+    const handelResize = () => {
+      const newItemsPerPage = window.innerWidth <= 1196 ? 1 : 4;
+      setItemsPerPage(newItemsPerPage);
+      console.log(window.innerWidth);
+    };
+    handelResize();
+  }, [window.innerWidth]);
   return (
     <div className="flex justify-center">
       <div className="overflow-x-auto w-full">
@@ -105,16 +112,14 @@ function TableComponent({ posts }: { posts: PostsData[] }) {
                 className="bg-white dark:border-gray-700 dark:bg-gray-800"
                 style={{ height: "100px" }} // Adjust the height as needed
               >
-                <Table.Cell style={{ width: "120px" }}>
-                  <img
-                    style={{
-                      minHeight: "150px",
-                      minWidth: "120px",
-                    }}
-                    src={post.imageURL}
-                    alt="..."
-                    className="rounded-sm object-cover"
-                  />
+                <Table.Cell className="w-[120px]">
+                  <div className="overflow-hidden rounded-sm">
+                    <img
+                      src={post.imageURL}
+                      alt={post.title}
+                      className="object-cover max-h-[150px] max-w-[120px]"
+                    />
+                  </div>
                 </Table.Cell>
                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                   {post.author.username}

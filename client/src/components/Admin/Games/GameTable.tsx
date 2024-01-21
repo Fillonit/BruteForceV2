@@ -76,11 +76,9 @@ function TableComponent({ games }: { games: GamesData[] }) {
             <Table.HeadCell>Developers</Table.HeadCell>
             <Table.HeadCell>Publisher</Table.HeadCell>
             <Table.HeadCell>Genres</Table.HeadCell>
-            <Table.HeadCell>Platforms</Table.HeadCell>
             <Table.HeadCell style={{ width: "80px" }}>Rating</Table.HeadCell>
             <Table.HeadCell style={{ width: "80px" }}>Price</Table.HeadCell>
             <Table.HeadCell>Release Date</Table.HeadCell>
-            <Table.HeadCell>Tags</Table.HeadCell>
             <Table.HeadCell>Actions</Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
@@ -90,16 +88,14 @@ function TableComponent({ games }: { games: GamesData[] }) {
                 className="bg-white dark:border-gray-700 dark:bg-gray-800"
                 style={{ height: "100px" }} // Adjust the height as needed
               >
-                <Table.Cell style={{ width: "120px" }}>
-                  <img
-                    style={{
-                      minHeight: "150px",
-                      minWidth: "120px",
-                    }}
-                    src={game.image}
-                    alt={game.name}
-                    className="rounded-sm object-cover"
-                  />
+                <Table.Cell className="w-[120px]">
+                  <div className="overflow-hidden rounded-sm">
+                    <img
+                      src={game.image}
+                      alt={game.name}
+                      className="object-cover max-h-[150px] max-w-[120px]"
+                    />
+                  </div>
                 </Table.Cell>
                 <Table.Cell
                   style={{ width: "200px" }}
@@ -112,18 +108,10 @@ function TableComponent({ games }: { games: GamesData[] }) {
                 <Table.Cell style={{ width: "100px" }}>
                   {game.genre.join(", ")}
                 </Table.Cell>
-                <Table.Cell style={{ width: "200px" }}>
-                  {game.platform.join(", ")}
-                </Table.Cell>
                 <Table.Cell>{game.rating}/5</Table.Cell>
                 <Table.Cell>{game.price}$</Table.Cell>
                 <Table.Cell>
                   {new Date(game.releaseDate).toLocaleDateString("en-GB")}
-                </Table.Cell>
-
-                <Table.Cell style={{ width: 300 }}>
-                  {game.tags.slice(0, 10).join(", ")}
-                  {game.tags.length > 10 && `, +${game.tags.length - 10} more`}
                 </Table.Cell>
 
                 <Table.Cell style={{ width: "180px" }}>
