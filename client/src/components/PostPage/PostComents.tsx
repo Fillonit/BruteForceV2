@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { API_BASE_URL } from "../../config";
-import { HiOutlineBadgeCheck } from "react-icons/hi";
 
 interface Author {
   _id: string;
@@ -25,7 +24,7 @@ interface Post {
   _id: string;
   title: string;
   imageURL: string;
-  content: string[];
+  content: string;
   tags: string[];
   author: Author;
   createdAt: Date;
