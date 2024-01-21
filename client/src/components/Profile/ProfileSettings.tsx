@@ -4,6 +4,8 @@ import { API_BASE_URL } from "../../config";
 import { ToastContainer, ToastOptions, toast } from "react-toastify";
 import notifyConfig from "../notifyConfig";
 
+import useCloudinaryUpload from "../../utils/uploadImage";
+
 const inputTheme = {
 	field: {
 		input: {
@@ -36,6 +38,7 @@ interface User {
 }
 
 const SettingsPage: React.FC = () => {
+	const { imageUrl, uploadImage } = useCloudinaryUpload();
 	const [user, setUser] = useState<User>({
 		_id: "",
 		username: "",
@@ -73,51 +76,25 @@ const SettingsPage: React.FC = () => {
 	};
 
 	const fileInputRef = React.useRef<HTMLInputElement>(null);
-	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const handleFileChange = async (
+		event: React.ChangeEvent<HTMLInputElement>
+	) => {
 		try {
 			if (event.target.files && event.target.files[0]) {
-				const img = document.createElement("img");
-				img.src = URL.createObjectURL(event.target.files[0]);
-				if (event.target.files[0].size > 2 * 1024 * 1024) {
-					toast.error(
-						"Image is too large. Please select a smaller image.",
-						{
-							...notifyConfig,
-						} as ToastOptions
-					);
+				const reader = new FileReader();
+				reader.readAsDataURL(event.target.files[0]);
+				reader.onload = async () => {
+					const base64Image = reader.result as string;
 
-					if (fileInputRef.current) {
-						fileInputRef.current.value = "";
-					}
-
-					return;
-				}
-				img.onload = () => {
-					const canvas = document.createElement("canvas");
-					const ctx = canvas.getContext("2d");
-
-					canvas.width = 400;
-					canvas.height = 400;
-
-					ctx?.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-					const resizedImageUrl = canvas.toDataURL();
-
-					const base64Limit = 3 * 1024 * 1024;
-					if (resizedImageUrl.length > base64Limit) {
-						toast.error(
-							"Image is too large. Please select a smaller image.",
-							{
-								...notifyConfig,
-							} as ToastOptions
-						);
-					}
+					// Upload the image
+					const uploadedImageUrl = await uploadImage(base64Image);
+					console.log(uploadedImageUrl);
 
 					setUser((prevUser) => ({
 						...prevUser,
 						profile: {
 							...prevUser.profile,
-							avatar: resizedImageUrl,
+							avatar: uploadedImageUrl,
 						},
 					}));
 				};
@@ -331,6 +308,7 @@ const SettingsPage: React.FC = () => {
 								onChange={handleFileChange}
 								// helperText="A profile picture is useful to confirm your are logged into your account"
 							/>
+							{imageUrl && <img src={imageUrl} alt="Uploaded" />}
 						</div>
 
 						{/* <div className="flex items-center justify-center w-full">
