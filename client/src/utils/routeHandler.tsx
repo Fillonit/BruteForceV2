@@ -1,22 +1,41 @@
-import React from "react";
-import { Navigate, useLocation, Route } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Navigate, Route } from "react-router-dom";
+import { API_BASE_URL } from "../config";
 
 function PrivateRoute({
 	element,
 	...props
 }: React.ComponentProps<typeof Route>) {
-	const location = useLocation();
-	const user = JSON.parse(localStorage.getItem("user") || "{}");
+	const [role, setRole] = useState<string | null>(null);
 
-	if (user && user.role === "admin") {
+	useEffect(() => {
+		const user = JSON.parse(localStorage.getItem("user") || "{}");
+
+		if (user && user.authentication.sessionToken) {
+			fetch(`${API_BASE_URL}/users/me`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `${user.authentication.sessionToken}`,
+				},
+			})
+				.then((response) => response.json())
+				.then((data) => {
+					setRole(data.user.role);
+				})
+				.catch((error) => console.error(error));
+		}
+	}, []);
+
+	if (role === null) {
+		return null; // or a loading spinner
+	} else if (role === "admin") {
 		return React.cloneElement(
 			element as React.ReactElement<unknown>,
 			props
 		);
-	} else if (user && user.role === "user") {
-		return <Navigate to="/" />;
 	} else {
-		return <Navigate to="/login" state={{ from: location }} />;
+		return <Navigate to="/" />;
 	}
 }
 
@@ -24,7 +43,6 @@ export function PublicRoute({
 	element,
 	...props
 }: React.ComponentProps<typeof Route>) {
-	//   const location = useLocation();
 	const user = JSON.parse(localStorage.getItem("user") || "{}");
 
 	if (!user || !user.role) {
