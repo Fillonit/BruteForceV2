@@ -208,7 +208,7 @@ export const logger = (
 	next: express.NextFunction
 ) => {
 	let methodColor: chalk.Chalk | ((arg0: string) => any);
-	const start = Date.now(); // Note the start time
+	const start = Date.now();
 
 	switch (req.method) {
 		case "GET":
@@ -228,8 +228,7 @@ export const logger = (
 	}
 
 	res.on("finish", () => {
-		// Listen for when the response has been sent
-		const duration = Date.now() - start; // Calculate the duration
+		const duration = Date.now() - start;
 
 		const logMessage = `${chalk.bold.blueBright(
 			"HTTP Request:"
