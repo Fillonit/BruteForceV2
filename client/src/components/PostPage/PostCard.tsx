@@ -111,14 +111,17 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 				</div>
 				<p className="text-gray-700 text-base line-clamp-2 dark:text-gray-400">
 					Published at:{" "}
-					{new Date(post.createdAt).toLocaleDateString()}
+					{new Date(post.createdAt).toLocaleDateString()}{" "}
+					<span className="text-purple-300">
+						({getTimeDifference(post.createdAt.toString())})
+					</span>
 				</p>
 				<p className="text-gray-700 text-base line-clamp-2 dark:text-gray-400">
 					Last Edited at: {getTimeDifference(post.updatedAt)}
 				</p>
 				<div className="mt-4 flex flex-wrap">
 					{post.tags.map((tag) => (
-						<span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 mr-2 mb-2 dark:bg-gray-800 dark:text-gray-200 cursor-pointer hover:scale-110 hover:bg-purple-400 hover:text-white">
+						<span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 mr-2 mb-2 dark:bg-gray-800 dark:text-gray-200 cursor-pointer hover:scale-110 hover:bg-purple-400 hover:text-white dark:hover:bg-purple-600">
 							#{tag}
 						</span>
 					))}
