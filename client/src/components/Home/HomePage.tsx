@@ -2,7 +2,6 @@ import { Button, Card, Carousel } from "flowbite-react";
 import Doom from "../../assets/Doom.jpg";
 import Hades from "../../assets/Hades.jpg";
 import { Link } from "react-router-dom";
-import Hades2 from "../../assets/Hades2.mp4";
 import Nintendo from "../../assets/nintendo.jpg";
 import Soma from "../../assets/Soma.jpg";
 import Arcane from "../../assets/Arcane.jpg";
@@ -21,7 +20,12 @@ const HomePage = () => {
           loop
           className="w-full h-full object-cover rounded-none bg-cover"
         >
-          <source src={Hades2} type="video/mp4" />
+          <source
+            src={
+              "https://www.dropbox.com/scl/fi/mtl5zpvblypp2smes9f7s/Hades2.mp4?rlkey=lu5ildhd1d3orxp0i8b2krmzn&raw=1"
+            }
+            type="video/mp4"
+          />
           Your browser does not support the video tag.
         </video>
       </div>
