@@ -15,6 +15,7 @@ interface Author {
 		bio: string;
 		avatar: string;
 	};
+	role: string;
 }
 interface Post {
 	_id: string;

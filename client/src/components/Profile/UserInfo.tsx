@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 // import PostList from "../Posts/PostsList";
 import PostCard from "../Posts/PostsCard";
 import { API_BASE_URL } from "../../config";
+import { HiOutlineBadgeCheck } from "react-icons/hi";
 
 interface UserData {
 	username: string;
@@ -41,7 +42,7 @@ interface Post {
 	_id: string;
 	title: string;
 	imageURL: string;
-	content: string[];
+	content: string;
 	tags: string[];
 	author: Author;
 	createdAt: Date;
@@ -88,6 +89,9 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
 					<div>
 						<h3 className="text-lg leading-6 font-medium text-slate-900 dark:text-white">
 							{user.username}
+							{user.role === "admin" && (
+								<HiOutlineBadgeCheck className="inline-block ml-2 text-purple-500" />
+							)}
 						</h3>
 						<p className="mt-1 max-w-2xl text-sm text-gray-500">
 							Personal details and posts.

@@ -16,6 +16,7 @@ interface Author {
 		bio: string;
 		avatar: string;
 	};
+	role: string;
 }
 
 interface Comment {

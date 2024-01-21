@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { API_BASE_URL } from "../../config";
+import { HiOutlineBadgeCheck } from "react-icons/hi";
 
 interface Author {
 	_id: string;
@@ -11,6 +12,7 @@ interface Author {
 		bio: string;
 		avatar: string;
 	};
+	role: string;
 }
 
 interface Comment {
@@ -150,6 +152,9 @@ const PostComments: React.FC<PostCardProps> = ({ post }) => {
 							<p className="text-gray-400 text-xs">
 								<span className="text-purple-200 text-sm">
 									{comment.user.username}
+									{comment.user.role === "admin" && (
+										<HiOutlineBadgeCheck className="inline-block ml-2 text-purple-500" />
+									)}
 								</span>{" "}
 								- {timeSince(new Date(comment.createdAt))}
 							</p>
