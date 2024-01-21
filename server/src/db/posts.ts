@@ -32,7 +32,9 @@ const PostSchema = new mongoose.Schema({
 
 export const PostModel = mongoose.model("Post", PostSchema);
 
-export const getPosts = () => PostModel.find().populate("author comments");
+PostSchema.index({ title: 1, author: 1 });
+
+export const getPosts = () => PostModel.find();
 
 export const getPostById = (id: string) => {
 	return PostModel.findById(id)

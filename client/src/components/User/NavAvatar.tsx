@@ -94,9 +94,11 @@ function NavAvatar() {
 				<Link to={`/createpost`}>
 					<Dropdown.Item>Create Post</Dropdown.Item>
 				</Link>
-				<Link to={`/dashboard/users`}>
-					<Dropdown.Item>Dashboard</Dropdown.Item>
-				</Link>
+				{userData.role === "admin" && (
+					<Link to={`/dashboard/users`}>
+						<Dropdown.Item>Dashboard</Dropdown.Item>
+					</Link>
+				)}
 				<Link to={`/settings`}>
 					<Dropdown.Item>Settings</Dropdown.Item>
 				</Link>
