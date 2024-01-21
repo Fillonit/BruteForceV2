@@ -20,7 +20,7 @@ interface Post {
 	_id: string;
 	title: string;
 	imageURL: string;
-	content: string[];
+	content: string;
 	tags: string[];
 	author: Author;
 	createdAt: Date;
