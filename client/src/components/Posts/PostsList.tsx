@@ -41,7 +41,7 @@ const PostsList: React.FC<{ postsList: Post[] }> = ({ postsList }) => {
           ))}
         </div>
         <div className="w-full flex justify-center gap-4">
-          {postsList.length > 3 && (
+          {postsList.length > 4 && (
             <div className="mt-7">
               <Link
                 to={"/allPosts"}

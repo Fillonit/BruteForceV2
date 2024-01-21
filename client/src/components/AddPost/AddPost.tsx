@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { API_BASE_URL } from "../../config";
 import { FileInput, Label, TextInput } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
+import useCloudinaryUpload from "../../utils/uploadImage";
+import { toast, ToastOptions } from "react-toastify";
+import notifyConfig from "../notifyConfig";
 
 const inputTheme = {
   field: {
@@ -20,6 +23,34 @@ const AddPost = () => {
   const [imageURL, setImageURL] = useState("");
   const [tags, setTags] = useState("");
   const navigate = useNavigate();
+  const { imageUrl, uploadImage } = useCloudinaryUpload();
+
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
+  const handleFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    try {
+      if (event.target.files && event.target.files[0]) {
+        const reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+        reader.onload = async () => {
+          const base64Image = reader.result as string;
+
+          const uploadedImageUrl = await uploadImage(base64Image);
+          setImageURL(uploadedImageUrl);
+          console.log(imageUrl);
+        };
+      }
+    } catch (error) {
+      console.warn(error);
+      toast.error(
+        (error as Error).message || "Profile Picture Upload Failed!",
+        {
+          ...notifyConfig,
+        } as ToastOptions
+      );
+    }
+  };
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,20 +80,6 @@ const AddPost = () => {
       }
     } catch (error) {
       console.error("Internal server error:", error);
-    }
-  };
-
-  const handleImageFileChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-
-      reader.onload = (e) => {
-        setImageURL(e.target?.result as string);
-      };
-
-      reader.readAsDataURL(event.target.files[0]);
     }
   };
 
@@ -117,7 +134,8 @@ const AddPost = () => {
             theme={inputTheme}
             color={"purple"}
             accept="image/*"
-            onChange={handleImageFileChange}
+            ref={fileInputRef}
+            onChange={handleFileChange}
           />
         </div>
         <div className="mb-4">
