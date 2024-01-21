@@ -168,10 +168,10 @@ const HomePage = () => {
 								<g
 									fill="none"
 									stroke="currentColor"
-									strokeLinecap="round"
-									strokeLinejoin="round"
+									stroke-linecap="round"
+									stroke-linejoin="round"
 									strokeMiterlimit="10"
-									strokeWidth="40"
+									stroke-width="40"
 									clipPath="url(#a)"
 									transform="matrix(1.33 0 0 -1.33 0 682.667)"
 								>
@@ -307,7 +307,7 @@ const HomePage = () => {
 									fill="none"
 									stroke="currentColor"
 									strokeMiterlimit="10"
-									strokeWidth="30"
+									stroke-width="30"
 									clipPath="url(#a)"
 									transform="matrix(1.33 0 0 -1.33 0 682.667)"
 								>
