@@ -97,8 +97,8 @@ function TableComponent({ games }: { games: GamesData[] }) {
                 <Table.Cell
                   className={
                     window.innerWidth <= 1495
-                      ? "h-[120px] max-w-[100px] p-2"
-                      : "h-[150px] max-w-[120px] p-2"
+                      ? "h-[120px] max-w-[60px] p-2"
+                      : "h-[180px] max-w-[120px] p-2"
                   }
                 >
                   <img

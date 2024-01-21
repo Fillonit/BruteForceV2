@@ -2,7 +2,7 @@
 
 import { Button, Modal, Table } from "flowbite-react";
 import { API_BASE_URL } from "../../../config";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 interface ContanctsData {
@@ -15,9 +15,8 @@ interface ContanctsData {
   _id: string;
 }
 function TableComponent({ contacts }: { contacts: ContanctsData[] }) {
-  const itemsPerPage = 3; // Number of items to display per page
+  const [itemsPerPage, setItemsPerPage] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
-
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentContacts = contacts.slice(indexOfFirstItem, indexOfLastItem);
@@ -56,6 +55,15 @@ function TableComponent({ contacts }: { contacts: ContanctsData[] }) {
       console.error("Couldn't delete Contact:", error);
     }
   };
+
+  useEffect(() => {
+    const handelResize = () => {
+      const newItemsPerPage = window.innerWidth <= 1495 ? 3 : 5;
+      setItemsPerPage(newItemsPerPage);
+      console.log(window.innerWidth);
+    };
+    handelResize();
+  }, [window.innerWidth]);
 
   return (
     <div className="flex justify-center">

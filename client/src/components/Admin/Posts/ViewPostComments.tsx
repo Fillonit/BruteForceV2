@@ -1,8 +1,4 @@
-import React, { useState } from "react";
-import { API_BASE_URL } from "../../../config";
-import { toast } from "react-toastify";
-import { Button, Modal } from "flowbite-react";
-
+import React from "react";
 interface Author {
   _id: string;
   username: string;

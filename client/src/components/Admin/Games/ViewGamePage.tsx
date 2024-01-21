@@ -1,20 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Button, TextInput, FileInput, Label, Avatar } from "flowbite-react";
+import { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../config";
-import { ToastContainer, ToastOptions, toast } from "react-toastify";
-import notifyConfig from "../../notifyConfig";
-import { useNavigate, useParams } from "react-router-dom";
-
-const inputTheme = {
-  field: {
-    input: {
-      colors: {
-        purple:
-          "border-purple-500 bg-purple-50 text-purple-900 placeholder-purple-700 focus:border-purple-500 focus:ring-purple-500 dark:border-purple-400 dark:bg-purple-100 dark:focus:border-purple-500 dark:focus:ring-purple-500 ",
-      },
-    },
-  },
-};
+import { useParams } from "react-router-dom";
 
 interface Game {
   description: string;
@@ -31,7 +17,6 @@ interface Game {
 }
 
 const ViewGame = () => {
-  const navigate = useNavigate();
   const { id } = useParams();
   const [game, setGame] = useState<Game>({
     description: "",

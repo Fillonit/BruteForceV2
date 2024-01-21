@@ -29,7 +29,7 @@ import GetStarted from "./pages/GetStarted";
 import AllPosts from "./pages/AllPosts";
 import PrivateRoute from "./utils/routeHandler";
 import { PublicRoute } from "./utils/routeHandler";
-// import ViewPostsByTag from "./pages/ViewByTag";
+import ViewPostsByTag from "./pages/ViewByTag";
 
 function App() {
   // const [userId, setUserId] = useState(localStorage.getItem("userId"));
@@ -62,6 +62,7 @@ function App() {
             <Route path="/games/" element={<Games />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/about" element={<About />} />
+            <Route path="/postsByTag" element={<ViewPostsByTag />} />
             <Route path="/settings" element={<ProfileSettings />} />
             <Route path="/contact" element={<Contact />} />
             <Route
