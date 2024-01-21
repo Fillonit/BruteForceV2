@@ -2,7 +2,7 @@
 
 import { Button, Modal, Table } from "flowbite-react";
 import { API_BASE_URL } from "../../../config";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 interface GamesData {
@@ -24,7 +24,7 @@ interface GamesData {
 }
 
 function TableComponent({ games }: { games: GamesData[] }) {
-  const itemsPerPage = 3; // Number of items to display per page
+  const [itemsPerPage, setItemsPerPage] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -65,10 +65,17 @@ function TableComponent({ games }: { games: GamesData[] }) {
       console.error("Couldn't delete game:", error);
     }
   };
-
+  useEffect(() => {
+    const handelResize = () => {
+      const newItemsPerPage = window.innerWidth <= 1495 ? 3 : 4;
+      setItemsPerPage(newItemsPerPage);
+      console.log(window.innerWidth);
+    };
+    handelResize();
+  }, [window.innerWidth]);
   return (
     <div className="flex justify-center">
-      <div className="overflow-x-auto ">
+      <div className="overflow-x-auto  w-11/12">
         <Table hoverable>
           <Table.Head>
             <Table.HeadCell>Cover</Table.HeadCell>
@@ -76,8 +83,8 @@ function TableComponent({ games }: { games: GamesData[] }) {
             <Table.HeadCell>Developers</Table.HeadCell>
             <Table.HeadCell>Publisher</Table.HeadCell>
             <Table.HeadCell>Genres</Table.HeadCell>
-            <Table.HeadCell style={{ width: "80px" }}>Rating</Table.HeadCell>
-            <Table.HeadCell style={{ width: "80px" }}>Price</Table.HeadCell>
+            <Table.HeadCell>Rating</Table.HeadCell>
+            <Table.HeadCell>Price</Table.HeadCell>
             <Table.HeadCell>Release Date</Table.HeadCell>
             <Table.HeadCell>Actions</Table.HeadCell>
           </Table.Head>
@@ -85,36 +92,34 @@ function TableComponent({ games }: { games: GamesData[] }) {
             {currentGames.map((game) => (
               <Table.Row
                 key={game._id}
-                className="bg-white dark:border-gray-700 dark:bg-gray-800"
-                style={{ height: "100px" }} // Adjust the height as needed
+                className="bg-white dark:border-gray-700 dark:bg-gray-800 "
               >
-                <Table.Cell className="w-[120px]">
-                  <div className="overflow-hidden rounded-sm">
-                    <img
-                      src={game.image}
-                      alt={game.name}
-                      className="object-cover max-h-[150px] max-w-[120px]"
-                    />
-                  </div>
-                </Table.Cell>
                 <Table.Cell
-                  style={{ width: "200px" }}
-                  className="whitespace-nowrap font-medium text-gray-900 dark:text-white"
+                  className={
+                    window.innerWidth <= 1495
+                      ? "h-[120px] max-w-[100px] p-2"
+                      : "h-[150px] max-w-[120px] p-2"
+                  }
                 >
+                  <img
+                    src={game.image}
+                    alt={game.name}
+                    className="object-cover h-full w-full"
+                  />
+                </Table.Cell>
+                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                   {game.name}
                 </Table.Cell>
                 <Table.Cell>{game.developer}</Table.Cell>
                 <Table.Cell>{game.publisher}</Table.Cell>
-                <Table.Cell style={{ width: "100px" }}>
-                  {game.genre.join(", ")}
-                </Table.Cell>
+                <Table.Cell>{game.genre.join(", ")}</Table.Cell>
                 <Table.Cell>{game.rating}/5</Table.Cell>
                 <Table.Cell>{game.price}$</Table.Cell>
                 <Table.Cell>
                   {new Date(game.releaseDate).toLocaleDateString("en-GB")}
                 </Table.Cell>
 
-                <Table.Cell style={{ width: "180px" }}>
+                <Table.Cell>
                   <div className="space-x-4">
                     <a
                       href={`/editgame/${game._id}`}
@@ -123,13 +128,12 @@ function TableComponent({ games }: { games: GamesData[] }) {
                       Edit
                     </a>
                     <a
-                      href={`/viewuser/${game._id}`}
+                      href={`/viewgame/${game._id}`}
                       className="font-medium text-green-600 hover:underline dark:text-green-500"
                     >
                       View
                     </a>
                     <a
-                      href="#"
                       className="font-medium text-red-600 hover:underline dark:text-red-500"
                       onClick={() => handleOpenDeleteModal(game._id, game.name)}
                     >

@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, Modal, Table } from "flowbite-react";
-import { API_BASE_URL } from "../../config";
+import { API_BASE_URL } from "../../../config";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -59,7 +59,7 @@ function TableComponent({ contacts }: { contacts: ContanctsData[] }) {
 
   return (
     <div className="flex justify-center">
-      <div className="overflow-x-auto w-full">
+      <div className="overflow-x-auto  w-5/6">
         <Table hoverable>
           <Table.Head>
             <Table.HeadCell>Name</Table.HeadCell>
@@ -91,13 +91,12 @@ function TableComponent({ contacts }: { contacts: ContanctsData[] }) {
                 <Table.Cell>
                   <div className="space-x-4">
                     <a
-                      href={`/viewuser/${contact._id}`}
+                      href={`/viewcontact/${contact._id}`}
                       className="font-medium text-green-600 hover:underline dark:text-green-500"
                     >
                       View
                     </a>
                     <a
-                      href="#"
                       className="font-medium text-red-600 hover:underline dark:text-red-500"
                       onClick={() =>
                         handleOpenDeleteModal(contact._id, contact.name)

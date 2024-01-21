@@ -85,7 +85,7 @@ function TableComponent({ posts }: { posts: PostsData[] }) {
 
   useEffect(() => {
     const handelResize = () => {
-      const newItemsPerPage = window.innerWidth <= 1196 ? 1 : 4;
+      const newItemsPerPage = window.innerWidth <= 1495 ? 3 : 4;
       setItemsPerPage(newItemsPerPage);
       console.log(window.innerWidth);
     };
@@ -93,13 +93,12 @@ function TableComponent({ posts }: { posts: PostsData[] }) {
   }, [window.innerWidth]);
   return (
     <div className="flex justify-center">
-      <div className="overflow-x-auto w-full">
+      <div className="overflow-x-auto  w-5/6">
         <Table hoverable>
           <Table.Head>
             <Table.HeadCell>Cover</Table.HeadCell>
             <Table.HeadCell>Author</Table.HeadCell>
             <Table.HeadCell>Title</Table.HeadCell>
-            <Table.HeadCell>Tags</Table.HeadCell>
             <Table.HeadCell>Likes</Table.HeadCell>
             <Table.HeadCell>Views</Table.HeadCell>
             <Table.HeadCell>Date of Post</Table.HeadCell>
@@ -110,25 +109,24 @@ function TableComponent({ posts }: { posts: PostsData[] }) {
               <Table.Row
                 key={post._id}
                 className="bg-white dark:border-gray-700 dark:bg-gray-800"
-                style={{ height: "100px" }} // Adjust the height as needed
               >
-                <Table.Cell className="w-[120px]">
-                  <div className="overflow-hidden rounded-sm">
-                    <img
-                      src={post.imageURL}
-                      alt={post.title}
-                      className="object-cover max-h-[150px] max-w-[120px]"
-                    />
-                  </div>
+                <Table.Cell
+                  className={
+                    window.innerWidth <= 1495
+                      ? "max-h-[100px] max-w-[100px] p-2"
+                      : "max-h-[120px] max-w-[120px] p-2"
+                  }
+                >
+                  <img
+                    src={post.imageURL}
+                    alt={post.title}
+                    className="object-cover h-full w-full"
+                  />
                 </Table.Cell>
                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                   {post.author.username}
                 </Table.Cell>
                 <Table.Cell>{post.title}</Table.Cell>
-                <Table.Cell style={{ width: 300 }}>
-                  {post.tags.slice(0, 10).join(", ")}
-                  {post.tags.length > 10 && `, +${post.tags.length - 10} more`}
-                </Table.Cell>
                 <Table.Cell>{post.likes}</Table.Cell>
                 <Table.Cell>{post.views}</Table.Cell>
                 <Table.Cell>
@@ -143,13 +141,12 @@ function TableComponent({ posts }: { posts: PostsData[] }) {
                       Edit
                     </a>
                     <a
-                      href={`/viewuser/${post._id}`}
+                      href={`/viewpost/${post._id}`}
                       className="font-medium text-green-600 hover:underline dark:text-green-500"
                     >
                       View
                     </a>
                     <a
-                      href="#"
                       className="font-medium text-red-600 hover:underline dark:text-red-500"
                       onClick={() =>
                         handleOpenDeleteModal(post._id, post.author.username)
@@ -186,7 +183,7 @@ function TableComponent({ posts }: { posts: PostsData[] }) {
           </Modal.Footer>
         </Modal>
       </div>
-      <div className="flex mt-4 absolute bottom-0 mb-10">
+      <div className="flex mt-4 absolute bottom-0 mb-4">
         {Array.from({ length: Math.ceil(posts.length / itemsPerPage) }).map(
           (_, index) => (
             <button

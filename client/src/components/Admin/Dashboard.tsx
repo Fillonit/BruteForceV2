@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import UsersTable from "./Users/UserTable";
 import GameTable from "./Games/GameTable";
 import PostTable from "./Posts/PostTable";
-import ContactTable from "./ContactsTable";
+import ContactTable from "./Contacts/ContactsTable";
 import SidebarComponent from "./Sidebar";
 import { useParams } from "react-router-dom";
 
@@ -139,10 +139,10 @@ const UsersInfo: React.FC = () => {
   return (
     <div>
       <div className="flex h-screen bg-gray-100 bg-gradient-to-br from-purple-400 to-indigo-600 dark:from-purple-800 dark:to-indigo-900 py-10 ">
-        <div className="w-64 bg-white p-4 border-r dark:bg-gray-800">
+        <div className="w-64 bg-white border-r dark:bg-gray-800">
           <SidebarComponent />
         </div>
-        <div className="flex-1 p-6 overflow-auto overflow-y-hidden">
+        <div className="flex-1 overflow-auto overflow-y-hidden">
           {table === "users" || table === undefined ? (
             <UsersTable users={users} />
           ) : table === "games" ? (
