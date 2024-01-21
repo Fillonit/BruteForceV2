@@ -34,7 +34,7 @@ interface PostCardProps {
 }
 
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
-	const [likes, setLikes] = useState(post?.likes ?? 0);
+	const [likes, setLikes] = useState(post?.likes);
 	const [hasLiked, setHasLiked] = useState(false);
 	const user = localStorage.getItem("user");
 	const userId = user ? JSON.parse(user)._id : null;
@@ -73,7 +73,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 
 		if (response.ok) {
 			setHasLiked(true);
-			setLikes(likes + 1);
+			setLikes(likes ? likes : post?.likes + 1);
 		}
 	};
 
@@ -104,7 +104,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 							}`}
 							onClick={handleLike}
 						>
-							{formatNumber(likes)}
+							{formatNumber(likes ? likes : post?.likes)}
 							<FaThumbsUp className="ml-1" />
 						</div>
 					</div>

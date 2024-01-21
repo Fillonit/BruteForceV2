@@ -1,4 +1,10 @@
 # [Brute Force](https://brute-force-v2.vercel.app/)
+
+[![GitHub deployments](https://img.shields.io/github/deployments/Fillonit/BruteForceV2/Production?style=for-the-badge&logo=vercel&label=Deployment)](https://brute-force-v2.vercel.app/)
+![GitHub License](https://img.shields.io/github/license/Fillonit/BruteForceV2?style=for-the-badge)
+[![Wakatime](https://wakatime.com/badge/user/342a7411-61e3-4ce3-aa3e-01d34c9a11af/project/018ccbe9-a0da-425f-b5a6-5721884e3cb2.svg?style=for-the-badge)](https://wakatime.com/badge/user/342a7411-61e3-4ce3-aa3e-01d34c9a11af/project/018ccbe9-a0da-425f-b5a6-5721884e3cb2)
+
+
 This project is a full-stack gaming blog application developed as part of a university project. The application is built using a robust and modern tech stack including TypeScript, React, Node.js, Express, and Tailwind CSS.
 
 The front-end of the application is built with React and Tailwind CSS, providing a responsive and user-friendly interface. TypeScript is used to ensure type safety and improve the development experience.
