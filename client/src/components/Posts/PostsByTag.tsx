@@ -28,16 +28,25 @@ interface Post {
   views: number;
 }
 
+interface Tag {
+  _id: string;
+  count: number;
+}
+
 const PostByTag: React.FC = () => {
   const [selectedOption, setSelectedOption] = useState<string>("");
   const [postsList, setPostsList] = useState<Post[]>([]);
+  const [popularTags, setPopularTags] = useState<Tag[]>([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch(
-          `${API_BASE_URL}/posts/byTag/${selectedOption}`
-        );
+        let url = `${API_BASE_URL}/posts`;
+        if (selectedOption) {
+          url = `${API_BASE_URL}/posts/byTag/${selectedOption}`;
+        }
+
+        const response = await fetch(url);
         const data = await response.json();
         setPostsList(data.posts);
       } catch (error) {
@@ -45,13 +54,27 @@ const PostByTag: React.FC = () => {
       }
     };
 
-    if (selectedOption) {
-      fetchPosts();
-    } else {
-      // Handle the case when no option is selected, e.g., show all posts
-      // You might want to implement a different behavior based on your requirements
-    }
+    fetchPosts();
   }, [selectedOption]);
+
+  useEffect(() => {
+    const fetchPopularTags = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/posts/tags/popular`);
+        if (response.ok) {
+          const data = await response.json();
+
+          setPopularTags(data.tags);
+        } else {
+          console.error("Error fetching popular tags:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error fetching popular tags:", error);
+      }
+    };
+
+    fetchPopularTags();
+  }, []);
 
   return (
     <div>
@@ -71,8 +94,11 @@ const PostByTag: React.FC = () => {
           <option value="" disabled>
             Select Tag
           </option>
-          <option value="Character">Character</option>
-          <option value="Game Review">Game Review</option>
+          {popularTags.map((tag: Tag) => (
+            <option key={tag._id} value={tag._id}>
+              {tag._id}
+            </option>
+          ))}
         </select>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6">
