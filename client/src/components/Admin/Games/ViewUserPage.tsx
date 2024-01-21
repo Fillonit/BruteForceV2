@@ -4,6 +4,7 @@ import { API_BASE_URL } from "../../../config";
 // import { ToastContainer, ToastOptions, toast } from "react-toastify";
 // import notifyConfig from "../notifyConfig";
 import { useParams } from "react-router-dom";
+import { HiOutlineBadgeCheck } from "react-icons/hi";
 
 interface UserProfile {
 	firstName: string;
@@ -103,6 +104,9 @@ const ViewUser = () => {
 						</label>
 						<div className="appearance-none rounded w-full py-2 text-gray-700 dark:text-white leading-tight focus:outline-none focus:shadow-outline ">
 							{user.username}
+							{user.role === "admin" && (
+								<HiOutlineBadgeCheck className="inline-block ml-2 text-purple-500" />
+							)}
 						</div>
 					</div>
 					<div className="mb-4">
