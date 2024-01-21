@@ -2,7 +2,7 @@ import { Button, Card, Carousel } from "flowbite-react";
 import Doom from "../../assets/Doom.jpg";
 import Hades from "../../assets/Hades.jpg";
 import { Link } from "react-router-dom";
-import LeagueVideo from "../../assets/Still Here.mp4";
+// import LeagueVideo from "../../assets/Still Here.mp4";
 import Nintendo from "../../assets/nintendo.jpg";
 import Soma from "../../assets/Soma.jpg";
 import Arcane from "../../assets/Arcane.jpg";
@@ -21,7 +21,13 @@ const HomePage = () => {
 					loop
 					className="w-full h-full object-cover rounded-none bg-cover"
 				>
-					<source src={LeagueVideo} type="video/mp4" />
+					<source
+						src={
+							// "https://uc342283ee399e38c70e46a5b4d4.dl.dropboxusercontent.com/cd/0/inline/CLwsTtQDG14hVEtwqh7BztWQUpD5pZzImUICL4mWu2lVqzos_A7_AA6nyW0I9Bc4JHgD__4ycEESsNU_avT2AiGrL6qRD4jxTY-MpQvn255oouB5wbB_eg8Yq1W3B7V1nrO2BqRF2t6teK4Ah6N-x5QM/file#"
+							"https://www.dropbox.com/scl/fi/mtl5zpvblypp2smes9f7s/Hades2.mp4?rlkey=lu5ildhd1d3orxp0i8b2krmzn&raw=1"
+						}
+						type="video/mp4"
+					/>
 					Your browser does not support the video tag.
 				</video>
 			</div>
