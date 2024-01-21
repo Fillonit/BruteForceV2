@@ -25,42 +25,47 @@ import CreatePost from "./pages/CreatePost";
 import Games from "./pages/Games";
 import GetStarted from "./pages/GetStarted";
 import AllPosts from "./pages/AllPosts";
+import ViewPostsByTag from "./pages/ViewByTag";
 function App() {
-  // const [userId, setUserId] = useState(localStorage.getItem("userId"));
-  return (
-    <Router>
-      <Flowbite>
-        <div className="min-h-screen flex flex-col ">
-          {/* {!window.location.pathname.includes("/dashboard") && ( */}
-          <Navbar />
-          {/* )} */}
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/dashboard/:table" element={<Dashboard />} />
-            <Route path="/createPost" element={<CreatePost />} />
-            <Route path="/dashboard/" element={<Dashboard />} />
-            <Route path="/post/:id" element={<Post />} />
-            <Route path="/posts/" element={<Posts />} />
+	// const [userId, setUserId] = useState(localStorage.getItem("userId"));
+	return (
+		<Router>
+			<Flowbite>
+				<div className="min-h-screen flex flex-col ">
+					{/* {!window.location.pathname.includes("/dashboard") && ( */}
+					<Navbar />
+					{/* )} */}
+					<Routes>
+						<Route path="/" element={<Home />} />
+						<Route path="/login" element={<LoginPage />} />
+						<Route
+							path="/dashboard/:table"
+							element={<Dashboard />}
+						/>
+						<Route path="/createPost" element={<CreatePost />} />
+						<Route path="/dashboard/" element={<Dashboard />} />
+						<Route path="/post/:id" element={<Post />} />
+						<Route path="/posts/" element={<Posts />} />
             <Route path="/allPosts" element={<AllPosts />} />
-            <Route path="/games/" element={<Games />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/settings" element={<ProfileSettings />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/edituser/:id" element={<EditUser />} />
-            <Route path="/editgame/:id" element={<EditGame />} />
-            <Route path="/editpost/:id" element={<EditPost />} />
-            <Route path="/viewuser/:id" element={<ViewUser />} />
-            <Route path="/getStarted" element={<GetStarted />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          {!window.location.pathname.includes("/dashboard") && <Footer />}
-        </div>
-        <DarkThemeToggle className="fixed bottom-2 right-2 text-white dark:text-white bg-purple-400 hover:bg-purple-600 dark:hover:bg-purple-600 ring-0 focus:ring-0 dark:focus:ring-0 dark:ring-0" />
-      </Flowbite>
-      <Analytics />
-    </Router>
-  );
+						<Route path="/games/" element={<Games />} />
+						<Route path="/profile" element={<Profile />} />
+						<Route path="/about" element={<About />} />
+						<Route path="/settings" element={<ProfileSettings />} />
+						<Route path="/contact" element={<Contact />} />
+						<Route path="/edituser/:id" element={<EditUser />} />
+						<Route path="/editgame/:id" element={<EditGame />} />
+						<Route path="/viewuser/:id" element={<ViewUser />} />
+						<Route path="/getStarted" element={<GetStarted />} />
+						<Route path="*" element={<NotFound />} />
+					</Routes>
+					{!window.location.pathname.includes("/dashboard") && (
+						<Footer />
+					)}
+				</div>
+				<DarkThemeToggle className="fixed bottom-2 right-2 text-white dark:text-white bg-purple-400 hover:bg-purple-600 dark:hover:bg-purple-600 ring-0 focus:ring-0 dark:focus:ring-0 dark:ring-0" />
+			</Flowbite>
+			<Analytics />
+		</Router>
+	);
 }
 export default App;

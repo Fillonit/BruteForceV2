@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../config";
 import PostsList from "../components/Posts/PostsList";
-import PostsListByTag from "../components/Posts/PostsListByTag";
 
 interface Author {
   _id: string;
@@ -44,7 +43,6 @@ const Posts: React.FC = () => {
   return (
     <div>
       <PostsList postsList={posts} />
-      <PostsListByTag />
     </div>
   );
 };

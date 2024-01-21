@@ -36,20 +36,32 @@ const PostsList: React.FC<{ postsList: Post[] }> = ({ postsList }) => {
           Latest Posts
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {postsList.slice(0, 4).map((post: Post) => (
+          {postsList.slice(0, 8).map((post: Post) => (
             <PostsCard {...post} />
           ))}
         </div>
-        {postsList.length > 3 && (
-          <div className="w-full text-center mt-7">
-            <Link
-              to={"/allPosts"}
-              className="text-white w-44 bg-gray-800 p-3 py-2 rounded-lg border border-white"
-            >
-              View All Posts
-            </Link>
-          </div>
-        )}
+        <div className="w-full flex justify-center gap-4">
+          {postsList.length > 3 && (
+            <div className="mt-7">
+              <Link
+                to={"/allPosts"}
+                className="text-white w-44 bg-gray-800 p-3 py-2 rounded-lg border border-white"
+              >
+                View All Posts
+              </Link>
+            </div>
+          )}
+          {postsList.length > 0 && (
+            <div className="mt-7">
+              <Link
+                to={"/postsByTag"}
+                className="text-white w-44 bg-gray-800 p-3 py-2 rounded-lg border border-white"
+              >
+                View Posts By Tag
+              </Link>
+            </div>
+          )}
+        </div>
       </main>
     </div>
   );
