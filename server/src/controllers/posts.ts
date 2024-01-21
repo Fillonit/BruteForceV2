@@ -209,7 +209,7 @@ export const getMostPopularTagsController = async (
 	res: express.Response
 ) => {
 	try {
-		const tags = await getMostPopularTags(5);
+		const tags = await getMostPopularTags(20);
 
 		return res.status(200).json({ tags }).end();
 	} catch (error) {

@@ -2,6 +2,7 @@ import { Button, Card, Carousel } from "flowbite-react";
 import Doom from "../../assets/Doom.jpg";
 import Hades from "../../assets/Hades.jpg";
 import { Link } from "react-router-dom";
+// import LeagueVideo from "../../assets/Still Here.mp4";
 import Nintendo from "../../assets/nintendo.jpg";
 import Soma from "../../assets/Soma.jpg";
 import Arcane from "../../assets/Arcane.jpg";
@@ -11,101 +12,111 @@ import Minecraft from "../../assets/Minecraft.jpg";
 import Sidebar from "../Sidebar";
 
 const HomePage = () => {
-  return (
-    <div className="bg-gray-200 min-h-screen dark:bg-slate-700 bg-gradient-to-br from-purple-400 to-indigo-600 dark:from-purple-800 dark:to-indigo-900 pb-10">
-      <div className="h-[500px]">
-        <video
-          autoPlay
-          muted
-          loop
-          className="w-full h-full object-cover rounded-none bg-cover"
-        >
-          <source
-            src={
-              "https://www.dropbox.com/scl/fi/mtl5zpvblypp2smes9f7s/Hades2.mp4?rlkey=lu5ildhd1d3orxp0i8b2krmzn&raw=1"
-            }
-            type="video/mp4"
-          />
-          Your browser does not support the video tag.
-        </video>
-      </div>
-      <h1 className="text-3xl text-center mt-10 text-black dark:text-white">
-        Features
-      </h1>
-      <div className="grid grid-cols-1 gap-6 justify-center mt-9 w-3/4 md:grid-cols-2 lg:grid-cols-3 lg:justify-between mx-auto">
-        <Card
-          className="max-w-sm"
-          renderImage={() => (
-            <img
-              width={400}
-              height={500}
-              style={{ minHeight: "350px" }}
-              src={ArcaneCard}
-              alt="..."
-              className="rounded-md object-cover"
-            />
-          )}
-        >
-          <h5 className="font-bold text-xl tracking-tight text-gray-900 dark:text-white">
-            Welcome to BruteForce
-          </h5>
-          <p className="font-normal text-gray-700 dark:text-gray-400">
-            Immerse yourself in a world of gaming stories, tips, and
-            discussions.
-          </p>
-          <Button gradientDuoTone="purpleToBlue" as={Link} to="/about">
-            Explore
-          </Button>
-        </Card>
-        <Card
-          className="max-w-sm"
-          renderImage={() => (
-            <img
-              width={400}
-              height={400}
-              style={{ minHeight: "350px" }}
-              src={Minecraft}
-              alt="..."
-              className="rounded-md object-cover"
-            />
-          )}
-        >
-          <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Engaging Blog Content
-          </h5>
-          <p className="font-normal text-gray-700 dark:text-gray-400">
-            Stay informed with our insightful blog posts covering the gaming
-            world.
-          </p>
-          <Button gradientDuoTone="purpleToBlue" as={Link} to="/posts">
-            Check it Out
-          </Button>
-        </Card>
-        <Card
-          className="max-w-sm"
-          renderImage={() => (
-            <img
-              width={400}
-              height={500}
-              style={{ minHeight: "350px" }}
-              src={Hades}
-              alt="..."
-              className="rounded-md"
-            />
-          )}
-        >
-          <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Dive into Exciting Games
-          </h5>
-          <p className="font-normal text-gray-700 dark:text-gray-400">
-            Discover the latest gaming trends and explore a wide range of games.
-          </p>
-          <Button gradientDuoTone="purpleToBlue" as={Link} to="/games">
-            Read More
-          </Button>
-        </Card>
-      </div>
-      <Sidebar />
+	return (
+		<div className="bg-gray-200 min-h-screen dark:bg-slate-700 bg-gradient-to-br from-purple-400 to-indigo-600 dark:from-purple-800 dark:to-indigo-900 pb-10">
+			<div className="h-[500px]">
+				<video
+					autoPlay
+					muted
+					loop
+					className="w-full h-full object-cover rounded-none bg-cover"
+				>
+					<source
+						src={
+							// "https://uc342283ee399e38c70e46a5b4d4.dl.dropboxusercontent.com/cd/0/inline/CLwsTtQDG14hVEtwqh7BztWQUpD5pZzImUICL4mWu2lVqzos_A7_AA6nyW0I9Bc4JHgD__4ycEESsNU_avT2AiGrL6qRD4jxTY-MpQvn255oouB5wbB_eg8Yq1W3B7V1nrO2BqRF2t6teK4Ah6N-x5QM/file#"
+							"https://www.dropbox.com/scl/fi/mtl5zpvblypp2smes9f7s/Hades2.mp4?rlkey=lu5ildhd1d3orxp0i8b2krmzn&raw=1"
+						}
+						type="video/mp4"
+					/>
+					Your browser does not support the video tag.
+				</video>
+			</div>
+			<h1 className="text-3xl text-center mt-10 text-black dark:text-white">
+				Features
+			</h1>
+			<div className="grid grid-cols-1 gap-6 justify-center mt-9 w-3/4 md:grid-cols-2 lg:grid-cols-3 lg:justify-between mx-auto">
+				<Card
+					className="max-w-sm"
+					renderImage={() => (
+						<img
+							width={400}
+							height={500}
+							style={{ minHeight: "350px" }}
+							src={ArcaneCard}
+							alt="..."
+							className="rounded-md object-cover"
+						/>
+					)}
+				>
+					<h5 className="font-bold text-xl tracking-tight text-gray-900 dark:text-white">
+						Welcome to BruteForce
+					</h5>
+					<p className="font-normal text-gray-700 dark:text-gray-400">
+						Immerse yourself in a world of gaming stories, tips, and
+						discussions.
+					</p>
+					<Button
+						gradientDuoTone="purpleToBlue"
+						as={Link}
+						to="/about"
+					>
+						Explore
+					</Button>
+				</Card>
+				<Card
+					className="max-w-sm"
+					renderImage={() => (
+						<img
+							width={400}
+							height={400}
+							style={{ minHeight: "350px" }}
+							src={Minecraft}
+							alt="..."
+							className="rounded-md object-cover"
+						/>
+					)}
+				>
+					<h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+						Engaging Blog Content
+					</h5>
+					<p className="font-normal text-gray-700 dark:text-gray-400">
+						Stay informed with our insightful blog posts covering
+						the gaming world.
+					</p>
+					<Button gradientDuoTone="purpleToBlue" as={Link} to="/blog">
+						Check it Out
+					</Button>
+				</Card>
+				<Card
+					className="max-w-sm"
+					renderImage={() => (
+						<img
+							width={400}
+							height={500}
+							style={{ minHeight: "350px" }}
+							src={Hades}
+							alt="..."
+							className="rounded-md"
+						/>
+					)}
+				>
+					<h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+						Dive into Exciting Games
+					</h5>
+					<p className="font-normal text-gray-700 dark:text-gray-400">
+						Discover the latest gaming trends and explore a wide
+						range of games.
+					</p>
+					<Button
+						gradientDuoTone="purpleToBlue"
+						as={Link}
+						to="/games"
+					>
+						Read More
+					</Button>
+				</Card>
+			</div>
+			<Sidebar />
 
       <div className="font-[sans-serif] text-white py-12 px-4">
         <div className="max-w-7xl mx-auto">
