@@ -10,7 +10,7 @@ import {
 import { API_BASE_URL } from "../../../config";
 import { ToastContainer, ToastOptions, toast } from "react-toastify";
 import notifyConfig from "../../notifyConfig";
-import PostComments from "./PostComments";
+import PostComments from "./EditPostComments";
 import { useNavigate, useParams } from "react-router-dom";
 
 const inputTheme = {
@@ -309,7 +309,7 @@ const EditPost = () => {
             </div>
           </div>
           <div>
-            <PostComments post={post} />
+            {post.comments.length !== 0 ? <PostComments post={post} /> : ""}
           </div>
           <div className="flex items-center justify-between mt-5">
             <Button

@@ -6,6 +6,7 @@ import games from "./games";
 import comments from "./comments";
 import views from "./views";
 import contacts from "./contacts";
+import images from "./images";
 
 const router = express.Router();
 
@@ -17,6 +18,7 @@ export default (): express.Router => {
 	comments(router);
 	views(router);
 	contacts(router);
+	images(router);
 	router.get("/test", (req, res) => {
 		res.send("Hello World!");
 	});

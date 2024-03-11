@@ -27,6 +27,21 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({ text }) => {
 		};
 	}, [text]);
 
+	useEffect(() => {
+		const synth = window.speechSynthesis;
+		const setVoices = () => {
+			const voices = synth.getVoices();
+			setVoice(voices[0]);
+		};
+
+		setVoices();
+		synth.onvoiceschanged = setVoices;
+
+		return () => {
+			synth.onvoiceschanged = null;
+		};
+	}, []);
+
 	const handlePlay = () => {
 		const synth = window.speechSynthesis;
 

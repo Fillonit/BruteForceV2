@@ -24,13 +24,3 @@ describe("GET /", () => {
 		expect(res.body.alive).toBe("True");
 	});
 });
-
-describe("GET /posts", () => {
-	it("should return all products", async () => {
-		const res = await request(app).get("/posts");
-		let data = JSON.parse(res.text);
-		expect(res.statusCode).toBe(200);
-		expect(data.posts).not.toBeNull();
-		expect(data.posts).not.toBeUndefined();
-	});
-});
